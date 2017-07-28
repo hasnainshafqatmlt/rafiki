@@ -10,11 +10,10 @@
     "dev": "NODE_ENV=development node server",
     "build": "cross-env npm run clean && NODE_ENV=production webpack --config ./webpack.production.config.js --progress --profile --colors",
     "prod": "NODE_ENV=production PORT=5000 node server",
-
     "lint": "eslint ./app/**/**.js",
     "test": "mocha --compilers js:babel-core/register --recursive ./tests/**/*.js",
-    "precommit": "cross-env npm run lint && npm test",
-    "prepush": "cross-env npm run lint && npm test"
+    //"precommit": "cross-env npm run lint && npm test",
+    //"prepush": "cross-env npm run lint && npm test"
   },
   "license": "MIT",
   "dependencies": {
@@ -28,7 +27,6 @@
     "lodash": "^4.17.4",
     "query-string": "^5.0.0",
     "react": "^15.6.1",
-    "react-bootstrap": "^0.31.1",
     "react-dom": "^15.6.1",
     "react-helmet": "^5.1.3",
     "react-hot-loader": "^3.0.0-beta.6",

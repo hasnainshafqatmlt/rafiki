@@ -1,23 +1,6 @@
-@import "./theme/main.scss";
-@import "./Login.scss";
-@import "./Navbar.scss";
-@import "./Sidebar.scss";
-@import "./Profile.scss";
-@import "./Members.scss";
-@import "./StepOne.scss";
-@import "./StepOneForm.scss";
-
-@import "./theme/fonts.scss";
-
 @import "./theme/variables.scss";
+@import "./theme/reset.scss";
+@import "./Header.scss";
+@import "./Footer.scss";
+@import "./Login.scss";
 
-.app {
-	.btn-primary {
-		background-color: $lightGreen;
-	    border-color: $lightGreen;
-    }
-}
-
-.appContent {
-  padding-bottom: 10rem;
-}

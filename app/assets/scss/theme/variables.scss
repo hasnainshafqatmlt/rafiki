@@ -7,20 +7,28 @@
  */
 
 // Custom Colors
-$cyan: #33e0ff;
-$humility: #777;
-$lightGreen: #009245;
-$darkGreen: #006e51;
+$gray: #9B9B9B;
+$dark-gray: #4A4A4A;
+$offwhite: #F8F8F8;
+$darkOffwhite: #e1e1e1;
+$darkGray: #5C5C5C;
+$lightGray: #7E7E7E;
 
-// Bootstrap Variables
-$brand-primary: $lightGreen;
-$brand-secondary: #e25139;
-$brand-success: #5cb85c;
-$brand-warning: #f0ad4e;
-$brand-danger: #d9534f;
-$brand-info: #5bc0de;
+// family
+$openSans: 'Open Sans', sans-serif;
+$montserrat: 'Montserrat', sans-serif;
 
-$text-color: #333;
+// functions
 
-$font-size-base: 14px;
-$font-family-sans-serif: "Helvetica Neue", Helvetica, sans-serif;
+@mixin transition($transition...) {
+    -moz-transition:    $transition;
+    -o-transition:      $transition;
+    -webkit-transition: $transition;
+    transition:         $transition;
+}
+@mixin rotate($rotate...) {
+    -webkit-transform: rotate($rotate);  
+        -ms-transform: rotate($rotate);
+            transform: rotate($rotate);
+}
+

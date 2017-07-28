@@ -42,10 +42,8 @@ class Main extends Component {
 			<div className={`app col-100 h-100`}>
 				<Helmet {...Config.App.head} />
 				<Header pathname={this.props.location.pathname}/>
-				<div className={`col-100 h-100 ${bgClass}`}>
-					<div className={`main-wrap ${container}`}>
-						{this.props.children}
-					</div>
+				<div className={`col-100 h-100 float-left ${bgClass}`}>
+					{this.props.children}
 				</div>
 				<Footer />
 			</div>

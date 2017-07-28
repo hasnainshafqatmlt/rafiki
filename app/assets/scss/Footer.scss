@@ -1,0 +1,59 @@
+.footer{
+	float: left;
+	width: 100%;
+	background: $offwhite;
+	padding: 56px 0 40px;
+	.row{ margin: 0;}
+	.social-icons{
+		float: left;
+		width: 100%;
+		text-align: center;
+		margin-bottom: 42px;
+		i{
+			display: inline-block;
+			width: 26px;
+			height: 26px;
+			position: relative;
+			margin: 0 3.5px;
+			border-radius: 50%;
+			background-color: $darkOffwhite;
+			@include transition(.3s);
+			cursor: pointer;
+			&:hover{
+				background-color: #c3bebe;
+			}
+			img{
+				position: absolute;
+				left: 0;
+				right: 0;
+				top: 0;
+				bottom: 0;
+				margin: auto;
+			}
+		}
+	}
+	.nav-links{
+		text-align: center;
+		margin-bottom: 52px;
+		a{
+			display: inline-block;
+			color: $darkGray;
+			font-size: 16px;
+			margin: 0 20px;
+			text-decoration: none;
+			@include transition(.3s);
+			&:hover{
+				color: $gray;
+			}
+		}
+	}
+	.info{
+		color: $lightGray;
+		font-size: 14px;
+		margin-bottom: 7px;
+		text-align: center;
+		&.bottom{
+			margin-bottom: 0;
+		}
+	}
+}
