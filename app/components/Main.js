@@ -22,9 +22,18 @@ class Main extends Component {
 
 	componentDidMount() {
 		const { location, routes } = this.props;
+		this.updateTitle();
 	}
 
+	componentDidUpdate() {
+		this.updateTitle();	
+	}
 
+	updateTitle() {
+		console.log('this.props', this.props)
+		const pathname = this.props.location.pathname;
+		document.title = pathname.split('/')[1];
+	}
 
 	render() {
 		//console.log('MAIN: this.props.location', this.props.location)
@@ -39,7 +48,7 @@ class Main extends Component {
 		}
 
 		return (
-			<div className={`app col-100 h-100`}>
+			<div className={`app col-100`}>
 				<Helmet {...Config.App.head} />
 				<Header pathname={this.props.location.pathname}/>
 				<div className={`col-100 h-100 float-left ${bgClass}`}>

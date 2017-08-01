@@ -48,27 +48,27 @@ class Header extends Component {
 
 			<header className='header'>
 				<div className='container'>
-					<a
-						href='#'
+					<Link
+						to='/'
 						className='logo'
 					>
 						<img src='/images/kogno-logo.png'/>
-					</a>
+					</Link>
 					<ul className='nav'>
 						<li>
-							<a href=''>
+							<Link to='servicios'>
 								{'Mis Servicios'}
-							</a>
+							</Link>
 						</li>
 						<li>
-							<a href=''>
+							<Link to='ventas'>
 								{'Mis Ventas'}
-							</a>
+							</Link>
 						</li>
 						<li>
-							<a href=''>
+							<Link to='perfil'>
 								{'Perfil'}
-							</a>
+							</Link>
 						</li>
 						<li className='logout'>
 							<Link to='signup'>

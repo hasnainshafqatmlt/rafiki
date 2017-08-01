@@ -1,0 +1,55 @@
+.signup-block,
+.login-block,
+.forgot-block{
+	margin-bottom: 150px;
+	h1{
+		margin-top: 60px;
+		margin-bottom: 0;
+	}
+	h2{
+		font-size: 18px;
+		font-weight: 400;
+		color: $gray;
+		margin-top: 13px;
+		margin-bottom: 0;
+	}
+	.center{
+		width: 350px;
+		margin: 0 auto;
+	}
+	.form{
+		margin-top: 60px;
+		.form-group{
+			margin-bottom: 30px;
+		}
+		.btn-success{
+			margin-top: 3px;
+		}
+		p{
+			margin-top: 32px;
+			color: $dark-gray;
+			a{
+				color: $green;
+			}
+			&.t-8{
+				margin-top: 8px;
+			}
+		}
+	}
+	.message{
+		.form{
+			margin-top: 85px;
+			text-align: center;
+			p{
+				font-size: 40px;
+				font-weight: 700;
+				margin-bottom: 40px;
+				margin-top: 0;
+			}
+			small{
+				font-size: 18px;
+				color: $gray;
+			}
+		}
+	}
+}

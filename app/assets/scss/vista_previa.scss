@@ -1,0 +1,121 @@
+.vista-previa-block{
+	margin-bottom: 150px;
+	float: left;
+	width: 100%;
+	h1{
+		margin-top: 60px;
+		margin-bottom: 0;
+	}
+	h2{
+		font-size: 18px;
+		font-weight: 400;
+		color: $gray;
+		margin-top: 13px;
+		margin-bottom: 0;
+	}
+	.top-horizental-line{
+		margin-top: 28px;
+		margin-bottom: 28px;
+	}	
+	.bottom-horizental-line{
+		margin-top: 0;
+		margin-bottom: 28px;
+		float: left;
+		width: 100%;
+	}
+	.breadcrumb{
+		float: left;
+		width: 100%;
+		background-color: transparent;
+		padding: 0;
+		li{
+			font-size: 14px;
+			color: $dark-gray;
+			a{
+				font-size: 14px;
+				color: $dark-gray;
+			}
+		}		
+	}
+	.breadcrumb-item+.breadcrumb-item::before{
+		content: "-";
+	}
+	.info-block{
+		margin-top: 35px;
+		position: relative;
+		padding-left: 242px;
+		padding-right: 177px;
+		.thumb{
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 200px;
+			height: 200px;
+			background-color: #D8D8D8;
+			.icon{
+				position: absolute;
+				left: 0;
+				right: 0;
+				top: 0;
+				bottom: 0;
+				margin: auto;
+			}
+		}
+		h3{
+			float: left;
+			width: 100%;
+			font-size: 27px;
+			color: $black;
+			margin-bottom: 9px;
+			font-weight: 700;
+			padding-right: 110px;
+		}
+		small{
+			float: left;
+			width: 100%;
+			font-size: 14px;
+			color: $dark-gray;
+			margin-bottom: 19px;
+		}
+		price{
+			float: left;
+			width: 100%;
+			font-size: 24px;
+			color: $black;
+			margin-bottom: 15px;
+		}
+		p{
+			float: left;
+			width: 100%;
+			font-size: 18px;
+			color: $dark-gray;
+			margin-bottom: 23px;
+		}
+		strong{
+			font-size: 18px;
+			color: $dark-gray;
+			margin-bottom: 17px;	
+			font-weight: 600;
+			float: left;
+		}
+		.btn-gray{
+			position: absolute;
+			top: 0;
+			right: 0;
+			width: 167px;
+		}		
+	}
+	.actions{
+		text-align: center;
+		.btn{
+			margin: 0 12px;
+		}
+		.btn-secondary{
+			width: 107px;
+		}
+		.btn-success{
+			width: 145px;
+		}
+	}
+	
+}

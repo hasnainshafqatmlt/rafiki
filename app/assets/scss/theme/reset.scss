@@ -43,6 +43,7 @@ table {
 html,body{
 	height: 100%;
 	font-family: $openSans;
+	font-size: 16px;
 }
 .col-100{
 	width: 100%;
@@ -52,4 +53,111 @@ html,body{
 }
 .row{
 	margin-bottom: 0;
+}
+// Helper classes
+.m-t-10{
+	margin-top: 10px;
+}
+.m-t-20{
+	margin-top: 20px;
+}
+.m-t-30{
+	margin-top: 30px;
+}
+.m-t-40{
+	margin-top: 40px;
+}
+.m-t-50{
+	margin-top: 50px;
+}
+.m-t-60{
+	margin-top: 60px;
+}
+.heading-1{
+	font-size: 40px;
+	font-weight: 300;
+	color: $dark-gray;
+}
+input[type=text],input[type=email],input[type=password]{
+	height: 50px;
+	border-color: $sliver;
+	box-shadow: none;
+	border-radius: 5px;
+	font-size: 20px;
+	font-weight: 400;
+	color: $dark-gray;
+	font-family: $openSans;
+}
+textarea.form-control{
+	height: 123px;
+	resize:none;
+	border-color: $sliver;
+	box-shadow: none;
+	border-radius: 5px;
+	font-size: 20px;
+	font-weight: 400;
+	color: $dark-gray;
+	font-family: $openSans;
+}
+.btn{
+	font-family: $openSans;
+	border-radius: 5px;
+	border: none;
+	font-size: 20px;
+	height: 50px;
+	&.sm{
+		height: 36px;
+		padding-top: 0;
+		padding-bottom: 0;
+	}
+	&.btn-success{
+		background-color: $green;	
+		&:hover{
+			background-color: #13AB17;
+		}
+	}
+	&.btn-secondary{
+		border: 2px solid #979797;
+		color: $dark-gray;
+	}
+	&.btn-gray{
+		background-color: #D8D8D8;
+		color: #555459;
+		font-size: 20px;
+		font-weight: 700;
+	}
+}
+a.btn{
+	&.btn-gray{
+		padding-top: 11px;
+	}
+}
+.plus-icon{
+	display: inline-block;
+	width: 41px;
+	height: 41px;
+	background-color: $green;
+	border-radius: 50%;
+	text-align: center;
+	font-style: normal;
+	&:before{
+		content: '+';
+		font-size: 48px;
+		color: $white;
+		font-family: $montserrat;
+		line-height: 38px;
+	}
+}
+.add-btn{
+	display: inline-block;
+	color: $dark-gray;
+	font-size: 20px;	
+	i{
+		float: left;
+	}
+	span{
+		float: left;
+		margin-top: 12px;
+		margin-left: 15px;
+	}
 }

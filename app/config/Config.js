@@ -17,26 +17,16 @@ if(process.env.NODE_ENV == 'development') {
 }
 
 const App = {
-	title: 'INSEADERS',
-	description: 'The global venture booster for INSEAD',
+	title: 'Kogno',
+	description: '',
 	head: {
-		defaultTitle: 'INSEADERS',
-		titleTemplate: '%s | INSEADERS',
+		//defaultTitle: 'INSEADERS',
+		titleTemplate: '%s | Kogno',
 		meta: [
-			{name: 'description', content: 'The global venture booster for INSEAD'},
+			//{name: 'description', content: 'The global venture booster for INSEAD'},
 			{charset: 'utf-8'},
-			{property: 'robots', content: 'index,follow'},
-			{property: 'copyright', content: 'INSEADERS'},
-			{property: 'author', content: 'INSEADERS'},
-			{property: 'og:site_name', content: 'INSEADERS'},
-			{property: 'og:image', content: 'http://inseaders.vc/images/logo-inseaders.jpg'},
-			{property: 'og:locale', content: 'en_US'},
-			{property: 'og:title', content: 'INSEADERS'},
-			{property: 'og:description', content: 'The global venture booster for INSEAD'},
-			{property: 'og:site', content: 'INSEADERS'},
-			{property: 'og:creator', content: 'INSEADERS'},
-			{property: 'og:image:width', content: '470'},
-			{property: 'og:image:height', content: '275'}
+			//{property: 'robots', content: 'index,follow'},
+			
 		]
 	}
 };

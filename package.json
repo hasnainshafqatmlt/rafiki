@@ -12,8 +12,8 @@
     "prod": "NODE_ENV=production PORT=5000 node server",
     "lint": "eslint ./app/**/**.js",
     "test": "mocha --compilers js:babel-core/register --recursive ./tests/**/*.js",
-    //"precommit": "cross-env npm run lint && npm test",
-    //"prepush": "cross-env npm run lint && npm test"
+    "precommit": "cross-env npm run lint && npm test",
+    "prepush": "cross-env npm run lint && npm test"
   },
   "license": "MIT",
   "dependencies": {
