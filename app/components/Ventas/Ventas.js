@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class Ventas extends Component {
 
@@ -26,13 +27,13 @@ class Ventas extends Component {
 					</div>
 
 					<div className='float-left col-100 text-center'>
-						<a
-							href='#'
+						<Link
+							to='descripcion'
 							className='add-btn'
 						>
 							<i className='plus-icon' />
 							<span>Aumenta tus ventas incluyendo más servicios</span>
-						</a>
+						</Link>
 					</div>
 				</div>
 			</div>

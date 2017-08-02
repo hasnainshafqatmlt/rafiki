@@ -16,6 +16,13 @@ import Servicios from '../components/Servicios/Servicios';
 import Ventas from '../components/Ventas/Ventas';
 import Perfil from '../components/Perfil/Perfil';
 
+// Admin
+import AdminLogin from '../components/Admin/Login';
+import AdminServicios from '../components/Admin/Servicios';
+import AdminUsuarios from '../components/Admin/Usuarios';
+import AdminPerfil from '../components/Admin/Perfil';
+
+
 
 
 const Root = () => {
@@ -33,6 +40,11 @@ const Root = () => {
         <Route path='/servicios' component={Servicios}/>
         <Route path='/ventas' component={Ventas}/>
         <Route path='/perfil' component={Perfil}/>
+
+        <Route path='/admin/login' component={AdminLogin}/>
+        <Route path='/admin/servicios' component={AdminServicios}/>
+        <Route path='/admin/usuarios' component={AdminUsuarios}/>
+        <Route path='/admin/perfil' component={AdminPerfil}/>
       </Main>
 
       <Route path="*" component={NotFound} status={404} />

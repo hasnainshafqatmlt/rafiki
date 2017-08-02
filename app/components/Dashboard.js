@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 
 class App extends Component {
+
+	componentDidMount() {
+		this.props.history.push('/login')
+	}
 	render () {
 		return (
-			<div>
-				<h2>Welcom to INSEADERS Dashboard!!</h2>
-			</div>
+			<div/>
 		);
 	}
 };

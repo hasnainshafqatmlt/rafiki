@@ -1,0 +1,89 @@
+.admin-usuarios{
+  margin-bottom: 150px;
+  float: left;
+  width: 100%;
+  h1{
+    margin-top: 60px;
+    margin-bottom: 0;
+  }
+ 
+  .table{
+    float: left;
+    width: 100%;
+    margin-top: 54px;
+    margin-bottom: 0;
+    th{
+      border: none;
+      font-size: 18px;
+      font-weight: 700;
+      color: $dark-gray;
+      padding-top: 0;
+      padding-bottom: 50px;
+      position: relative;
+      .filter-status{
+        position: absolute;
+        left: 12px;
+        top: 31px;
+        .status-icon{
+          float: left;
+          width: 10px;
+          height: 10px;
+          margin-right: 9px;
+          cursor: pointer;
+        }
+      }
+      img{
+        position: relative;
+        top: 9px;
+        cursor: pointer;
+      }
+    }
+    td{     
+      border: none;
+      padding-bottom: 43px;
+      .number{
+        width: 66px;
+        height: 24px;
+        float: left;
+        font-size: 14px;
+      }
+      .tick{
+        float: left;
+        margin-left: 16px;
+      }
+      a{
+        font-size: 20px;
+        color: $dark-gray;
+      }
+      .icon{
+        cursor: pointer;
+      }
+    }
+    tr{
+      &:last-child{
+        td{
+          padding-bottom: 0;
+        }
+      }
+    }
+    .status-icon{
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      margin-right: 7px;
+      margin-top: 3px;
+      &.green{
+        background-color: $green;
+      }
+      &.red{
+        background-color: $red;
+      }
+      &.yellow{
+        background-color: $yellow;
+      }
+    }
+  }
+
+  
+}

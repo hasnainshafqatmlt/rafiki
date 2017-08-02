@@ -37,11 +37,13 @@
 		float: left;
 		width: 100%;
 		margin-top: 80px;
-		td{
-			font-size: 20px;
-			color: $dark-gray;
+		td{			
 			border: none;
 			padding-bottom: 43px;
+			a{
+				font-size: 20px;
+				color: $dark-gray;
+			}
 			.icon{
 				cursor: pointer;
 			}

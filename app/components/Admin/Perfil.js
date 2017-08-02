@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 
-class Signup extends Component {
+class Perfil extends Component {
 
 	constructor(props) {
     super(props);
@@ -13,35 +12,30 @@ class Signup extends Component {
 
 	render() {
 		return (
-			<div className="signup-block">
+			<div className="perfil-block">
 				{this.state.showForm &&
 					<div className='container'>
-						<h1 className='col-sm-12 text-center heading-1'>{'Abre tu cuenta, es gratis!'}</h1>
+						<h1 className='col-sm-12 text-center heading-1'>{'Mi perfil'}</h1>
 						<div className='col-sm-12 form'>
-							<div className='center'>
+							<div className='center sm'>
 								<div className="form-group">
-							    <input
-							    	type="email"
-							    	className="form-control"
-							    	placeholder="Email"
-							   	/>
+								    <input
+								    	type="text"
+								    	className="form-control"
+								    	placeholder="Email"
+								   	/>
 								</div>
 								<div className="form-group">
-								  <input
-								  	type="password"
-								  	className="form-control"
-								  	placeholder="Clave"
-								  />
+								    <input
+								    	type="text"
+								    	className="form-control"
+								    	placeholder="Clave nueva"
+								   	/>
 								</div>
+								
 								<button type="submit" className="btn btn-success col-100">
-									{'Crear cuenta'}
+									{'Guardar cambios'}
 								</button>
-								<p className='text-center'>
-								 	{'¿Ya tienes cuenta?  '}
-								 	<Link to='/login'>
-								 		{'Iniciar sesión'}
-								 	</Link>
-								 </p>
 							</div>
 						</div>
 					</div>
@@ -61,5 +55,5 @@ class Signup extends Component {
 	}
 }
 
-export default Signup;
+export default Perfil;
 

@@ -1,0 +1,223 @@
+.admin-servicios{
+  margin-bottom: 150px;
+  float: left;
+  width: 100%;
+  h1{
+    margin-top: 60px;
+    margin-bottom: 0;
+  }
+  .status{
+    float: left;
+    margin-top: -29px;
+    li{
+      float: left;
+      color: $dark-gray;
+      font-size: 15px;
+      margin-right: 15px;
+      i{
+        float: left;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        margin-right: 7px;
+        margin-top: 3px;
+        &.green{
+          background-color: $green;
+        }
+        &.red{
+          background-color: $red;
+        }
+        &.yellow{
+          background-color: $yellow;
+        }
+      }
+    }
+  }
+  .table{
+    float: left;
+    width: 100%;
+    margin-top: 54px;
+    margin-bottom: 0;
+    th{
+      border: none;
+      font-size: 18px;
+      font-weight: 600;
+      color: $dark-gray;
+      padding-top: 0;
+      padding-bottom: 50px;
+      position: relative;
+      .filter-status{
+        position: absolute;
+        left: 12px;
+        top: 31px;
+        .status-icon{
+          float: left;
+          width: 10px;
+          height: 10px;
+          margin-right: 9px;
+          cursor: pointer;
+        }
+      }
+      img{
+        position: relative;
+        top: 9px;
+        cursor: pointer;
+      }
+    }
+    td{     
+      border: none;
+      padding-bottom: 43px;
+      a{
+        font-size: 20px;
+        color: $dark-gray;
+      }
+      .icon{
+        cursor: pointer;
+      }
+    }
+    tr{
+      &:last-child{
+        td{
+          padding-bottom: 0;
+        }
+      }
+    }
+    .status-icon{
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      margin-right: 7px;
+      margin-top: 3px;
+      &.green{
+        background-color: $green;
+      }
+      &.red{
+        background-color: $red;
+      }
+      &.yellow{
+        background-color: $yellow;
+      }
+    }
+  }
+
+  .top-horizental-line{
+    float: left;
+    width: 100%;
+    margin-top: 98px;
+    margin-bottom: 28px;
+  } 
+  .bottom-horizental-line{
+    margin-top: 0;
+    margin-bottom: 28px;
+    float: left;
+    width: 100%;
+  }
+  .breadcrumb{
+    float: left;
+    width: 100%;
+    background-color: transparent;
+    padding: 0;
+    li{
+      font-size: 14px;
+      color: $dark-gray;
+      a{
+        font-size: 14px;
+        color: $dark-gray;
+      }
+    }   
+  }
+  .breadcrumb-item+.breadcrumb-item::before{
+    content: "-";
+  }
+  .info-block{
+    margin-top: 35px;
+    position: relative;
+    padding-left: 242px;
+    padding-right: 177px;
+    padding-bottom: 30px;
+    .thumb{
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 200px;
+      height: 200px;
+      background-color: #D8D8D8;
+      .icon{
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+      }
+    }
+    h3{
+      float: left;
+      width: 100%;
+      font-size: 27px;
+      color: $black;
+      margin-bottom: 9px;
+      font-weight: 700;
+      padding-right: 110px;
+    }
+    small{
+      float: left;
+      width: 100%;
+      font-size: 14px;
+      color: $dark-gray;
+      margin-bottom: 19px;
+    }
+    price{
+      float: left;
+      width: 100%;
+      font-size: 24px;
+      color: $black;
+      margin-bottom: 15px;
+    }
+    p{
+      float: left;
+      width: 100%;
+      font-size: 18px;
+      color: $dark-gray;
+      margin-bottom: 23px;
+    }    
+    strong{
+      font-size: 18px;
+      color: $dark-gray;
+      margin-bottom: 17px;  
+      font-weight: 600;
+      float: left;
+    }
+    .list{
+      float: left;
+      width: 100%;
+      li{
+        float: left;
+        width: 100%;
+        font-size: 18px;
+        color: $dark-gray;
+        margin-bottom: 5px;
+      } 
+    }
+    .btn-gray{
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 167px;
+    }   
+  }
+  .actions{
+    text-align: center;
+    .btn{
+      margin: 0 12px;
+    }
+    .btn-secondary{
+      width: 107px;
+    }
+    .btn-success{
+      width: 145px;
+    }
+  }
+  
+}

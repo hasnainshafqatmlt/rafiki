@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class Servicios extends Component {
 
@@ -45,7 +46,9 @@ class Servicios extends Component {
 						      	<i className='status-icon green'/>
 						      </td>
 						      <td>
-						      	Nombre de Servicio 1  asdfasdf
+						      	<Link to='/vistaPrevia'>
+						      		Nombre de Servicio 1  asdfasdf
+						      	</Link>
 						      </td>
 						    </tr>
 						    <tr>
@@ -59,7 +62,9 @@ class Servicios extends Component {
 						      	<i className='status-icon red'/>
 						      </td>
 						      <td>
+						      	<Link to='/vistaPrevia'>
 						      	Nombre de Servicio 1  asdfasdf
+						      	</Link>
 						      </td>
 						    </tr>
 						    <tr>
@@ -73,7 +78,9 @@ class Servicios extends Component {
 						      	<i className='status-icon yellow'/>
 						      </td>
 						      <td>
+						      	<Link to='/vistaPrevia'>
 						      	Nombre de Servicio 1  asdfasdf
+						      	</Link>
 						      </td>
 						    </tr>
 						  </tbody>
@@ -81,13 +88,13 @@ class Servicios extends Component {
 					</div>
 
 					<div className='float-left col-100 text-center'>
-						<a
-							href='#'
+						<Link
+							to='descripcion'
 							className='add-btn'
 						>
 							<i className='plus-icon' />
 							<span>Agregar otro servicio</span>
-						</a>
+						</Link>
 					</div>
 				</div>
 			</div>

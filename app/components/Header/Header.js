@@ -56,22 +56,22 @@ class Header extends Component {
 					</Link>
 					<ul className='nav'>
 						<li>
-							<Link to='servicios'>
+							<Link to='/servicios'>
 								{'Mis Servicios'}
 							</Link>
 						</li>
 						<li>
-							<Link to='ventas'>
+							<Link to='/ventas'>
 								{'Mis Ventas'}
 							</Link>
 						</li>
 						<li>
-							<Link to='perfil'>
+							<Link to='/perfil'>
 								{'Perfil'}
 							</Link>
 						</li>
-						<li className='logout'>
-							<Link to='signup'>
+						<li className='/logout'>
+							<Link to='/signup'>
 								<img src='/images/logout-icon.png'/>
 							</Link>
 						</li>

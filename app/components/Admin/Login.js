@@ -6,10 +6,9 @@ import AuthActionCreator from '../../actions/AuthActionCreator';
 import AuthStore from '../../stores/AuthStore';
 import ActionTypes from '../../constants/ActionTypes';
 
-import Validation from './LoginValidation';
 
 
-class LoginPage extends Component {
+class Login extends Component {
 	constructor () {
 		super();
 		this.state = {
@@ -103,7 +102,7 @@ class LoginPage extends Component {
 			<div className="login-block">
 				{this.state.showForm &&
 					<div className='container'>
-						<h1 className='col-sm-12 text-center heading-1'>{'Ingresa a tu cuenta'}</h1>
+						<h1 className='col-sm-12 text-center heading-1'>{'Login'}</h1>
 						<div className='col-sm-12 form'>
 							<div className='center'>
 								<div className="form-group">
@@ -121,19 +120,8 @@ class LoginPage extends Component {
 								  />
 								</div>
 								<button type="submit" className="btn btn-success col-100">
-									{'Continuar'}
+									{'Login'}
 								</button>
-								<p className='text-center'>
-								 	{'¿Eres nuevo?  '}
-								 	<Link to='/signup'>
-								 		{'Crea tu cuenta'}
-								 	</Link>
-								 </p>
-								 <p className='text-center t-8'>
-								 	<Link to='/forgot'>
-								 		{'¿Olvidaste tu clave?'}
-								 	</Link>
-								 </p>
 							</div>
 						</div>
 					</div>
@@ -152,4 +140,4 @@ class LoginPage extends Component {
 	}
 }
 
-export default LoginPage;
+export default Login;
