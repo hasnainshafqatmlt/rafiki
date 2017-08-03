@@ -89,7 +89,7 @@ class Servicios extends Component {
 
 					<div className='float-left col-100 text-center'>
 						<Link
-							to='descripcion'
+							to='/areas'
 							className='add-btn'
 						>
 							<i className='plus-icon' />

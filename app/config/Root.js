@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import Dashboard from '../components/Dashboard';
+import Home from '../components/Home';
 import Main from '../components/Main';
 import NotFound from '../components/NotFound';
 
@@ -29,7 +29,7 @@ const Root = () => {
   return (
     <Switch>
       <Main>
-        <Route exact path='/' component={Dashboard}/>
+        <Route exact path='/' component={Home}/>
         <Route path='/login' component={Login}/>
         <Route path='/signup' component={Signup}/>
         <Route path='/forgot' component={Forgot}/>

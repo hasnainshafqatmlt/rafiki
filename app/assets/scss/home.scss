@@ -1,0 +1,35 @@
+.home-block{
+	float: left; 
+	width: 100%;
+	margin-bottom: 150px;
+	min-height: 600px;
+	h1{
+		margin-top: 32px;
+		margin-bottom: 57px;
+	}
+	.list{
+		float: left;
+		width: 100%;
+		margin-bottom: 60px;
+		li{
+			float: left;
+			width: 100%;
+			font-size: 24px;
+			color: $dark-gray;
+			font-weight: 600;
+			margin-bottom: 20px;
+		}
+	}
+	.row{
+		position: relative;
+	}
+	.photo{
+		position: absolute;
+		right: 0;
+		top: -70px;
+	}
+	.btn-success{
+		width: 350px;
+		max-width: 100%;
+	}
+}

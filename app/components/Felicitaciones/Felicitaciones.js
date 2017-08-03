@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class Felicitaciones extends Component {
 
@@ -20,13 +21,13 @@ class Felicitaciones extends Component {
 				<div className='float-left col-100'>
 					<div className='container'>
 						<div className='float-left col-100 text-center'>
-							<a
-								href='#'
+							<Link
+								to='/areas'
 								className='add-btn'
 							>
 								<i className='plus-icon' />
 								<span>Agregar otro servicio</span>
-							</a>
+							</Link>
 						</div>
 					</div>
 				</div>
