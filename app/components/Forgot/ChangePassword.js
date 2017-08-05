@@ -1,71 +1,47 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
+import { Link } from 'react-router-dom';
+import QueryString from 'query-string';
 
+import Helmet from 'react-helmet'
 import RegisterActionCreator from '../../actions/RegisterActionCreator';
 import RegistrationStore from '../../stores/RegistrationStore';
 import AuthStore from '../../stores/AuthStore';
 import ActionTypes from '../../constants/ActionTypes';
 
-class Forgot extends Component {
+import Config from '../../config/Config';
+
+import Validation from './Validation';
+
+class ChangePassword extends Component {
 
 	constructor(props) {
 		super(props);
 
+		const query = QueryString.parse(this.props.location.search);
+		const id = query.id;
+		const code = query.code;
+
 		this.state = {
-			showForm: true,
-
-			form: {
-				email: '',
-				errors: {
-					email: '',
-				},
-				valid: {
-					email: false,
-				},
-
-				formValid: false,
-
-				loading: false,
-				errorMsg: false
-			}
+			id,
+			code,
+			errorMsg: ''
 		};
 	}
 
-	handleUserInput = (e) => {
-		const name = e.target.name;
-		let value = e.target.value;
-
-		let { form } = this.state;
-		form[name] = value;
-		this.setState({ form }, () => { this.validateField(name, value) });
-	}
-
-	validateField(fieldName, value) {
-
-		let { valid, errors } = this.state.form;
-
-		valid.email = (/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i).test(value);
-		errors.email = valid.email ? '': 'Invalid email';
-
-		console.log('valid, errors', valid, errors)
-
-		let isValid = true;
-		for(let f in valid) {
-			if(!valid[f]) isValid = false;
-		}
-		this.setState({formValid: isValid});
-	}
-
-	errorClass(error) {
-		return(error.length === 0 ? '' : 'has-error');
+	static propTypes = {
+		id: PropTypes.string.isRequired,
+		code: PropTypes.string.isRequired
 	}
 
 	componentDidMount() {
-		const { location, routes } = this.props;
+		const { code, id } = this.state;
 		const isLoggedIn = AuthStore.isLoggedIn();
 		RegistrationStore.addChangeListener(this.handleStoreChange);
 
 		if (isLoggedIn) {
 			this.props.history.push('/')
+		} else {
+			RegisterActionCreator.registerStep2(id, code);
 		}
 	}
 
@@ -81,38 +57,14 @@ class Forgot extends Component {
 		const action = RegistrationStore.getLastAction();
 		const error = RegistrationStore.error;
 
-		if (action && action.type === ActionTypes.REQUEST_RESET_PASSWORD_SUCCESS) {
-			this.setState({
-				showForm: false
-			})
+		if (action && action.type === ActionTypes.SIGNUP_STEP2_SUCCESS) {
+			this.props.history.push('/login')
 
-		} else if (action && (action.type === ActionTypes.REQUEST_RESET_PASSWORD_ERROR) ) {
+		} else if (action && (action.type === ActionTypes.SIGNUP_STEP2_ERROR) ) {
 			this.setState({
 				errorMsg: error,
 			})
 		}
-		console.log('action.type', action.type)
-	}
-
-	handleSubmit = (e) => {
-		e.preventDefault();
-
-		const form = this.state.form;
-
-		if (!this.state.formValid) {
-			return;
-		}
-
-		this.setState({
-			loading: true,
-		});
-
-
-		const { email } = form;
-
-
-
-		RegisterActionCreator.requestResetPassword({email});
 	}
 
 	render() {
@@ -164,5 +116,5 @@ class Forgot extends Component {
 	}
 }
 
-export default Forgot;
+export default ChangePassword;
 

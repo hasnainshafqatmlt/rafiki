@@ -4,17 +4,16 @@ export default function validateField(state, fieldName, value) {
 
 	switch(fieldName) {
 		case 'email':
-			emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
+			emailValid = (/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i).test(value);
 			formErrors.email = emailValid ? '' : ' is invalid';
 			break;
 		case 'password':
-			passwordValid = value.length >= 6;
+			passwordValid = value.length >= 2;
 			formErrors.password = passwordValid ? '': ' is too short';
 			break;
 		default:
 			break;
 	}
-	console.log('here i am ')
 
 	return {
 		formErrors,

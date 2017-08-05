@@ -22,6 +22,19 @@ export default keyMirror({
 
 
 	/**
+	* Registration
+	*/
+	SIGNUP_USER: null,
+	SIGNUP_USER_SUCCESS: null,
+	SIGNUP_USER_ERROR: null,
+	SIGNUP_EMAIL_AVAILABLE_SUCCESS: null,
+	SIGNUP_EMAIL_AVAILABLE_ERROR: null,
+
+	SIGNUP_STEP2_SUCCESS: null,
+	SIGNUP_STEP2_ERROR: null,
+
+
+	/**
 	* Users
 	*/
 	GET_PROFILE: null,

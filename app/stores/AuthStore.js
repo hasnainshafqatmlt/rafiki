@@ -34,7 +34,7 @@ class AuthStore extends BaseStore {
     // LOGIN, REFRESH JWT
     case ActionTypes.REQUEST_LOGIN_USER_SUCCESS:{
       const data = action.data.respData;
-      this._jwt = data.loginAction.authToken;
+      this._jwt = data.token;
       this._user = data.user || null;
       this._error = null;
 
@@ -45,6 +45,7 @@ class AuthStore extends BaseStore {
     }
 
     case ActionTypes.REQUEST_LOGIN_USER_ERROR:
+    case ActionTypes.REQUEST_RESET_PASSWORD_ERROR:
     case ActionTypes.UNAUTHORIZED_USER:
       if (action.error) {
         this._error = action.error.message || 'none';
@@ -56,7 +57,6 @@ class AuthStore extends BaseStore {
 
     case ActionTypes.REQUEST_RESET_PASSWORD_SUCCESS:
       this._error = null;
-      this._phoneCode = null;
       this.emitChange();
       break;
 
@@ -85,7 +85,7 @@ class AuthStore extends BaseStore {
   _login() {
     const storeIt = {
       header: {
-        'inseaders-token': this._jwt,
+        'kogno-token': this._jwt,
         storeTime: Math.floor(Date.now() / 1000),
       },
       userData: {
@@ -102,13 +102,13 @@ class AuthStore extends BaseStore {
       },
     };
 
-    localStorage.setItem('jv_jwt', JSON.stringify(storeIt));
+    localStorage.setItem('kongo-jwt', JSON.stringify(storeIt));
   }
 
   _autoLogin() {
     if (typeof (Storage) !== 'undefined') {
       let jwt;
-      const jsonJWT = localStorage.getItem('jv_jwt');
+      const jsonJWT = localStorage.getItem('kongo-jwt');
 
       if (jsonJWT) {
         jwt = JSON.parse(jsonJWT);
@@ -116,7 +116,7 @@ class AuthStore extends BaseStore {
 
       if (jwt && jwt.header) {
         const now = Math.floor(Date.now() / 1000);
-        const exp = jwtDecode(jwt.header['inseaders-token']).exp;
+        const exp = jwtDecode(jwt.header['kogno-token']).exp;
         const timeFromLastRefresh = (now - jwt.header.storeTime) / 60 / 60;
 
         if (now >= exp) {
@@ -130,7 +130,7 @@ class AuthStore extends BaseStore {
             browserHistory.push('/login');
           }
         } else {
-          this._jwt = jwt.header['inseaders-token'];
+          this._jwt = jwt.header['kogno-token'];
           this._user = jwt.userData;
 
           if (timeFromLastRefresh >= 24) {
@@ -144,11 +144,11 @@ class AuthStore extends BaseStore {
   }
 
   _updateUserData(field, data) {
-    const jsonJWT = localStorage.getItem('jv_jwt');
+    const jsonJWT = localStorage.getItem('kongo-jwt');
     if (jsonJWT) {
       const jwt = JSON.parse(jsonJWT);
       jwt.userData[field] = data;
-      localStorage.setItem('jv_jwt', JSON.stringify(jwt));
+      localStorage.setItem('kongo-jwt', JSON.stringify(jwt));
       this._user[field] = data;
     }
   }
@@ -158,7 +158,7 @@ class AuthStore extends BaseStore {
     this._error = null;
     this._jwt = null;
     if (typeof (Storage) !== 'undefined') {
-      localStorage.removeItem('jv_jwt');
+      localStorage.removeItem('kongo-jwt');
     }
   }
 
@@ -174,6 +174,11 @@ class AuthStore extends BaseStore {
    */
   clearJwtStore() {
     this._clearStore();
+  }
+
+
+  logoutUser() {
+    this._logout();
   }
 
   get user() {

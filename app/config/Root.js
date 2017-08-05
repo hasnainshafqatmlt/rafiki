@@ -7,6 +7,7 @@ import NotFound from '../components/NotFound';
 
 import Login from '../components/Login/Login';
 import Signup from '../components/Signup/Signup';
+import SignupStep2 from '../components/Signup/SignupStep2';
 import Forgot from '../components/Forgot/Forgot';
 import Areas from '../components/Areas/Areas';
 import Descripcion from '../components/Descripcion/Descripcion';
@@ -31,7 +32,8 @@ const Root = () => {
       <Main>
         <Route exact path='/' component={Home}/>
         <Route path='/login' component={Login}/>
-        <Route path='/signup' component={Signup}/>
+        <Route exact path='/signup' component={Signup}/>
+        <Route path='/signup/verification' component={SignupStep2}/>
         <Route path='/forgot' component={Forgot}/>
         <Route path='/areas' component={Areas}/>
         <Route path='/descripcion' component={Descripcion}/>

@@ -12,11 +12,8 @@ class Header extends Component {
 	}
 
 	static propTypes = {
-		pathname: PropTypes.string.isRequired
-	}
-
-	state = {
-		unreadCount: 0
+		pathname: PropTypes.string.isRequired,
+		isAuthenticated: PropTypes.bool.isRequired,
 	}
 
 	componentDidMount() {
@@ -27,22 +24,14 @@ class Header extends Component {
 		//console.log('Header Rec Props', this.props)
 	}
 
+	logoutUser = () => {
+		AuthStore.logoutUser();
+	}
+
 	render() {
 
 
-		let authenticated = false;
-		const user = AuthStore.user;
-
-		if(user) {
-			authenticated = true;
-		}
-
-		const { unreadCount } = this.state
-
-		let isLoginPage = true;
-		if(this.props.pathname.indexOf('/register') === 0) {
-			isLoginPage = false;
-		}
+		const { isAuthenticated, user } = this.props;
 
 		return (
 
@@ -55,26 +44,43 @@ class Header extends Component {
 						<img src='/images/kogno-logo.png'/>
 					</Link>
 					<ul className='nav'>
-						<li>
+
+						{isAuthenticated && <li>
 							<Link to='/servicios'>
 								{'Mis Servicios'}
 							</Link>
 						</li>
+						}
+						{isAuthenticated &&
 						<li>
 							<Link to='/ventas'>
 								{'Mis Ventas'}
 							</Link>
 						</li>
+						}
+						{isAuthenticated &&
 						<li>
 							<Link to='/perfil'>
 								{'Perfil'}
 							</Link>
 						</li>
+						}
+
+						{isAuthenticated &&
+						<li className='/logout'>
+							<span onClick={this.logoutUser}>
+								<img src='/images/logout-icon.png'/>Logout
+							</span>
+						</li>
+						}
+
+						{!isAuthenticated &&
 						<li className='/logout'>
 							<Link to='/signup'>
 								<img src='/images/logout-icon.png'/>
 							</Link>
 						</li>
+						}
 					</ul>
 				</div>
 			</header>
