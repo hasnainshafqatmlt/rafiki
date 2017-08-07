@@ -113,7 +113,7 @@ class LoginPage extends Component {
 								<div className='center'>
 									{errorMsg && <div className="text-danger">Invalid email or password</div>}
 									<div className="form-group">
-										<div className={`form-group ${this.errorClass(form.errors.email)}`}>
+										<div className={`form-group ${this.errorClass(formErrors.email)}`}>
 										    <input
 										    	type="email"
 										    	className="form-control"
@@ -125,7 +125,7 @@ class LoginPage extends Component {
 									   	</div>
 									</div>
 									<div className="form-group">
-										<div className={`form-group ${this.errorClass(form.errors.password)}`}>
+										<div className={`form-group ${this.errorClass(formErrors.password)}`}>
 										  <input
 										  	type="password"
 										  	className="form-control"
