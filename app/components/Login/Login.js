@@ -67,6 +67,9 @@ class LoginPage extends Component {
 		const error = AuthStore.error;
 
 		if (action && action.type === ActionTypes.REQUEST_LOGIN_USER_SUCCESS) {
+			this.setState({
+				errorMsg: null,
+			})
 			this.props.history.push('/')
 
 		} else if (action && (action.type === ActionTypes.REQUEST_LOGIN_USER_ERROR || action.type === ActionTypes.UNAUTHORIZED_USER) ) {
@@ -84,6 +87,7 @@ class LoginPage extends Component {
 
 		e.preventDefault();
 
+		console.log('this.state', this.state)
 		if (this.state.formValid) {
 			//this.showLoader();
 			this.setState({
@@ -105,36 +109,49 @@ class LoginPage extends Component {
 					<div className='container'>
 						<h1 className='col-sm-12 text-center heading-1'>{'Ingresa a tu cuenta'}</h1>
 						<div className='col-sm-12 form'>
-							<div className='center'>
-								<div className="form-group">
-							    <input
-							    	type="email"
-							    	className="form-control"
-							    	placeholder="Email"
-							   	/>
+							<form className='' onSubmit={this.handleSubmit}>
+								<div className='center'>
+									{errorMsg && <div className="text-danger">Invalid email or password</div>}
+									<div className="form-group">
+										<div className={`form-group ${this.errorClass(form.errors.email)}`}>
+										    <input
+										    	type="email"
+										    	className="form-control"
+										    	placeholder="Email"
+												name="email"
+												value={email}
+												onChange={this.handleUserInput}
+										   	/>
+									   	</div>
+									</div>
+									<div className="form-group">
+										<div className={`form-group ${this.errorClass(form.errors.password)}`}>
+										  <input
+										  	type="password"
+										  	className="form-control"
+										  	placeholder="Clave"
+										  	name="password"
+											value={password}
+											onChange={this.handleUserInput}
+										  />
+										</div>
+									</div>
+									<button type="submit" className="btn btn-success col-100">
+										{'Continuar'}
+									</button>
+									<p className='text-center'>
+									 	{'¿Eres nuevo?  '}
+									 	<Link to='/signup'>
+									 		{'Crea tu cuenta'}
+									 	</Link>
+									 </p>
+									 <p className='text-center t-8'>
+									 	<Link to='/forgot'>
+									 		{'¿Olvidaste tu clave?'}
+									 	</Link>
+									 </p>
 								</div>
-								<div className="form-group">
-								  <input
-								  	type="password"
-								  	className="form-control"
-								  	placeholder="Clave"
-								  />
-								</div>
-								<button type="submit" className="btn btn-success col-100">
-									{'Continuar'}
-								</button>
-								<p className='text-center'>
-								 	{'¿Eres nuevo?  '}
-								 	<Link to='/signup'>
-								 		{'Crea tu cuenta'}
-								 	</Link>
-								 </p>
-								 <p className='text-center t-8'>
-								 	<Link to='/forgot'>
-								 		{'¿Olvidaste tu clave?'}
-								 	</Link>
-								 </p>
-							</div>
+							</form>
 						</div>
 					</div>
 				}

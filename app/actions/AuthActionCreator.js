@@ -14,9 +14,7 @@ export default {
 
 		const form = {
 			email,
-			password,
-			os: 'WINDOWS', // TODO: Get os
-			grant_type: 'password'
+			password
 		};
 
 		WebAPIUtils.sendPOST(success, error, url, form);

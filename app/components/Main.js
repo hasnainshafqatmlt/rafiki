@@ -5,6 +5,8 @@ import Helmet from 'react-helmet';
 import Header from './Header/Header';
 import Footer from './Footer/Footer';
 
+import AuthStore from '../stores/AuthStore';
+
 import Config from '../config/Config';
 
 
@@ -12,6 +14,11 @@ class Main extends Component {
 
 	constructor() {
 		super();
+
+		this.state = {
+			isAuthenticated: false,
+			user: null
+		}
 	}
 
 	static propTypes = {
@@ -20,13 +27,20 @@ class Main extends Component {
 		routes: PropTypes.array,
 	}
 
+
 	componentDidMount() {
 		const { location, routes } = this.props;
 		this.updateTitle();
+
+		AuthStore.addChangeListener(this.handleChange);
 	}
 
 	componentDidUpdate() {
-		this.updateTitle();	
+		this.updateTitle();
+	}
+
+	componentWillUnmount() {
+		AuthStore.removeChangeListener(this.handleChange);
 	}
 
 	updateTitle() {
@@ -34,22 +48,49 @@ class Main extends Component {
 		document.title = pathname.split('/')[1];
 	}
 
+	handleChange = () => {
+
+
+		let isAuthenticated = false;
+		const user = AuthStore.user;
+
+		if(user) {
+			this.setState({
+				isAuthenticated: true,
+				user
+			});
+		} else {
+			if(
+				this.props.location.pathname != '/login' &&
+				this.props.location.pathname != '/signup' &&
+				this.props.location.pathname != '/forgot'
+			) {
+				window.location = "/";
+			}
+		}
+
+	}
+
+
 	render() {
 		//console.log('MAIN: this.props.location', this.props.location)
 		let bgClass;
 		let container;
-		if (this.props.location.pathname == '/login') {
-			bgClass = 'login-page'
-		} else if (this.props.location.pathname == '/register') {
-			bgClass = 'register-page'
-		} else {
-			container = 'container'
-		}
+		// if (this.props.location.pathname == '/login') {
+		// 	bgClass = 'login-page'
+		// } else if (this.props.location.pathname == '/register') {
+		// 	bgClass = 'register-page'
+		// } else {
+		// 	container = 'container'
+		// }
+
+		const { user, isAuthenticated } = this.state;
+
 
 		return (
 			<div className={`app col-100`}>
 				<Helmet {...Config.App.head} />
-				<Header pathname={this.props.location.pathname}/>
+				<Header pathname={this.props.location.pathname} isAuthenticated={isAuthenticated} user={user}/>
 				<div className={`col-100 h-100 float-left ${bgClass}`}>
 					{this.props.children}
 				</div>

@@ -7,26 +7,29 @@
 
 let SITE_STATIC_ASSETS = '../public/images/';
 
-let API_URL = 'http://localhost:3333/api/v2'; // local env
+let API_URL = 'http://localhost:3333/api/v1'; // local env
 
 if(process.env.NODE_ENV == 'development') {
-	API_URL = 'http://188.166.225.132:3333/api/v2';
+	API_URL = 'http://188.166.225.132:3333/api/v1';
 } else if (process.env.NODE_ENV == 'production') {
-	API_URL = 'http://app.inseaders.vc:3333/api/v2';
+	API_URL = 'http://188.166.225.132:3333/api/v1';
 	SITE_STATIC_ASSETS = '../public/images/';
 }
 
 const App = {
-	title: 'Kogno',
-	description: '',
+	title: 'KOGNO',
+	description: 'KOGNO',
 	head: {
-		//defaultTitle: 'INSEADERS',
-		titleTemplate: '%s | Kogno',
+		defaultTitle: 'KOGNO',
+		titleTemplate: '%s | KOGNO',
 		meta: [
-			//{name: 'description', content: 'The global venture booster for INSEAD'},
+			{name: 'description', content: 'KOGNO'},
 			{charset: 'utf-8'},
-			//{property: 'robots', content: 'index,follow'},
-			
+			{property: 'og:locale', content: 'en_US'},
+			{property: 'og:title', content: 'KOGNO'},
+			{property: 'og:description', content: 'KOGNO'},
+			{property: 'og:site', content: 'KOGNO'},
+			{property: 'og:creator', content: 'KOGNO'},
 		]
 	}
 };
