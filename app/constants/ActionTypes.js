@@ -20,7 +20,7 @@ export default keyMirror({
 	REQUEST_REFRESH_JWT_ERROR: null,
 	UNAUTHORIZED_USER: null,
 
-
+	SET_AREAS_CATEGORIES: null,
 	/**
 	* Users
 	*/

@@ -10,7 +10,7 @@ const config = {
 	devtool: 'cheap-module-eval-source-map',
 
 	entry: [
-	'webpack-hot-middleware/client', // ?reload=true
+	'webpack-hot-middleware/client?reload=true',
 		resolve(__dirname, 'app/main.js')
 	],
 

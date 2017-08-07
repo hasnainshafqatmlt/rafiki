@@ -1,16 +1,23 @@
 import React, { Component } from 'react';
+import AreasStore from '../../stores/AreasStore';
 
 class Description extends Component {
 
 	constructor(props) {
-    super(props);
+	    super(props);
 
-    this.state = {
-      showForm: true
-    };
-  }
+	    this.state = {
+	      showForm: true,
+	      selectedCategories: AreasStore.getAreas
+	    };
+	}
+
+	componentDidMount() {
+		window.scrollTo(0,0);
+	}
 
 	render() {
+		console.log('AreasStore.getAreas>', AreasStore.getAreas)
 		return (
 			<div className="description-block">
 				{this.state.showForm &&

@@ -1,128 +1,243 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
+
+import Category from './Category';
+import SubCategory from './SubCategory';
+import AreasActionCreator from '../../actions/AreasActionCreator';
+import AreasStore from '../../stores/AreasStore';
+import ActionTypes from '../../constants/ActionTypes';
+
+const categoryArray = [
+	{
+		name: 'Social Media',
+		title1: '¿En qué Redes?',
+		title2: '¿Qué Servicios?',
+		subCategory: [
+			'Facebook',
+			'Instagram',
+			'Twitter',
+			'LinkedIn',
+			'YouTube',
+			'G+',
+			'Pinterest',
+			'Conseguir más seguidores / fans / likes',
+			'Promoción a miles o millones de fans',
+			'Creación / Manejo de Cuenta',
+			'Social Media Manager',
+			'Campaña de Paid Ads',
+			'Consulting / Analytics',
+			'Otro'
+		]
+	},
+	{
+		name: 'SEO, Generación de tráfico',
+		subCategory: [
+			'Backlinks',
+			'Optimización de sitios web',
+			'Análisis de sitios web',
+			'Mejora de posición en Google',
+			'Estudio de keywords o competidores',
+			'Consultoría / Analytics',
+			'Otro'
+		]
+	},
+	{
+		name: 'SEM, AdWords',
+		subCategory: [
+			'Campañas:  creación o administración',
+			'Estrategia',
+			'Remarketing',
+			'Consultoría / Analytics',
+			'Otro'
+		]
+	},
+	{
+		name: 'Email Marketing',
+		subCategory: [
+			'Campañas:  creación o administración',
+			'MailChimp, GetResponse',
+			'Plantillas de Emails',
+			'Otro'
+		]
+	},
+	{
+		name: 'Inbound Marketing, Contenidos',
+		subCategory: [
+			'Creación de contenidos',
+			'Promoción de contenidos',
+			'Consultoría, estrategia',
+			'Otro'
+		]
+	},
+	{
+		name: 'Retargeting, Display Programático',
+		subCategory: [
+			'Campañas:  creación o administración',
+			'Retargeting en Web o Facebook',
+			'AdWords Remarketing',
+			'Consultoría, estrategia',
+			'Otro'
+		]
+	},
+	{
+		name: 'Influenciadores',
+		title1: '¿En qué Redes?',
+		title2: '¿Qué Servicios?',
+		subCategory: [
+			'Facebook',
+			'Instagram',
+			'Twitter',
+			'LinkedIn',
+			'YouTube',
+			'G+',
+			'Pinterest',
+			'Conseguir más seguidores / fans / likes',
+			'Promoción a miles o millones de fans',
+			'Promociones o Shoutouts',
+			'Consultoría, estrategia',
+			'Otro'
+		]
+	},
+	{
+		name: 'Video Ads, YouTube',
+		subCategory: [
+			'Campañas de Video Ads',
+			'Conseguir más tráfico / views / likes',
+			'Creación de videos',
+			'Consultoría, estrategia',
+			'Otro'
+		]
+	},
+	{
+		name: 'Mobile Marketing',
+		subCategory: [
+			'Campañas de Mobile ads',
+			'Promoción de Apps',
+			'Otro'
+		]
+	},
+	{
+		name: 'Otros'
+	},
+]
 
 class Areas extends Component {
 
 	constructor(props) {
-    super(props);
+	    super(props);
 
-    this.state = {
+	    this.state = {
+	    	categoryId: -1,
+	    	subCatId: [],
+	    	selectedCatName: '',
+	    	selectedData: []
+	    };
+	}
 
-    };
-  }
+	componentDidMount() {
+		AreasStore.addChangeListener(this.onChange);
+	}
 
-  socialMediaCategory() {
-  	return(
-  		<div className='subcategory col-100 float-left'>
-				<div className='col-sm-5 float-left'>
-					<h3>{'¿En qué Redes?'}</h3>
-					<ul className='list'>
-						<li>
-							<i className='rectangle'/>
-							<span>{'Facebook'}</span>
-						</li>
-						<li className='active'>
-							<i className='rectangle'/>
-							<span>{'Instagram'}</span>
-						</li>
-						<li>
-							<i className='rectangle'/>
-							<span>{'Twitter'}</span>
-						</li>
-						<li>
-							<i className='rectangle'/>
-							<span>{'LinkedIn'}</span>
-						</li>
-						<li>
-							<i className='rectangle'/>
-							<span>{'YouTube'}</span>
-						</li>
-						<li>
-							<i className='rectangle'/>
-							<span>{'G+'}</span>
-						</li>
-						<li>
-							<i className='rectangle'/>
-							<span>{'Pinterest'}</span>
-						</li>
-					</ul>
-				</div>
-				<div className='col-sm-7 float-left'>
-					<h3>{'¿Qué Servicios?'}</h3>
-					<ul className='list'>
-						<li>
-							<i className='rectangle'/>
-							<span>{'Conseguir más seguidores / fans / likes'}</span>
-						</li>
-						<li>
-							<i className='rectangle'/>
-							<span>{'Promoción a miles o millones de fans'}</span>
-						</li>
-						<li>
-							<i className='rectangle'/>
-							<span>{'Creación / Manejo de Cuenta'}</span>
-						</li>
-						<li>
-							<i className='rectangle'/>
-							<span>{'Social Media Manager'}</span>
-						</li>
-						<li>
-							<i className='rectangle'/>
-							<span>{'Campaña de Paid Ads'}</span>
-						</li>
-						<li>
-							<i className='rectangle'/>
-							<span>{'Consulting / Analytics'}</span>
-						</li>
-						<li>
-							<i className='rectangle'/>
-							<span>{'Otro'}</span>
-						</li>
-					</ul>
-				</div>
-			</div>
-  	)
-  }
+	componentWillMount() {
+		AreasStore.removeChangeListener(this.onChange);
+	}
 
-  seoCategory() {
-  	return(
-  		<div className='subcategory col-100 float-left'>
-				<div className='col-sm-12 float-left'>
-					<ul className='list'>
-						<li>
-							<i className='rectangle'/>
-							<span>{'Backlinks'}</span>
-						</li>
-						<li>
-							<i className='rectangle'/>
-							<span>{'Optimización de sitios web'}</span>
-						</li>
-						<li>
-							<i className='rectangle'/>
-							<span>{'Análisis de sitios web'}</span>
-						</li>
-						<li>
-							<i className='rectangle'/>
-							<span>{'Mejora de posición en Google'}</span>
-						</li>
-						<li>
-							<i className='rectangle'/>
-							<span>{'Estudio de keywords o competidores'}</span>
-						</li>
-						<li>
-							<i className='rectangle'/>
-							<span>{'Consultoría / Analytics'}</span>
-						</li>
-						<li>
-							<i className='rectangle'/>
-							<span>{'Otro'}</span>
-						</li>
-					</ul>
-				</div>
-			</div>
-  	)
-  }
+	onChange = () => {
+		const action = AreasStore.getLastAction();
+
+		if (action && action.type === ActionTypes.SET_AREAS_CATEGORIES) {
+			this.props.history.push('/descripcion');
+		}
+	}
+
+	selectCategory = (catName, id) => {
+		let tempArray = this.state.selectedData;
+		let isCat = false;
+		tempArray.forEach((data) => {
+			if (data.title === catName) {
+				isCat = true;
+				data.selected = true;
+			} else {
+				data.selected = false;
+			}
+		})
+
+		const catData = {
+			selected: true,
+			subCat: []
+		};
+		if (!isCat) {
+			catData.title = catName;
+			tempArray.push(catData)
+			this.setState({
+				selectedCatName: catName,
+				categoryId: id,
+				selectedData: tempArray
+			})
+		} else {
+			this.setState({
+				selectedCatName: catName,
+				categoryId: id,
+				selectedData: tempArray
+			})
+		}
+	}
+
+	selectSubCategory = (catName, subCatNewname, subCatId) => {
+		let selectedData = this.state.selectedData;
+		selectedData.forEach((data) => {
+			if (data.title === catName) {
+				if (data.subCat.length > 0) {
+					let push = true;
+					data.subCat.forEach((oldSubCatName, i) => {
+						if (oldSubCatName === subCatNewname) {
+							const index = data.subCat.indexOf(oldSubCatName);
+							data.subCat.splice(index, 1);
+							push = false;
+						}
+					})
+					if (push) {
+						data.subCat.push(subCatNewname);	
+					}
+				} else {
+					data.subCat.push(subCatNewname);
+				}				
+			}
+		})
+
+		this.setState({
+			selectedData: selectedData
+		});
+	}
+
+	handleContinue = () => {		
+		const selectedCat = _.find(this.state.selectedData, {selected: true})
+		AreasActionCreator.setCategories(selectedCat);
+	}
 
 	render() {
+		
+		let categories = [];
+		categoryArray.forEach((data, i) => {
+			categories.push(
+				<div key={`list_${i}`}>
+					<Category
+						categoryName={data.name}
+						id={i}
+						categoryId={this.state.categoryId}
+						selectCategory={this.selectCategory}
+					/>
+					<SubCategory
+						categoryId={i}
+						selectedCatName={this.state.selectedCatName}
+						subCat={data}
+						selectSubCategory={this.selectSubCategory}
+						selectedCategoryId={this.state.categoryId}
+						subCatId={this.state.subCatId}
+					/>
+				</div>
+			)
+		})
 		return (
 			<div className="areas-block">
 				<div className='container'>
@@ -133,51 +248,14 @@ class Areas extends Component {
 								<ul
 									className='category-list'
 								>
-									<li className='active'>
-										<i className='radio'/>
-										<span>{'Social Media'}</span>
-									</li>
-									{this.socialMediaCategory()}
-									<li >
-										<i className='radio'/>
-										<span>{'SEO, Generación de tráfico '}</span>
-									</li>
-									{this.seoCategory()}
-									<li>
-										<i className='radio'/>
-										<span>{'SEM, AdWords'}</span>
-									</li>
-									<li>
-										<i className='radio'/>
-										<span>{'Email Marketing'}</span>
-									</li>
-									<li>
-										<i className='radio'/>
-										<span>{'Inbound Marketing, Contenidos'}</span>
-									</li>
-									<li>
-										<i className='radio'/>
-										<span>{'Retargeting, Display Programático'}</span>
-									</li>
-									<li>
-										<i className='radio'/>
-										<span>{'Influenciadores'}</span>
-									</li>
-									<li>
-										<i className='radio'/>
-										<span>{'Video Ads y YouTube'}</span>
-									</li>
-									<li>
-										<i className='radio'/>
-										<span>{'Mobile Marketing'}</span>
-									</li>
-									<li>
-										<i className='radio'/>
-										<span>{'Otros'}</span>
-									</li>
+									{categories}
 								</ul>
 								<div className='float-left col-100 next'>
-									<button type="button" className="btn btn-success col-100">
+									<button
+										type="button"
+										className="btn btn-success col-100"
+										onClick={this.handleContinue}
+									>
 										{'Continuar'}
 									</button>
 								</div>

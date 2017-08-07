@@ -30,7 +30,6 @@ class Main extends Component {
 	}
 
 	updateTitle() {
-		console.log('this.props', this.props)
 		const pathname = this.props.location.pathname;
 		document.title = pathname.split('/')[1];
 	}
