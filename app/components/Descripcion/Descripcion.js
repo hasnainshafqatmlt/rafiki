@@ -1,23 +1,62 @@
 import React, { Component } from 'react';
 import AreasStore from '../../stores/AreasStore';
+import AuthStore from '../../stores/AuthStore';
+import DescripcionActionCreator from '../../actions/DescripcionActionCreator';
+import {getCountries} from '../../utils/utils';
+import _ from 'lodash';
+import Select from 'react-select';
+
 
 class Description extends Component {
 
 	constructor(props) {
 	    super(props);
+	    this.logChange = this.logChange.bind(this);
+	    this.handleContinue = this.handleContinue.bind(this);
 
 	    this.state = {
 	      showForm: true,
-	      selectedCategories: AreasStore.getAreas
+	      selectedCategories: AreasStore.getAreas,
+	      user: AuthStore.user,
+	      selectedCountry: null
 	    };
 	}
 
 	componentDidMount() {
 		window.scrollTo(0,0);
+		if (_.isEmpty(this.state.selectedCategories)) {
+			//this.props.history.push('/areas');
+		}
+	}
+
+	logChange(val) {
+  	this.setState({
+  		selectedCountry: val ? val.value : val
+  	});
+	}
+
+	handleContinue() {
+		const country = this.state.selectedCountry;
+		const fullName = this.refs.fullName.value.trim();
+		const about = this.refs.about.value.trim();
+		const userId = this.state.user._id;
+		console.log(country, fullName, about)
+		const data = {
+			fullName,
+			country,
+			about
+		}
+		DescripcionActionCreator.updateProfile(data, userId);
 	}
 
 	render() {
-		console.log('AreasStore.getAreas>', AreasStore.getAreas)
+		const {user, selectedCountry} = this.state;
+		console.log('AreasStore.getAreas>', AreasStore.getAreas, this.state.user)
+		const fullNameDisable = user.fullName ? true : false;
+		const countryDisable = user.country ? true : false;
+		const aboutDisable = user.about ? true : false;
+		const aboutText = 'ACERCA DE TI: Por ejemplo años de experiencia, en que área es tu mayor conocimiento,que te apasiona'
+console.log('fullNameDisable >>',fullNameDisable)
 		return (
 			<div className="description-block">
 				{this.state.showForm &&
@@ -31,6 +70,7 @@ class Description extends Component {
 								    	type="text"
 								    	className="form-control"
 								    	placeholder="TÍTULO:  por ejemplo “Soy tu Social Media Manager”"
+								    	ref='title'
 								   	/>
 								</div>
 								<div className="form-group">
@@ -39,6 +79,7 @@ class Description extends Component {
 								    	placeholder="DESCRIPCIÓN: 
 										que incluye, que lo hace especial, requisitos,
 										tiempo de entrega, etc."
+										ref='description'
 								   	/>
 								</div>
 								<div className="form-group">
@@ -47,6 +88,7 @@ class Description extends Component {
 									  	type="text"
 									  	className="form-control sm"
 									  	placeholder="Precio en USD $"
+									  	ref='price'
 									  />
 									</div>
 								</div>
@@ -54,23 +96,28 @@ class Description extends Component {
 								  <input
 								  	type="text"
 								  	className="form-control"
-								  	placeholder="Tu Nombre"
+								  	placeholder={user.fullName ? user.fullName : 'Tu Nombre'}
+								  	ref='fullName'
+								  	readOnly={fullNameDisable}
 								  />
 								</div>
 								<div className="form-group">
-								  <input
-								  	type="text"
-								  	className="form-control"
-								  	placeholder="Tu País"
-								  />
+									<Select
+									  name="form-field-name"
+									  placeholder={user.country ? user.country : 'Tu País'}
+									  value={selectedCountry}	
+									  options={getCountries()}
+									  onChange={this.logChange}
+									  disabled={countryDisable}
+									/>
+								  
 								</div>
 								<div className="form-group">
 								    <textarea
 								    	className="form-control"
-								    	placeholder="ACERCA DE TI:
-										Por ejemplo años de experiencia, 
-										en que área es tu mayor conocimiento,
-										que te apasiona"
+								    	ref='about'
+								    	readOnly={aboutDisable}
+								    	placeholder={user.about ? user.about : aboutText}
 								   	/>
 								</div>
 								<div className='upload-pic'>
@@ -84,7 +131,11 @@ class Description extends Component {
 									<span>{'Adjuntar'}</span>
 									<input type='file'/>
 								</div>
-								<button type="submit" className="btn btn-success col-100">
+								<button
+									type="button"
+									className="btn btn-success col-100"
+									onClick={this.handleContinue}
+								>
 									{'Continuar'}
 								</button>
 							</div>

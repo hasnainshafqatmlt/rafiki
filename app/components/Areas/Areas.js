@@ -127,6 +127,7 @@ class Areas extends Component {
 	    super(props);
 
 	    this.state = {
+	    	showError: false,
 	    	categoryId: -1,
 	    	subCatId: [],
 	    	selectedCatName: '',
@@ -212,7 +213,19 @@ class Areas extends Component {
 
 	handleContinue = () => {		
 		const selectedCat = _.find(this.state.selectedData, {selected: true})
-		AreasActionCreator.setCategories(selectedCat);
+		if (this.state.selectedData.length < 1 ) {
+			this.setState({
+				showError: 'Please Select Category'
+			})
+			window.scrollTo(0,0);
+		} else if (_.isEmpty(selectedCat.subCat)) {
+			this.setState({
+				showError: 'Please Select Subcategories'
+			})
+			window.scrollTo(0,0);
+		} else {
+			AreasActionCreator.setCategories(selectedCat);
+		}
 	}
 
 	render() {
@@ -245,6 +258,11 @@ class Areas extends Component {
 						<h1 className='col-sm-12 text-center heading-1 m-t-60'>{'Elige el área de tu servicio'}</h1>
 						<div className='pull-left col-100 form'>
 							<div className='center'>
+								{this.state.showError &&
+									<div className='alert alert-danger text-center m-t-30 m-b-0'>
+										{this.state.showError}
+									</div>
+								}
 								<ul
 									className='category-list'
 								>

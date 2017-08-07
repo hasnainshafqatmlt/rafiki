@@ -16,8 +16,8 @@ class Main extends Component {
 		super();
 
 		this.state = {
-			isAuthenticated: false,
-			user: null
+			isAuthenticated: !!AuthStore.user,
+			user: AuthStore.user
 		}
 	}
 
@@ -50,10 +50,8 @@ class Main extends Component {
 
 	handleChange = () => {
 
-
 		let isAuthenticated = false;
-		const user = AuthStore.user;
-
+		const user = this.state.user;
 		if(user) {
 			this.setState({
 				isAuthenticated: true,

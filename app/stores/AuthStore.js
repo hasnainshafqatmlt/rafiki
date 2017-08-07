@@ -92,13 +92,10 @@ class AuthStore extends BaseStore {
         _id: this._user._id,
         userId: this._user._id,
         email: this._user.email,
-        username: this._user.username,
-        firstName: this._user.firstName,
-        lastName: this._user.lastName,
-        roles: this._user.roles,
-        slash: this._user.slash,
-        bio: this._user.bio,
-        type: ''
+        fullName: this._user.fullName,
+        country: this._user.country,
+        about: this._user.about,
+        roles: this._user.roles
       },
     };
 
@@ -190,6 +187,7 @@ class AuthStore extends BaseStore {
   }
 
   get jwt() {
+    console.log('this._jwt ', this._jwt)
     return deepCopy(this._jwt);
   }
 

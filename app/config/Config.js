@@ -8,6 +8,7 @@
 let SITE_STATIC_ASSETS = '../public/images/';
 
 let API_URL = 'http://localhost:3333/api/v1'; // local env
+//let API_URL = 'http://192.168.1.104:3333/api/v1'; // local env
 
 if(process.env.NODE_ENV == 'development') {
 	API_URL = 'http://188.166.225.132:3333/api/v1';

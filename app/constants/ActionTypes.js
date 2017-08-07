@@ -44,6 +44,9 @@ export default keyMirror({
 	GET_MEMBERS_SUCCESS: null,
 	GET_MEMBERS_ERROR: null,
 
+	UPDATE_PROFILE_SUCCESS: null,
+	UPDATE_PROFILE_ERROR: null,
+
 
 
 	/**

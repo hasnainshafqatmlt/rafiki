@@ -27,9 +27,9 @@ class WebAPIUtils {
 		// 	headers: headers,
 		// 	json: json,
 		// }, WebAPIUtils._responseCallback.bind(null, actionTypeSuccess, actionTypeError, SyncLayer.processingQueue));
-		console.log('send put form...', form, headers)
+		console.log('send put form...', form, headers, WebAPIUtils._addJWT())
 		axios
-			.put(url, { ...form }, { headers })
+			.put(url, { ...form }, {headers})
 			.then(WebAPIUtils._successCallback.bind(null, SyncLayer.processingQueue, actionTypeSuccess, actionTypeError))
 			.catch(WebAPIUtils._errorCallback.bind(null, SyncLayer.processingQueue, actionTypeSuccess, actionTypeError));
 	}
@@ -80,6 +80,7 @@ class WebAPIUtils {
 
 	static _addJWT() {
 		const jwt = AuthStore.jwt;
+		console.log('jwt', jwt)
 		if (AuthStore.isLoggedIn && jwt) {
 			return {
 				Authorization: 'Bearer ' + jwt,

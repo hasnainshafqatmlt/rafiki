@@ -73,6 +73,9 @@ html,body{
 .m-t-60{
 	margin-top: 60px;
 }
+.m-b-0{
+	margin-bottom: 0;
+}
 .heading-1{
 	font-size: 40px;
 	font-weight: 300;
@@ -165,4 +168,15 @@ a.btn{
 		margin-top: 12px;
 		margin-left: 15px;
 	}
+}
+.Select-control{
+	height: 50px;
+	border-color: $sliver;
+	.Select-placeholder, .Select-value{
+		line-height: 2.4 !important;
+		font-size: 20px;
+		font-weight: 400;
+		color: $dark-gray;
+		font-family: $openSans;
+	}	
 }

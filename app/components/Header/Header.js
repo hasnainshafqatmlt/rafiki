@@ -32,7 +32,7 @@ class Header extends Component {
 
 
 		const { isAuthenticated, user } = this.props;
-
+console.log('isAuthenticated >>', isAuthenticated)
 		return (
 
 			<header className='header'>
