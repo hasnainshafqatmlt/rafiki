@@ -1,15 +1,37 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+import ServiciosActionCreator from '../../actions/ServiciosActionCreator';
+import ServiciosStore from '../../stores/ServiciosStore';
+import ActionTypes from '../../constants/ActionTypes';
+
 class Servicios extends Component {
 
 	constructor(props) {
-    super(props);
+	    super(props);
+	    this.onChange = this.onChange.bind(this);
 
-    this.state = {
+	    this.state = {
 
-    };
-  }
+	    };
+	}
+
+	componentDidMount() {
+		ServiciosActionCreator.submitService();
+		ServiciosStore.addChangeListener(this.onChange);
+	}
+
+	componentWillMount() {
+		ServiciosStore.removeChangeListener(this.onChange);
+	}
+
+	onChange = () => {
+		const action = ServiciosStore.getLastAction();
+
+		if (action && action.type === ActionTypes.GET_SERVICES_SUCCESS) {
+			
+		}
+	}
 
 	render() {
 		return (

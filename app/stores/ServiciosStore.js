@@ -13,19 +13,33 @@ class AreasStore extends BaseStore {
 		this._error = null;
 		this._success = null;
 		this._action = null;
-		this._areas = {};
-		this._members = [];
+		this._selectedCategory = {};
+		this._serviceDescription = {};
+		this._service = {};
 	}
 
 
-	_registerToActions(action) {
+	_registerToActions(action) { console.log('action', action)
 		switch (action.type) {
 
 			case ActionTypes.SET_AREAS_CATEGORIES:
 				this._error = null;
 				this._success = true;
-				this._action = action;
-				this._areas = action.data;
+				this._selectedCategory = action.data;
+				this.emitChange();
+				break;
+
+			case ActionTypes.SET_SERVICE_DESCRIPTION:
+				this._error = null;
+				this._success = true;
+				this._serviceDescription = action.data;
+				this.emitChange();
+				break;
+
+			case ActionTypes.SUBMIT_SERVICE_SUCCESS:
+				this._error = null;
+				this._success = true;
+				this._service = action.data;
 				this.emitChange();
 				break;
 
@@ -35,8 +49,17 @@ class AreasStore extends BaseStore {
 		}
 	}
 
-	get getAreas() {
-		return this._areas;
+	get getSelectedCategory() {
+		return this._selectedCategory;
+	}
+
+	get getServiceDescription() {
+		return this._serviceDescription;
+	}
+
+	clearCategoryService() {
+		this._selectedCategory = {};
+		this._serviceDescription = {};
 	}
 
 	get error() {

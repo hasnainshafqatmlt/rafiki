@@ -21,6 +21,12 @@ export default keyMirror({
 	UNAUTHORIZED_USER: null,
 
 	SET_AREAS_CATEGORIES: null,
+	SET_SERVICE_DESCRIPTION: null,
+
+	SUBMIT_SERVICE_SUCCESS: null,
+	SUBMIT_SERVICE_ERROR: null,
+	SUBMIT_SERVICE_SUCCESS: null,
+	SUBMIT_SERVICE_ERROR: null,
 	/**
 	* Registration
 	*/

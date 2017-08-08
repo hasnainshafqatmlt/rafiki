@@ -1,16 +1,87 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
+import _ from 'lodash';
+
+import AuthStore from '../../stores/AuthStore';
+import ServiciosStore from '../../stores/ServiciosStore';
+import ServiciosActionCreator from '../../actions/ServiciosActionCreator';
+import ActionTypes from '../../constants/ActionTypes';
 
 class VistaPrevia extends Component {
 
 	constructor(props) {
-    super(props);
+	    super(props);
+	    this.handleSubmit = this.handleSubmit.bind(this);
+	    this.onChange = this.onChange.bind(this);
 
-    this.state = {
+	    this.state = {
+	    	user: AuthStore.user,
+	    	category: ServiciosStore.getSelectedCategory,
+	    	service: ServiciosStore.getServiceDescription
+	    };
+	}
 
-    };
-  }
+	componentDidMount() {
+		window.scrollTo(0,0);
+		if (_.isEmpty(ServiciosStore.getSelectedCategory) || _.isEmpty(ServiciosStore.getServiceDescription)) {
+			this.props.history.push('/areas');
+		}
+
+		ServiciosStore.addChangeListener(this.onChange);
+	}
+
+	componentWillMount() {
+		ServiciosStore.removeChangeListener(this.onChange);
+	}
+
+	onChange() {
+		const action = ServiciosStore.getLastAction();
+
+		if (action && action.type === ActionTypes.SUBMIT_SERVICE_SUCCESS) {
+			ServiciosStore.clearCategoryService();
+			this.props.history.push('/felicitaciones');
+		}
+	}
+
+	handleSubmit() {
+		const {service, category} = this.state;
+		const params = {
+			title: service.title,
+			description: service.description,
+			price: service.price,
+			category: {
+				title: category.title,
+				sub: category.subCat
+			}
+		}
+		
+		ServiciosActionCreator.submitService(params);
+	}
 
 	render() {
+		const {user, service, category} = this.state;
+
+		const fullName = user.fullName || '';
+		const country = user.country || '';
+		const about = user.about || '';
+		const title = service.title || '';
+		const description = service.description || '';
+		const price = service.price || '';
+
+		let subcatList = [];
+		if (!_.isEmpty(category)) {
+			category.subCat.forEach((name, i) => {
+				subcatList.push(
+					<li
+						key={i}
+						className='breadcrumb-item active'
+					>
+						{name}
+					</li>
+				);
+			})
+		}
+
 		return (
 			<div className="vista-previa-block">
 				<div className='container'>
@@ -21,31 +92,30 @@ class VistaPrevia extends Component {
 				<div className='float-left col-100'>
 					<div className='container'>
 						<ol className='breadcrumb'>
-						  <li className='breadcrumb-item'><a href='#'>SEM & AdWords</a></li>
-						  <li className='breadcrumb-item'><a href='#'>Instagram</a></li>
-						  <li className='breadcrumb-item active'>Social Media Manager</li>
+						  <li className='breadcrumb-item'>
+						  	<Link to='/areas'>{category.title}</Link>
+						  </li>
+						  {subcatList}
 						</ol>
 						<div className='info-block float-left col-100'>
 							<i className='thumb'>
 								<img src='/images/profile-pic-lg.png' className='icon'/>
 							</i>
 							<div className='float-left col-100'>
-								<h3>Titulo por ejemplo:  Social Account Manager para IG y FB</h3>
-								<small>User Name,  en User Country</small>
-								<price>$ 99</price>
-								<p>
-									Description text here.  Description text here.  Description text here.  Description text here.  Description text here.  Description text here.  
-								</p>
-								<p>
-									Description text here.  Description text here.  Description text here.  Description text here.  Description text here. 
-								</p>
+								<h3>{title}</h3>
+								<small>
+									{`${fullName}, ${country}`}
+								</small>
+								<price>{price}</price>
+								<p>{description}</p>
+								
 								<strong>Acerca de mi:</strong>
-								<p>About us description here.   About us description here.   About us description here.   About us description here.   </p>
+								<p>{about}</p>
 								<a
 									href='#'
 									className='btn btn-gray'
 								>
-									Comprar
+									{'Comprar'}
 								</a>
 							</div>
 						</div>
@@ -57,14 +127,16 @@ class VistaPrevia extends Component {
 						<button
 							type='button'
 							className='btn btn-secondary sm'
+							onClick={() => this.props.history.push('/descripcion')}
 						>
-							Editar
+							{'Editar'}
 						</button>
 						<button
 							type='button'
 							className='btn btn-success sm'
+							onClick={this.handleSubmit}
 						>
-							Enviar
+							{'Enviar'}
 						</button>
 					</div>	
 				</div>

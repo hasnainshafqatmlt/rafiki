@@ -3,8 +3,8 @@ import _ from 'lodash';
 
 import Category from './Category';
 import SubCategory from './SubCategory';
-import AreasActionCreator from '../../actions/AreasActionCreator';
-import AreasStore from '../../stores/AreasStore';
+import ServiciosActionCreator from '../../actions/ServiciosActionCreator';
+import ServiciosStore from '../../stores/ServiciosStore';
 import ActionTypes from '../../constants/ActionTypes';
 
 const categoryArray = [
@@ -136,15 +136,15 @@ class Areas extends Component {
 	}
 
 	componentDidMount() {
-		AreasStore.addChangeListener(this.onChange);
+		ServiciosStore.addChangeListener(this.onChange);
 	}
 
 	componentWillMount() {
-		AreasStore.removeChangeListener(this.onChange);
+		ServiciosStore.removeChangeListener(this.onChange);
 	}
 
 	onChange = () => {
-		const action = AreasStore.getLastAction();
+		const action = ServiciosStore.getLastAction();
 
 		if (action && action.type === ActionTypes.SET_AREAS_CATEGORIES) {
 			this.props.history.push('/descripcion');
@@ -218,13 +218,13 @@ class Areas extends Component {
 				showError: 'Please Select Category'
 			})
 			window.scrollTo(0,0);
-		} else if (_.isEmpty(selectedCat.subCat)) {
+		} else if (_.isEmpty(selectedCat.subCat) && selectedCat.title !== 'Otros') {
 			this.setState({
 				showError: 'Please Select Subcategories'
 			})
 			window.scrollTo(0,0);
 		} else {
-			AreasActionCreator.setCategories(selectedCat);
+			ServiciosActionCreator.setCategories(selectedCat);
 		}
 	}
 
