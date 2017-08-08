@@ -69,7 +69,7 @@ console.log('isAuthenticated >>', isAuthenticated)
 						{isAuthenticated &&
 						<li className='/logout'>
 							<span onClick={this.logoutUser}>
-								<img src='/images/logout-icon.png'/>Logout
+								<img src='/images/logout-icon.png'/>
 							</span>
 						</li>
 						}
@@ -77,7 +77,7 @@ console.log('isAuthenticated >>', isAuthenticated)
 						{!isAuthenticated &&
 						<li className='/logout'>
 							<Link to='/signup'>
-								<img src='/images/logout-icon.png'/>
+								{'Signup'}
 							</Link>
 						</li>
 						}

@@ -14,32 +14,50 @@ class LoginPage extends Component {
 		super();
 		this.state = {
 			showForm: true,
-			email: '',
-			password: '',
-			formErrors: {email: '', password: ''},
-			emailValid: false,
-			passwordValid: false,
-			formValid: false,
-			loading: false,
-			errorMsg: false
-		}
+
+			form: {
+				email: '',
+				password: '',
+				errors: {
+					email: '',
+					password: '',
+				},
+				valid: {
+					email: false,
+					password: false,
+				},
+
+				formValid: false,
+
+				loading: false,
+				errorMsg: false
+			}
+		};
 	}
 
 
 	handleUserInput = (e) => {
 		const name = e.target.name;
-		const value = e.target.value;
-		this.setState({[name]: value}, () => { this.validateField(name, value) });
+		let value = e.target.value;
+
+		let { form } = this.state;
+		form[name] = value;
+		this.setState({ form }, () => { this.validateField(name, value) });
 	}
 
 	validateField(fieldName, value) {
 		let validation = Validation(this.state, fieldName, value);
-
-		this.setState({ ...validation }, this.validateForm);
+		this.validateForm();
 	}
 
 	validateForm() {
-		this.setState({formValid: this.state.emailValid && this.state.passwordValid});
+		const form = this.state.form;
+		let { valid } = form;
+		let isValid = true;
+		for(let f in valid) {
+			if(!valid[f]) isValid = false;
+		}
+		this.setState({formValid: isValid});
 	}
 
 	errorClass(error) {
@@ -85,23 +103,32 @@ class LoginPage extends Component {
 
 	handleSubmit = (e) => {
 
+		
 		e.preventDefault();
 
-		console.log('this.state', this.state)
-		if (this.state.formValid) {
-			//this.showLoader();
-			this.setState({
-				loading: true,
-			});
+		const form = this.state.form;
 
-			const { email, password } = this.state;
-			LoginPage.doLogin(email, password);
+		if (!this.state.formValid) {
+			return;
 		}
+
+		this.setState({
+			loading: true,
+		});
+
+
+		const { email, password } = form;
+
+		const data = {
+			email,
+			password,
+		}
+		LoginPage.doLogin(email, password);
 	}
 
 
 	render() {
-		const { errorMsg, loading, email, password, formErrors } =  this.state;
+		const { form, loading, errorMsg, showForm } = this.state
 
 		return (
 			<div className="login-block">
@@ -113,25 +140,25 @@ class LoginPage extends Component {
 								<div className='center'>
 									{errorMsg && <div className="text-danger">Invalid email or password</div>}
 									<div className="form-group">
-										<div className={`form-group ${this.errorClass(formErrors.email)}`}>
+										<div className={`form-group ${this.errorClass(form.errors.email)}`}>
 										    <input
 										    	type="email"
 										    	className="form-control"
 										    	placeholder="Email"
 												name="email"
-												value={email}
+												value={form.email}
 												onChange={this.handleUserInput}
 										   	/>
 									   	</div>
 									</div>
 									<div className="form-group">
-										<div className={`form-group ${this.errorClass(formErrors.password)}`}>
+										<div className={`form-group ${this.errorClass(form.errors.password)}`}>
 										  <input
 										  	type="password"
 										  	className="form-control"
 										  	placeholder="Clave"
 										  	name="password"
-											value={password}
+											value={form.password}
 											onChange={this.handleUserInput}
 										  />
 										</div>

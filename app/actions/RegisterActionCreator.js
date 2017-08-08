@@ -30,6 +30,14 @@ export default {
 		WebAPIUtils.sendPOST(success, error, url, form);
 	},
 
+	resetPassword: (id, form) => {
+		const success = ActionTypes.RESET_PASSWORD_SUCCESS;
+		const error = ActionTypes.RESET_PASSWORD_ERROR;
+		const url = `${Config.API_URL}/users/reset_password/${id}`;
+
+		WebAPIUtils.sendPOST(success, error, url, form);
+	},	
+
 	checkEmail: (phoneNo,username) => {
 		const success = ActionTypes.SIGNUP_EMAIL_AVAILABLE_SUCCESS;
 		const error = ActionTypes.SIGNUP_EMAIL_AVAILABLE_ERROR;

@@ -15,10 +15,10 @@ class Main extends Component {
 	constructor() {
 		super();
 
-		this.state = {
-			isAuthenticated: !!AuthStore.user,
-			user: AuthStore.user
-		}
+		// this.state = {
+		// 	isAuthenticated: !!AuthStore.user,
+		// 	user: AuthStore.user
+		// }
 	}
 
 	static propTypes = {
@@ -32,15 +32,18 @@ class Main extends Component {
 		const { location, routes } = this.props;
 		this.updateTitle();
 
-		AuthStore.addChangeListener(this.handleChange);
+		console.log('HEADER MOUNT')
+		// AuthStore.addChangeListener(this.handleChange);
 	}
 
 	componentDidUpdate() {
+		console.log('HEADER UPDATE')
 		this.updateTitle();
 	}
 
 	componentWillUnmount() {
-		AuthStore.removeChangeListener(this.handleChange);
+		console.log('HEADER UN-MOUNT')
+		//AuthStore.removeChangeListener(this.handleChange);
 	}
 
 	updateTitle() {
@@ -48,26 +51,26 @@ class Main extends Component {
 		document.title = pathname.split('/')[1];
 	}
 
-	handleChange = () => {
+	// handleChange = () => {
 
-		let isAuthenticated = false;
-		const user = this.state.user;
-		if(user) {
-			this.setState({
-				isAuthenticated: true,
-				user
-			});
-		} else {
-			if(
-				this.props.location.pathname != '/login' &&
-				this.props.location.pathname != '/signup' &&
-				this.props.location.pathname != '/forgot'
-			) {
-				window.location = "/";
-			}
-		}
+	// 	let isAuthenticated = false;
+	// 	const user = this.state.user;
+	// 	if(user) {
+	// 		this.setState({
+	// 			isAuthenticated: true,
+	// 			user
+	// 		});
+	// 	} else {
+	// 		if(
+	// 			this.props.location.pathname != '/login' &&
+	// 			this.props.location.pathname != '/signup' &&
+	// 			this.props.location.pathname != '/forgot'
+	// 		) {
+	// 			window.location = "/";
+	// 		}
+	// 	}
 
-	}
+	// }
 
 
 	render() {
@@ -82,7 +85,14 @@ class Main extends Component {
 		// 	container = 'container'
 		// }
 
-		const { user, isAuthenticated } = this.state;
+		let isAuthenticated = false;
+		const user = AuthStore.user;
+
+		if(user) {
+			isAuthenticated = true;
+		}
+
+		//const { user, isAuthenticated } = this.state;
 
 
 		return (

@@ -1,24 +1,26 @@
 export default function validateField(state, fieldName, value) {
 
-	let { formErrors, emailValid, passwordValid } = state;
+	let { form } = state;
+	let { valid, errors } = form;
 
 	switch(fieldName) {
 		case 'email':
-			emailValid = (/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i).test(value);
-			formErrors.email = emailValid ? '' : ' is invalid';
+			valid.email = (/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i).test(value);
+			errors.email = valid.email ? '': 'Invalid email';
 			break;
 		case 'password':
-			passwordValid = value.length >= 2;
-			formErrors.password = passwordValid ? '': ' is too short';
+			valid.password = value.length >= 4;
+			errors.password = valid.password ? '': ' is too short';
 			break;
 		default:
 			break;
+
 	}
+	form.valid = valid
+	form.errors = errors
 
 	return {
-		formErrors,
-		emailValid,
-		passwordValid
+		form
 	}
 
 }
