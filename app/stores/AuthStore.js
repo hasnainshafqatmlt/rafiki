@@ -176,6 +176,7 @@ class AuthStore extends BaseStore {
 
   logoutUser() {
     this._logout();
+    window.location = "/";
   }
 
   get user() {

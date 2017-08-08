@@ -9,6 +9,7 @@ import Login from '../components/Login/Login';
 import Signup from '../components/Signup/Signup';
 import SignupStep2 from '../components/Signup/SignupStep2';
 import Forgot from '../components/Forgot/Forgot';
+import ForgotStep2 from '../components/Forgot/ForgotStep2';
 import Areas from '../components/Areas/Areas';
 import Descripcion from '../components/Descripcion/Descripcion';
 import VistaPrevia from '../components/VistaPrevia/VistaPrevia';
@@ -34,7 +35,8 @@ const Root = () => {
         <Route path='/login' component={Login}/>
         <Route exact path='/signup' component={Signup}/>
         <Route path='/signup/verification' component={SignupStep2}/>
-        <Route path='/forgot' component={Forgot}/>
+        <Route exact path='/forgot' component={Forgot}/>
+        <Route path='/forgot/verification' component={ForgotStep2}/>
         <Route path='/areas' component={Areas}/>
         <Route path='/descripcion' component={Descripcion}/>
         <Route path='/vistaPrevia' component={VistaPrevia}/>

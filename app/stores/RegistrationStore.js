@@ -19,6 +19,7 @@ class RegistrationStore extends BaseStore {
 			case ActionTypes.SIGNUP_USER_SUCCESS:
 			case ActionTypes.SIGNUP_STEP2_SUCCESS:
 			case ActionTypes.REQUEST_RESET_PASSWORD_SUCCESS:
+			case ActionTypes.RESET_PASSWORD_SUCCESS:
 				this._error = null;
 				this._success = true;
 				this.emitChange();
@@ -27,6 +28,7 @@ class RegistrationStore extends BaseStore {
 			case ActionTypes.SIGNUP_USER_ERROR:
 			case ActionTypes.SIGNUP_STEP2_ERROR:
 			case ActionTypes.REQUEST_RESET_PASSWORD_ERROR:
+			case ActionTypes.RESET_PASSWORD_ERROR:
 				if (action.error) {
 					this._error = action.error.message || 'none';
 				} else {
