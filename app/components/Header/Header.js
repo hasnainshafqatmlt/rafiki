@@ -32,7 +32,7 @@ class Header extends Component {
 
 
 		const { isAuthenticated, user } = this.props;
-console.log('isAuthenticated >>', isAuthenticated)
+console.log('isAuthenticated >>', isAuthenticated, AuthStore.user)
 		return (
 
 			<header className='header'>
@@ -43,45 +43,65 @@ console.log('isAuthenticated >>', isAuthenticated)
 					>
 						<img src='/images/kogno-logo.png'/>
 					</Link>
-					<ul className='nav'>
+					{isAuthenticated && AuthStore.user.role === 'USER' &&
+						<ul className='nav'>
+							<li>
+								<Link to='/servicios'>
+									{'Mis Servicios'}
+								</Link>
+							</li>
+							<li>
+								<Link to='/ventas'>
+									{'Mis Ventas'}
+								</Link>
+							</li>
+							<li>
+								<Link to='/perfil'>
+									{'Perfil'}
+								</Link>
+							</li>
+							<li className='/logout'>
+								<span onClick={this.logoutUser}>
+									<img src='/images/logout-icon.png'/>
+								</span>
+							</li>						
+						</ul>
+					}
 
-						{isAuthenticated && <li>
-							<Link to='/servicios'>
-								{'Mis Servicios'}
-							</Link>
-						</li>
-						}
-						{isAuthenticated &&
-						<li>
-							<Link to='/ventas'>
-								{'Mis Ventas'}
-							</Link>
-						</li>
-						}
-						{isAuthenticated &&
-						<li>
-							<Link to='/perfil'>
-								{'Perfil'}
-							</Link>
-						</li>
-						}
+					{isAuthenticated && AuthStore.user.role === 'ADMIN' &&
+						<ul className='nav'>
+							<li>
+								<Link to='/admin/servicios'>
+									{'Servicios'}
+								</Link>
+							</li>
+							<li>
+								<Link to='/admin/usuarios'>
+									{'Usuarios'}
+								</Link>
+							</li>
+							<li>
+								<Link to='/admin/perfil'>
+									{'Perfil'}
+								</Link>
+							</li>
+							<li className='/logout'>
+								<span onClick={this.logoutUser}>
+									<img src='/images/logout-icon.png'/>
+								</span>
+							</li>						
+						</ul>
+					}
 
-						{isAuthenticated &&
-						<li className='/logout'>
-							<span onClick={this.logoutUser}>
-								<img src='/images/logout-icon.png'/>
-							</span>
-						</li>
-						}
-
-						{!isAuthenticated &&
-						<li className='/logout'>
-							<Link to='/signup'>
-								{'Signup'}
-							</Link>
-						</li>
-						}
-					</ul>
+					{!isAuthenticated &&
+						<ul className='nav'>
+							<li className='/logout'>
+								<Link to='/signup'>
+									{'Signup'}
+								</Link>
+							</li>
+						</ul>
+					}
 				</div>
 			</header>
 		)

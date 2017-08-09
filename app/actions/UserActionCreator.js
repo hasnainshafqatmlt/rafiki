@@ -47,4 +47,20 @@ export default {
 		WebAPIUtils.sendGET(success, error, url);
 	},
 
+	getUsers: () => {
+		const success = ActionTypes.GET_USERS_SUCCESS;
+		const error = ActionTypes.GET_USERS_ERROR;
+		const url = `${Config.API_URL}/users`;
+
+		WebAPIUtils.sendGET(success, error, url);
+	},
+
+	updateSales: (data, id) => {
+		const success = ActionTypes.UPDATE_SALES_SUCCESS;
+		const error = ActionTypes.UPDATE_SALES_ERROR;
+		const url = `${Config.API_URL}/users/sales/${id}`;
+
+		WebAPIUtils.sendPUT(success, error, url, data);
+	},
+
 };

@@ -88,8 +88,11 @@ class LoginPage extends Component {
 			this.setState({
 				errorMsg: null,
 			})
-			this.props.history.push('/')
-
+			if (action.data.respData.user.sales === 0) {
+				this.props.history.push('/areas');
+			} else {
+				this.props.history.push('/servicios');
+			}
 		} else if (action && (action.type === ActionTypes.REQUEST_LOGIN_USER_ERROR || action.type === ActionTypes.UNAUTHORIZED_USER) ) {
 			this.setState({
 				errorMsg: error,

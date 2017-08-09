@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 
+import AuthStore from '../../stores/AuthStore';
 import Category from './Category';
 import SubCategory from './SubCategory';
 import ServiciosActionCreator from '../../actions/ServiciosActionCreator';
@@ -136,6 +137,9 @@ class Areas extends Component {
 	}
 
 	componentDidMount() {
+		if (_.isEmpty(AuthStore.user) || AuthStore.user.role === 'ADMIN') {
+			this.props.history.push('/login');
+		}
 		ServiciosStore.addChangeListener(this.onChange);
 	}
 

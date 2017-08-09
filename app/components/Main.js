@@ -73,7 +73,7 @@ class Main extends Component {
 	// }
 
 
-	render() {
+	render() { console.log(AuthStore.user)
 		//console.log('MAIN: this.props.location', this.props.location)
 		let bgClass;
 		let container;
@@ -102,7 +102,9 @@ class Main extends Component {
 				<div className={`col-100 h-100 float-left ${bgClass}`}>
 					{this.props.children}
 				</div>
-				<Footer />
+				{isAuthenticated && AuthStore.user.role !== 'ADMIN' &&
+					<Footer />
+				}
 			</div>
 		);
 	}

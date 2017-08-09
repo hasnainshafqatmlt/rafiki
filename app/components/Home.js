@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class Home extends Component {
 
@@ -24,9 +25,11 @@ class Home extends Component {
 								</li>
 							</ul>
 							<div className='float-left col-100'>
-								<button className='btn btn-success'>
-									Crea tu cuenta, es gratis!
-								</button>
+								<Link to='/signup'>
+									<button className='btn btn-success'>
+										Crea tu cuenta, es gratis!
+									</button>
+								</Link>
 							</div>
 						</div>
 						<img src='/images/photo.png' className='photo'/>

@@ -35,6 +35,9 @@ class Description extends Component {
 		if (_.isEmpty(ServiciosStore.getSelectedCategory)) {
 			this.props.history.push('/areas');
 		}
+		if (_.isEmpty(AuthStore.user) || AuthStore.user.role === 'ADMIN') {
+			this.props.history.push('/login');
+		}
 		ServiciosStore.addChangeListener(this.onChange);
 	}
 
@@ -143,9 +146,9 @@ class Description extends Component {
 
 	render() {
 		const {user, selectedCountry, formErrors, service} = this.state;
-		const fullNameDisable = user.fullName ? true : false;
-		const countryDisable = user.country ? true : false;
-		const aboutDisable = user.about ? true : false;
+		const fullNameDisable = user && user.fullName ? true : false;
+		const countryDisable = user && user.country ? true : false;
+		const aboutDisable = user && user.about ? true : false;
 
 		return (
 			<div className="description-block">
@@ -212,7 +215,7 @@ class Description extends Component {
 								  	type="text"
 								  	className={`form-control`}
 								  	placeholder='Tu Nombre'
-								  	defaultValue={user.fullName}
+								  	defaultValue={user && user.fullName ? user.fullName : ''}
 								  	ref='fullName'
 								  	name='fullName'
 								  	onKeyUp={this.handleUserInput}
@@ -227,7 +230,7 @@ class Description extends Component {
 								<div className={`form-group ${this.errorClass(formErrors.country)}`}>
 									<Select
 									  name="form-field-name"
-									  placeholder={user.country ? user.country : 'Tu País'}
+									  placeholder={user && user.country ? user.country : 'Tu País'}
 									  value={selectedCountry}	
 									  options={getCountries()}
 									  onChange={this.logChange}
@@ -248,7 +251,7 @@ class Description extends Component {
 								    	className={`form-control`}
 								    	readOnly={aboutDisable}
 								    	placeholder='ACERCA DE TI: Por ejemplo años de experiencia, en que área es tu mayor conocimiento,que te apasiona'
-								    	defaultValue={user.about}
+								    	defaultValue={user && user.about ? user.about : ''}
 								    	onKeyUp={this.handleUserInput}
 								   	/>
 								   	{this.errorClass(formErrors.about) &&

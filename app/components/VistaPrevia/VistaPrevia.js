@@ -13,20 +13,27 @@ class VistaPrevia extends Component {
 	    super(props);
 	    this.handleSubmit = this.handleSubmit.bind(this);
 	    this.onChange = this.onChange.bind(this);
+	    this.acceptPost = this.acceptPost.bind(this);
+	    this.rejectPost = this.rejectPost.bind(this);
 
 	    this.state = {
-	    	user: AuthStore.user,
+	    	user: AuthStore.user.role === 'ADMIN' ? ServiciosStore.getServiceUserDetail : AuthStore.user,
 	    	category: ServiciosStore.getSelectedCategory,
-	    	service: ServiciosStore.getServiceDescription
+	    	service: ServiciosStore.getServiceDescription,
+	    	showSuccessAlert: false,
+	    	showErrorAlert: false
 	    };
 	}
 
 	componentDidMount() {
+		$('html, body').animate({ scrollTop: 0 }, 'fast');
 		window.scrollTo(0,0);
 		if (_.isEmpty(ServiciosStore.getSelectedCategory) || _.isEmpty(ServiciosStore.getServiceDescription)) {
 			this.props.history.push('/areas');
 		}
-
+		if (_.isEmpty(AuthStore.user)) {
+			this.props.history.push('/login');
+		}
 		ServiciosStore.addChangeListener(this.onChange);
 	}
 
@@ -36,10 +43,33 @@ class VistaPrevia extends Component {
 
 	onChange() {
 		const action = ServiciosStore.getLastAction();
-
 		if (action && action.type === ActionTypes.SUBMIT_SERVICE_SUCCESS) {
 			ServiciosStore.clearCategoryService();
 			this.props.history.push('/felicitaciones');
+		} else if (action.type === ActionTypes.ACCEPT_SERVICE_SUCCESS) {
+			this.setState({
+				showSuccessAlert: 'This post is active now'
+			}, () => {
+				$('html,body').animate({
+		        scrollTop: $('.alert').offset().top},'slow');
+			})
+			setTimeout(() => {
+				this.setState({
+					showSuccessAlert: false
+				})	
+			}, 5000)
+		} else if (action.type === ActionTypes.REJECT_SERVICE_SUCCESS) {
+			this.setState({
+				showErrorAlert: 'This post is disable now'
+			}, () => {
+				$('html,body').animate({
+		        scrollTop: $('.alert').offset().top},'slow');
+			})
+			setTimeout(() => {
+				this.setState({
+					showErrorAlert: false
+				})
+			}, 5000)
 		}
 	}
 
@@ -58,12 +88,28 @@ class VistaPrevia extends Component {
 		ServiciosActionCreator.submitService(params);
 	}
 
+	acceptPost() {
+		const param = {
+			status: 'ACTIVE'
+		}
+		const id = this.props.match.params.id;
+		ServiciosActionCreator.acceptService(param, id);
+	}
+
+	rejectPost() {
+		const param = {
+			status: 'INACTIVE'
+		}
+		const id = this.props.match.params.id;
+		ServiciosActionCreator.rejectService(param, id);
+	}
+
 	render() {
 		const {user, service, category} = this.state;
 
-		const fullName = user.fullName || '';
-		const country = user.country || '';
-		const about = user.about || '';
+		const fullName = user && user.fullName || '';
+		const country = user && user.country || '';
+		const about = user && user.about || '';
 		const title = service.title || '';
 		const description = service.description || '';
 		const price = service.price || '';
@@ -97,6 +143,16 @@ class VistaPrevia extends Component {
 						  </li>
 						  {subcatList}
 						</ol>
+						{this.state.showSuccessAlert &&
+							<div className="alert alert-success float-left col-sm-12">
+							  <strong>Accepted!</strong> {this.state.showSuccessAlert} 
+							</div>
+						}
+						{this.state.showErrorAlert &&
+							<div className="alert alert-danger float-left col-sm-12">
+							  <strong>Rejected!</strong> {this.state.showErrorAlert} 
+							</div>
+						}
 						<div className='info-block float-left col-100'>
 							<i className='thumb'>
 								<img src='/images/profile-pic-lg.png' className='icon'/>
@@ -123,22 +179,43 @@ class VistaPrevia extends Component {
 				</div>
 				<hr className='bottom-horizental-line'/>
 				<div className='float-left col-100 actions'>
-					<div className='container'>
-						<button
-							type='button'
-							className='btn btn-secondary sm'
-							onClick={() => this.props.history.push('/descripcion')}
-						>
-							{'Editar'}
-						</button>
-						<button
-							type='button'
-							className='btn btn-success sm'
-							onClick={this.handleSubmit}
-						>
-							{'Enviar'}
-						</button>
-					</div>	
+					
+					{AuthStore.user.role === 'ADMIN' &&
+						<div className='container'>
+							<button
+								type='button'
+								className='btn btn-secondary sm'
+								onClick={this.rejectPost}
+							>
+								{'Rechazar'}
+							</button>
+							<button
+								type='button'
+								className='btn btn-success sm'
+								onClick={this.acceptPost}
+							>
+								{'Publicar'}
+							</button>
+						</div>
+					}
+					{AuthStore.user.role === 'USER' &&
+						<div className='container'>
+							<button
+								type='button'
+								className='btn btn-secondary sm'
+								onClick={() => this.props.history.push('/descripcion')}
+							>
+								{'Editar'}
+							</button>
+							<button
+								type='button'
+								className='btn btn-success sm'
+								onClick={this.handleSubmit}
+							>
+								{'Enviar'}
+							</button>
+						</div>
+					}
 				</div>
 
 			</div>

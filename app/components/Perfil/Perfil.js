@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 import Select from 'react-select';
 
 import UserStore from '../../stores/UserStore';
@@ -26,9 +27,11 @@ class Perfil extends Component {
 	}
 
 	componentDidMount() {
-		console.log('AuthStore.user', AuthStore.user)
 		window.scrollTo(0,0);
 		UserStore.addChangeListener(this.onChange);
+		if (_.isEmpty(AuthStore.user) || AuthStore.user.role === 'ADMIN') {
+			this.props.history.push('/login');
+		}
 	}
 
 	componentWillMount() {
@@ -40,18 +43,18 @@ class Perfil extends Component {
 
 		if (action && action.type === ActionTypes.UPDATE_PROFILE_SUCCESS) {
 			this.setState({
-				user: AuthStore.user,
 				showSuccess: true
 			});
 			const user = action.data.user;
 			const data = {
 				_id: user._id,
-        userId: user._id,
-        email: user.email,
-        fullName: user.fullName,
-        country: user.country,
-        about: user.about,
-        roles: user.roles
+		        userId: user._id,
+		        email: user.email,
+		        fullName: user.fullName,
+		        country: user.country,
+		        about: user.about,
+		        role: AuthStore.user.role,
+		        sales: user.sales
 			}
 			AuthStore.updateUser(data);
 			window.scrollTo(0,0);

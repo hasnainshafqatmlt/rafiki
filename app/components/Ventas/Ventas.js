@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import _ from 'lodash';
+import AuthStore from '../../stores/AuthStore';
 
 import UserStore from '../../stores/UserStore';
 import UserActionCreator from '../../actions/UserActionCreator';
@@ -20,6 +22,9 @@ class Ventas extends Component {
 		window.scrollTo(0,0);
 		UserActionCreator.getMyinfo();
 		UserStore.addChangeListener(this.onChange);
+		if (_.isEmpty(AuthStore.user) || AuthStore.user.role === 'ADMIN') {
+			this.props.history.push('/login');
+		}
 	}
 
 	componentWillMount() {

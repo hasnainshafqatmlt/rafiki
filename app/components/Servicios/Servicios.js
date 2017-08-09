@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 import { Link } from 'react-router-dom';
+import AuthStore from '../../stores/AuthStore';
 
 import ServiciosActionCreator from '../../actions/ServiciosActionCreator';
 import ServiciosStore from '../../stores/ServiciosStore';
@@ -14,11 +16,15 @@ class Servicios extends Component {
 	    this.deleteService = this.deleteService.bind(this);
 
 	    this.state = {
-	    	services: []
+	    	services: [],
+	    	serviceId: null
 	    };
 	}
 
 	componentDidMount() {
+		if (_.isEmpty(AuthStore.user) || AuthStore.user.role === 'ADMIN') {
+			this.props.history.push('/login');
+		}
 		ServiciosActionCreator.getServices();
 		ServiciosStore.addChangeListener(this.onChange);
 	}
@@ -35,6 +41,7 @@ class Servicios extends Component {
 			});
 		} else if (action.type === ActionTypes.DELETE_SERVICE_SUCCESS) {
 			ServiciosActionCreator.getServices();
+			$('#myModal').modal('hide')
 		}
 	}
 
@@ -62,7 +69,9 @@ class Servicios extends Component {
 			      	<img
 			      		src='/images/del-icon.png'
 			      		className='icon'
-			      		onClick={() => this.deleteService(data._id)}
+			      		data-toggle="modal"
+			      		data-target="#myModal"
+			      		onClick={() => this.setState({serviceId: data._id})}
 			      	/>
 			      </td>
 			      <td width='40px'>
@@ -78,6 +87,34 @@ class Servicios extends Component {
 			}
 		})
 		return servicesList;
+	}
+
+	renderAlertModal() {
+		return(
+			<div className="modal fade" id="myModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			  <div className="modal-dialog" role="document">
+			    <div className="modal-content">
+			      <div className="modal-header">
+			        <h5 className="modal-title" id="exampleModalLabel">Delete Servicio?</h5>
+			        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div className="modal-body">
+			        {'Are you sure you want to delete?'}
+			      </div>
+			      <div className="modal-footer">
+			        <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+			        <button
+			        	type="button"
+			        	className="btn btn-danger"
+			        	onClick={() => this.deleteService(this.state.serviceId)}
+			        >Delete</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+		)
 	}
 
 	render() {
@@ -120,6 +157,7 @@ class Servicios extends Component {
 						</Link>
 					</div>
 				</div>
+				{this.renderAlertModal()}
 			</div>
 		);
 	}
