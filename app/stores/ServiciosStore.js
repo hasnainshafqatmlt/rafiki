@@ -16,6 +16,7 @@ class AreasStore extends BaseStore {
 		this._selectedCategory = {};
 		this._serviceDescription = {};
 		this._service = {};
+		this._services = {};
 	}
 
 
@@ -43,6 +44,19 @@ class AreasStore extends BaseStore {
 				this.emitChange();
 				break;
 
+			case ActionTypes.GET_SERVICES_SUCCESS:
+				this._error = null;
+				this._success = true;
+				this._services = action.data;
+				this.emitChange();
+				break;
+
+			case ActionTypes.DELETE_SERVICE_SUCCESS:
+				this._error = null;
+				this._success = true;
+				this.emitChange();
+				break;
+
 			default:
 				this._action = action;
 				break;
@@ -55,6 +69,10 @@ class AreasStore extends BaseStore {
 
 	get getServiceDescription() {
 		return this._serviceDescription;
+	}
+
+	get getServices() { console.log(' in store >>', this._services)
+		return this._services;
 	}
 
 	clearCategoryService() {

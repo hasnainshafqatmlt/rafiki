@@ -179,6 +179,15 @@ class AuthStore extends BaseStore {
     window.location = "/";
   }
 
+  updateUser(data) {
+    let jwtData = localStorage.getItem('kongo-jwt');
+    if (jwtData) {
+      jwtData = JSON.parse(jwtData);
+      jwtData.userData = data;
+      localStorage.setItem('kongo-jwt', JSON.stringify(jwtData));
+    }    
+  }
+
   get user() {
     return deepCopy(this._user);
   }
@@ -188,7 +197,6 @@ class AuthStore extends BaseStore {
   }
 
   get jwt() {
-    console.log('this._jwt ', this._jwt)
     return deepCopy(this._jwt);
   }
 

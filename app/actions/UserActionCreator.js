@@ -31,4 +31,20 @@ export default {
 		WebAPIUtils.sendGET(success, error, url);
 	},
 
+	updateProfile: (data, id) => {
+		const success = ActionTypes.UPDATE_PROFILE_SUCCESS;
+		const error = ActionTypes.UPDATE_PROFILE_ERROR;
+		const url = `${Config.API_URL}/users/${id}`;
+
+		WebAPIUtils.sendPUT(success, error, url, data);
+	},
+
+	getMyinfo: () => {
+		const success = ActionTypes.GET_MYINFO_SUCCESS;
+		const error = ActionTypes.GET_MYINFO_ERROR;
+		const url = `${Config.API_URL}/users/my_info`;
+
+		WebAPIUtils.sendGET(success, error, url);
+	},
+
 };

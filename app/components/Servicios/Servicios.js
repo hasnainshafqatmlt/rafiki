@@ -10,14 +10,16 @@ class Servicios extends Component {
 	constructor(props) {
 	    super(props);
 	    this.onChange = this.onChange.bind(this);
+	    this.renderServiceList = this.renderServiceList.bind(this);
+	    this.deleteService = this.deleteService.bind(this);
 
 	    this.state = {
-
+	    	services: []
 	    };
 	}
 
 	componentDidMount() {
-		ServiciosActionCreator.submitService();
+		ServiciosActionCreator.getServices();
 		ServiciosStore.addChangeListener(this.onChange);
 	}
 
@@ -25,15 +27,61 @@ class Servicios extends Component {
 		ServiciosStore.removeChangeListener(this.onChange);
 	}
 
-	onChange = () => {
+	onChange() {
 		const action = ServiciosStore.getLastAction();
-
 		if (action && action.type === ActionTypes.GET_SERVICES_SUCCESS) {
-			
+			this.setState({
+				services: ServiciosStore.getServices.services
+			});
+		} else if (action.type === ActionTypes.DELETE_SERVICE_SUCCESS) {
+			ServiciosActionCreator.getServices();
 		}
 	}
 
+	deleteService(id) {
+		const param = {status: 'DELETED'}
+		ServiciosActionCreator.deleteServices(param, id);
+	}
+
+	renderServiceList() {
+		const services = this.state.services;
+		let servicesList = [];
+		services.forEach((data) => {
+			if (data.status !== 'DELETED') {
+				servicesList.push(
+					<tr key={data._id}>
+			      <td width='40px'>
+			      	<Link to={`/areas/${data._id}`}>
+				      	<img
+				      		src='/images/edit-icon.png'
+				      		className='icon'
+				      	/>
+			      	</Link>
+			      </td>
+			      <td width='40px'>
+			      	<img
+			      		src='/images/del-icon.png'
+			      		className='icon'
+			      		onClick={() => this.deleteService(data._id)}
+			      	/>
+			      </td>
+			      <td width='40px'>
+			      	<i className={`status-icon green ${data.status}`}/>
+			      </td>
+			      <td>
+			      	<Link to='/vistaPrevia'>
+			      		{data.title}
+			      	</Link>
+			      </td>
+			    </tr>
+				);
+			}
+		})
+		return servicesList;
+	}
+
 	render() {
+
 		return (
 			<div className="servicios-block">
 				<div className='container'>
@@ -57,54 +105,7 @@ class Servicios extends Component {
 					<div className='float-left col-100'>
 						<table className='table'>
 						  <tbody>
-						    <tr>
-						      <td width='40px'>
-						      	<img src='/images/edit-icon.png' className='icon' />
-						      </td>
-						      <td width='40px'>
-						      	<img src='/images/del-icon.png' className='icon' />
-						      </td>
-						      <td width='40px'>
-						      	<i className='status-icon green'/>
-						      </td>
-						      <td>
-						      	<Link to='/vistaPrevia'>
-						      		Nombre de Servicio 1  asdfasdf
-						      	</Link>
-						      </td>
-						    </tr>
-						    <tr>
-						      <td>
-						      	<img src='/images/edit-icon.png' className='icon' />
-						      </td>
-						      <td>
-						      	<img src='/images/del-icon.png' className='icon' />
-						      </td>
-						      <td>
-						      	<i className='status-icon red'/>
-						      </td>
-						      <td>
-						      	<Link to='/vistaPrevia'>
-						      	Nombre de Servicio 1  asdfasdf
-						      	</Link>
-						      </td>
-						    </tr>
-						    <tr>
-						      <td>
-						      	<img src='/images/edit-icon.png' className='icon' />
-						      </td>
-						      <td>
-						      	<img src='/images/del-icon.png' className='icon' />
-						      </td>
-						      <td>
-						      	<i className='status-icon yellow'/>
-						      </td>
-						      <td>
-						      	<Link to='/vistaPrevia'>
-						      	Nombre de Servicio 1  asdfasdf
-						      	</Link>
-						      </td>
-						    </tr>
+						  	{this.renderServiceList()}
 						  </tbody>
 						</table>
 					</div>

@@ -37,7 +37,8 @@ const Root = () => {
         <Route path='/signup/verification' component={SignupStep2}/>
         <Route exact path='/forgot' component={Forgot}/>
         <Route path='/forgot/verification' component={ForgotStep2}/>
-        <Route path='/areas' component={Areas}/>
+        <Route exact path='/areas' component={Areas}/>
+        <Route path='/areas/:id' component={Areas}/>
         <Route path='/descripcion' component={Descripcion}/>
         <Route path='/vistaPrevia' component={VistaPrevia}/>
         <Route path='/felicitaciones' component={Felicitaciones}/>

@@ -29,6 +29,13 @@ export default keyMirror({
 	SUBMIT_SERVICE_ERROR: null,
 	SUBMIT_SERVICE_SUCCESS: null,
 	SUBMIT_SERVICE_ERROR: null,
+	DELETE_SERVICE_SUCCESS: null,
+	DELETE_SERVICE_ERROR: null,
+
+	GET_SERVICES_SUCCESS: null,
+	GET_SERVICES_ERROR: null,
+	GET_MYINFO_SUCCESS: null,
+	GET_MYINFO_ERROR: null,
 	/**
 	* Registration
 	*/

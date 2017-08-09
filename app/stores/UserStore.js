@@ -26,7 +26,6 @@ class UserStore extends BaseStore {
 				this._success = true;
 				this._action = action;
 				this._user = action.data.user;
-				//this.saveUserInfo(action.data);
 				this.emitChange();
 				break;
 
@@ -39,8 +38,24 @@ class UserStore extends BaseStore {
 				this.emitChange();
 				break;
 
+			case ActionTypes.UPDATE_PROFILE_SUCCESS:
+				this._error = null;
+				this._success = true;
+				this._action = action;
+				this.emitChange();
+				break;
+
+			case ActionTypes.GET_MYINFO_SUCCESS:
+				this._error = null;
+				this._success = true;
+				this._action = action;
+				this.emitChange();
+				break;
+
 			case ActionTypes.GET_PROFILE_ERROR:
 			case ActionTypes.GET_MEMBERS_ERROR:
+			case ActionTypes.UPDATE_PROFILE_ERROR:
+			case ActionTypes.GET_MYINFO_ERROR:
 				if (action.error) {
 					this._error = action.error.message || 'none';
 				} else {
@@ -57,10 +72,6 @@ class UserStore extends BaseStore {
 				this._action = action;
 				break;
 		}
-	}
-
-	saveUserInfo(data) {
-		this._user = data;
 	}
 
 	get singleUserData() {

@@ -62,13 +62,13 @@
 			border-radius: 50%;
 			margin-right: 7px;
 			margin-top: 3px;
-			&.green{
+			&.ACTIVE{
 				background-color: $green;
 			}
-			&.red{
+			&.INACTIVE{
 				background-color: $red;
 			}
-			&.yellow{
+			&.PENDING{
 				background-color: $yellow;
 			}
 		}

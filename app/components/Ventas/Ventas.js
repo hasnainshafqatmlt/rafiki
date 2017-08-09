@@ -1,15 +1,39 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+import UserStore from '../../stores/UserStore';
+import UserActionCreator from '../../actions/UserActionCreator';
+import ActionTypes from '../../constants/ActionTypes';
+
 class Ventas extends Component {
 
 	constructor(props) {
-    super(props);
+	    super(props);
+	    this.onChange = this.onChange.bind(this);
 
-    this.state = {
+	    this.state = {
+	    	mySale: ''
+	    };
+	}
 
-    };
-  }
+	componentDidMount() {
+		window.scrollTo(0,0);
+		UserActionCreator.getMyinfo();
+		UserStore.addChangeListener(this.onChange);
+	}
+
+	componentWillMount() {
+		UserStore.removeChangeListener(this.onChange);
+	}
+
+	onChange() {
+		const action = UserStore.getLastAction();
+		if (action && action.type === ActionTypes.GET_MYINFO_SUCCESS) {
+			this.setState({
+				mySale: action.data.user.sales ? action.data.user.sales : ''
+			});
+		}
+	}
 
 	render() {
 		return (
@@ -23,12 +47,12 @@ class Ventas extends Component {
 					</h2>
 					
 					<div className='float-left col-100 price text-center'>
-						$10
+						${this.state.mySale}
 					</div>
 
 					<div className='float-left col-100 text-center'>
 						<Link
-							to='descripcion'
+							to='/descripcion'
 							className='add-btn'
 						>
 							<i className='plus-icon' />

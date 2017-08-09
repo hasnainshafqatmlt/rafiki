@@ -5,6 +5,7 @@ import Select from 'react-select';
 import ServiciosStore from '../../stores/ServiciosStore';
 import AuthStore from '../../stores/AuthStore';
 import ServiciosActionCreator from '../../actions/ServiciosActionCreator';
+import UserActionCreatorCreator from '../../actions/ServiciosActionCreator';
 import ActionTypes from '../../constants/ActionTypes';
 import {getCountries} from '../../utils/utils';
 import Validation from './Validation';
@@ -50,9 +51,9 @@ class Description extends Component {
 	}
 
 	logChange(val) {
-  	this.setState({
-  		selectedCountry: val ? val.value : val
-  	});
+	  	this.setState({
+	  		selectedCountry: val ? val.value : val
+	  	});
 	}
 
 	handleUserInput(e) {
@@ -120,7 +121,7 @@ class Description extends Component {
 
 		if (!isError) {
 			if (_.isEmpty(user)) {
-				ServiciosActionCreator.updateProfile(userData, userId);
+				UserActionCreatorCreator.updateProfile(userData, userId);
 			}
 
 			const serviceData = {
