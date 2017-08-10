@@ -16,6 +16,7 @@
 			margin-left: 32px;
 			&.logout{
 				margin-top: -3px;
+				cursor: pointer;
 			}
 			a{
 				float: left;
@@ -24,7 +25,7 @@
 				text-decoration: none;
 				@include transition(.3s);
 				&:hover{
-					color: $dark-gray;
+					color: $green;
 				}
 			}
 		}

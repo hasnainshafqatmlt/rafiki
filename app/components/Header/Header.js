@@ -29,10 +29,8 @@ class Header extends Component {
 	}
 
 	render() {
-
-
 		const { isAuthenticated, user } = this.props;
-console.log('isAuthenticated >>', isAuthenticated, AuthStore.user)
+
 		return (
 
 			<header className='header'>
@@ -60,7 +58,7 @@ console.log('isAuthenticated >>', isAuthenticated, AuthStore.user)
 									{'Perfil'}
 								</Link>
 							</li>
-							<li className='/logout'>
+							<li className='logout'>
 								<span onClick={this.logoutUser}>
 									<img src='/images/logout-icon.png'/>
 								</span>
@@ -85,7 +83,7 @@ console.log('isAuthenticated >>', isAuthenticated, AuthStore.user)
 									{'Perfil'}
 								</Link>
 							</li>
-							<li className='/logout'>
+							<li className='logout'>
 								<span onClick={this.logoutUser}>
 									<img src='/images/logout-icon.png'/>
 								</span>
@@ -95,7 +93,7 @@ console.log('isAuthenticated >>', isAuthenticated, AuthStore.user)
 
 					{!isAuthenticated &&
 						<ul className='nav'>
-							<li className='/logout'>
+							<li>
 								<Link to='/signup'>
 									{'Signup'}
 								</Link>
