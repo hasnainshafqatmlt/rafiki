@@ -95,7 +95,7 @@ class UserStore extends BaseStore {
 
 	get user() {
 		return this._user;
-	}	
+	}
 
 	get members() {
 		return deepCopy(this._members || []);

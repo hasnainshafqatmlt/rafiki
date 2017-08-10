@@ -34,7 +34,7 @@ class Perfil extends Component {
 		}
 	}
 
-	componentWillMount() {
+	componentWillUnmount() {
 		UserStore.removeChangeListener(this.onChange);
 	}
 
@@ -45,18 +45,7 @@ class Perfil extends Component {
 			this.setState({
 				showSuccess: true
 			});
-			const user = action.data.user;
-			const data = {
-				_id: user._id,
-		        userId: user._id,
-		        email: user.email,
-		        fullName: user.fullName,
-		        country: user.country,
-		        about: user.about,
-		        role: AuthStore.user.role,
-		        sales: user.sales
-			}
-			AuthStore.updateUser(data);
+			AuthStore.updateNewData(action);
 			window.scrollTo(0,0);
 		}
 	}

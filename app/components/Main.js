@@ -96,10 +96,10 @@ class Main extends Component {
 
 
 		return (
-			<div className={`app col-100`}>
+			<div className={`app col-100 h-100`}>
 				<Helmet {...Config.App.head} />
 				<Header pathname={this.props.location.pathname} isAuthenticated={isAuthenticated} user={user}/>
-				<div className={`col-100 h-100 float-left ${bgClass}`}>
+				<div className={`col-100 float-left main-wrap`}>
 					{this.props.children}
 				</div>
 				{isAuthenticated && AuthStore.user.role !== 'ADMIN' &&

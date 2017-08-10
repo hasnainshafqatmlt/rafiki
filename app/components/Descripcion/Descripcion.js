@@ -5,7 +5,7 @@ import Select from 'react-select';
 import ServiciosStore from '../../stores/ServiciosStore';
 import AuthStore from '../../stores/AuthStore';
 import ServiciosActionCreator from '../../actions/ServiciosActionCreator';
-import UserActionCreatorCreator from '../../actions/ServiciosActionCreator';
+import UserActionCreator from '../../actions/UserActionCreator';
 import ActionTypes from '../../constants/ActionTypes';
 import {getCountries} from '../../utils/utils';
 import Validation from './Validation';
@@ -20,9 +20,11 @@ class Description extends Component {
 	    this.handleContinue = this.handleContinue.bind(this);
 	    this.onChange = this.onChange.bind(this);
 	    this.handleUserInput = this.handleUserInput.bind(this);
+	    this.onAuthChange = this.onAuthChange.bind(this);
 
 	    this.state = {
 	      showForm: true,
+	      postService: '',
 	      user: AuthStore.user,
 	      selectedCountry: AuthStore.user && AuthStore.user.country ? AuthStore.user.country : null,
 	      formErrors: {},
@@ -39,17 +41,34 @@ class Description extends Component {
 			this.props.history.push('/login');
 		}
 		ServiciosStore.addChangeListener(this.onChange);
+		AuthStore.addChangeListener(this.onAuthChange);
 	}
 
-	componentWillMount() {
+	componentWillUnmount() {
 		ServiciosStore.removeChangeListener(this.onChange);
+		AuthStore.removeChangeListener(this.onAuthChange);
 	}
 
 	onChange() {
 		const action = ServiciosStore.getLastAction();
 
 		if (action && action.type === ActionTypes.SET_SERVICE_DESCRIPTION) {
-			this.props.history.push('/vistaPrevia');
+			if (this.props.match.params.serviceId) {
+				this.props.history.push(`/vistaPrevia/${this.props.match.params.serviceId}`);
+			} else {
+				this.props.history.push('/vistaPrevia');
+			}			
+		}
+	}
+
+	onAuthChange() {
+		const action = AuthStore.getLastAction();
+		console.log('action >>', action)
+		if (action && action.type === ActionTypes.UPDATE_PROFILE_SUCCESS) {
+			AuthStore.updateNewData(action);
+			setTimeout(() => {
+				ServiciosActionCreator.setServiceDescription(this.state.postService);
+			}, 10);
 		}
 	}
 
@@ -123,16 +142,21 @@ class Description extends Component {
 		})
 
 		if (!isError) {
-			if (_.isEmpty(user)) {
-				UserActionCreatorCreator.updateProfile(userData, userId);
-			}
-
+			console.log(user, '_.isEmpty(user) ', _.isEmpty(user.fullName) ,'>>', _.isEmpty(user.country) ,'>>', _.isEmpty(user.about) )
 			const serviceData = {
 				title,
 				description,
 				price
 			}
-			ServiciosActionCreator.setServiceDescription(serviceData);
+
+			if (_.isEmpty(user.fullName) || _.isEmpty(user.country) || _.isEmpty(user.about)) {
+				UserActionCreator.updateProfile(userData, userId);
+				this.setState({
+					postService: serviceData
+				});
+			} else {
+				ServiciosActionCreator.setServiceDescription(serviceData);
+			}
 		}
 	}
 
@@ -167,6 +191,7 @@ class Description extends Component {
 								    	ref='title'
 								    	name='title'
 								    	onKeyUp={this.handleUserInput}
+								    	maxLength='70'
 								   	/>
 								   	{this.errorClass(formErrors.title) &&
 									   	<div className='form-control-feedback'>
@@ -248,11 +273,11 @@ class Description extends Component {
 								    	className="form-control"
 								    	ref='about'
 								    	name='about'
-								    	className={`form-control`}
-								    	readOnly={aboutDisable}
+								    	className={`form-control`}								    	
 								    	placeholder='ACERCA DE TI: Por ejemplo años de experiencia, en que área es tu mayor conocimiento,que te apasiona'
 								    	defaultValue={user && user.about ? user.about : ''}
 								    	onKeyUp={this.handleUserInput}
+								    	readOnly={aboutDisable}
 								   	/>
 								   	{this.errorClass(formErrors.about) &&
 									   	<div className='form-control-feedback'>

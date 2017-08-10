@@ -29,7 +29,7 @@ class Servicios extends Component {
 		ServiciosStore.addChangeListener(this.onChange);
 	}
 
-	componentWillMount() {
+	componentWillUnmount() {
 		ServiciosStore.removeChangeListener(this.onChange);
 	}
 
@@ -78,9 +78,7 @@ class Servicios extends Component {
 			      	<i className={`status-icon green ${data.status}`}/>
 			      </td>
 			      <td>
-			      	<Link to='/vistaPrevia'>
-			      		{data.title}
-			      	</Link>
+			      	{data.title}
 			      </td>
 			    </tr>
 				);

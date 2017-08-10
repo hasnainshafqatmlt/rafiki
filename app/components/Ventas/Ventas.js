@@ -27,7 +27,7 @@ class Ventas extends Component {
 		}
 	}
 
-	componentWillMount() {
+	componentWillUnmount() {
 		UserStore.removeChangeListener(this.onChange);
 	}
 

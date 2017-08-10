@@ -88,6 +88,10 @@ class LoginPage extends Component {
 			this.setState({
 				errorMsg: null,
 			})
+			if (action.data.respData.user.role === 'ADMIN') {
+				this.props.history.push('/admin/servicios');
+				return;
+			}
 			if (action.data.respData.user.sales === 0) {
 				this.props.history.push('/areas');
 			} else {

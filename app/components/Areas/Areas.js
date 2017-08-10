@@ -141,17 +141,49 @@ class Areas extends Component {
 			this.props.history.push('/login');
 		}
 		ServiciosStore.addChangeListener(this.onChange);
+		if (this.props.match.params.serviceId) {
+			ServiciosActionCreator.getServiceById(this.props.match.params.serviceId);
+		}
 	}
 
-	componentWillMount() {
+	componentWillUnmount() {
 		ServiciosStore.removeChangeListener(this.onChange);
 	}
 
 	onChange = () => {
 		const action = ServiciosStore.getLastAction();
-
 		if (action && action.type === ActionTypes.SET_AREAS_CATEGORIES) {
-			this.props.history.push('/descripcion');
+			if (this.props.match.params.serviceId) {
+				this.props.history.push(`/descripcion/${this.props.match.params.serviceId}`);	
+			} else {
+				this.props.history.push('/descripcion');
+			}
+			
+		} else if (action.type === ActionTypes.GET_SERVICES_BYID_SUCCESS) {
+			let saveData = [];
+			const category = action.data.service.category;
+			const title = action.data.service.title;
+			const price = action.data.service.price;
+			const description = action.data.service.description;
+			const serviceData = {
+				title,
+				price,
+				description
+			}			
+			const catData = {
+				title: category.title,
+				subCat: category.sub,
+				selected: true
+			}
+			saveData.push(catData);
+			setTimeout(() => {
+				ServiciosActionCreator.setServiceDescription(serviceData);
+			}, 10);
+
+			this.setState({
+				selectedCatName: category.title,
+				selectedData: saveData
+			});
 		}
 	}
 
@@ -191,6 +223,7 @@ class Areas extends Component {
 	selectSubCategory = (catName, subCatNewname, subCatId) => {
 		let selectedData = this.state.selectedData;
 		selectedData.forEach((data) => {
+			console.log('**', data.title ,'===', catName)
 			if (data.title === catName) {
 				if (data.subCat.length > 0) {
 					let push = true;
@@ -227,30 +260,34 @@ class Areas extends Component {
 				showError: 'Please Select Subcategories'
 			})
 			window.scrollTo(0,0);
-		} else {
+		} else { console.log('selectedCat >>', selectedCat)
 			ServiciosActionCreator.setCategories(selectedCat);
 		}
 	}
 
 	render() {
-		
+		const selectedCat = _.find(this.state.selectedData, {selected: true})
+console.log('selectedCat $$$$', this.state.selectedData)
 		let categories = [];
 		categoryArray.forEach((data, i) => {
+			let isSelected = false;			
+			if (selectedCat && selectedCat.title === data.name) {
+				isSelected = true;
+			}
 			categories.push(
 				<div key={`list_${i}`}>
 					<Category
-						categoryName={data.name}
 						id={i}
-						categoryId={this.state.categoryId}
+						isSelected={isSelected}
+						categoryName={data.name}
 						selectCategory={this.selectCategory}
 					/>
 					<SubCategory
-						categoryId={i}
+						showSubCategory={isSelected}
+						selectedCat={selectedCat}
 						selectedCatName={this.state.selectedCatName}
 						subCat={data}
 						selectSubCategory={this.selectSubCategory}
-						selectedCategoryId={this.state.categoryId}
-						subCatId={this.state.subCatId}
 					/>
 				</div>
 			)

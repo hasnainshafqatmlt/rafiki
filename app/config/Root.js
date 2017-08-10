@@ -33,14 +33,16 @@ const Root = () => {
       <Main>
         <Route exact path='/' component={Home}/>
         <Route path='/login' component={Login}/>
-        <Route exact path='/signup' component={Signup}/>
+        <Route path='/signup' exact component={Signup}/>
         <Route path='/signup/verification' component={SignupStep2}/>
-        <Route exact path='/forgot' component={Forgot}/>
+        <Route path='/forgot' exact component={Forgot}/>
         <Route path='/forgot/verification' component={ForgotStep2}/>
-        <Route exact path='/areas' component={Areas}/>
-        <Route path='/areas/:id' component={Areas}/>
-        <Route path='/descripcion' component={Descripcion}/>
-        <Route exact path='/vistaPrevia' component={VistaPrevia}/>
+        <Route path='/areas' exact component={Areas}/>
+        <Route path='/areas/:serviceId' component={Areas}/>
+        <Route path='/descripcion' exact component={Descripcion}/>
+        <Route path='/descripcion/:serviceId' component={Descripcion}/>
+        <Route path='/vistaPrevia' exact component={VistaPrevia}/>
+        <Route path='/vistaPrevia/:serviceId' component={VistaPrevia}/>
         <Route path='/felicitaciones' component={Felicitaciones}/>
         <Route path='/servicios' component={Servicios}/>
         <Route path='/ventas' component={Ventas}/>
@@ -48,7 +50,7 @@ const Root = () => {
 
         <Route path='/admin/login' component={AdminLogin}/>
         <Route path='/admin/servicios' component={AdminServicios}/>
-        <Route path='/admin/vistaPrevia/:id' component={VistaPrevia}/>
+        <Route path='/admin/vistaPrevia/:serviceId' component={VistaPrevia}/>
         <Route path='/admin/usuarios' component={AdminUsuarios}/>
         <Route path='/admin/perfil' component={AdminPerfil}/>
       </Main>

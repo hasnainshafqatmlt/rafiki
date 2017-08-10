@@ -8,23 +8,15 @@ class SubCategory extends Component {
 
 	    this.state = {
 	    	activeClass: false,
-	    	subCatId: this.props.subCatId
 	    };
 	}
 
 	static propTypes = {
 	    id: React.PropTypes.number,
+	    isSelected: React.PropTypes.bool,
 	    name: React.PropTypes.string,
 	    selectSubCategory: React.PropTypes.func,
-	    subCatId: React.PropTypes.array,
-	    categoryId: React.PropTypes.number,
 	    selectedCatName: React.PropTypes.string
-	}
-
-	componentWillReceiveProps(nextProps) {
-		this.setState({
-			subCatId: nextProps.subCatId,
-		})
 	}
 
 	handleSubCategory = () => {
@@ -35,13 +27,12 @@ class SubCategory extends Component {
 	}
 
 	render() {
-		const {subCatId, categoryId} = this.props;
-		const setActive = this.state.activeClass ? 'active' : '';
+		const isSelected = this.props.isSelected ? 'active' : '';
 		return (
 			<li
 				key={`sub_${this.props.id}`}
 				onClick={() => this.handleSubCategory()}
-				className={setActive}
+				className={isSelected}
 			>
 				<i className='rectangle'/>
 				<span>{this.props.name}</span>

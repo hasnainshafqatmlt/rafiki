@@ -70,6 +70,13 @@ class AuthStore extends BaseStore {
       localStorage.removeItem('ALRU');
       break;
 
+    case ActionTypes.UPDATE_PROFILE_SUCCESS:
+        this._error = null;
+        this._success = true;
+        this._action = action;
+        this.emitChange();
+        break;
+
     // LOGOUT
     case ActionTypes.LOGOUT:
     case ActionTypes.LOGOUT_SUCCESS:
@@ -180,14 +187,32 @@ class AuthStore extends BaseStore {
     window.location = "/";
   }
 
+  updateNewData(action) {
+    const user = action.data.user;
+    const data = {
+      _id: user._id,
+      userId: user._id,
+      email: user.email,
+      fullName: user.fullName,
+      country: user.country,
+      about: user.about,
+      role: user.role,
+      sales: user.sales
+    }
+    this.updateUser(data);
+  }
+
   updateUser(data) {
     let jwtData = localStorage.getItem('kongo-jwt');
     if (jwtData) {
       jwtData = JSON.parse(jwtData);
       jwtData.userData = data;
       localStorage.setItem('kongo-jwt', JSON.stringify(jwtData));
-    }    
+      this._user = data;
+    }
   }
+
+  
 
   get user() {
     return deepCopy(this._user);

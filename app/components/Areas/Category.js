@@ -12,30 +12,19 @@ class Category extends Component {
 	}
 
 	static propTypes = {
+		isSelected: React.PropTypes.bool,
 	    categoryName: React.PropTypes.string,
 	    id: React.PropTypes.number,
-	    selectCategory: React.PropTypes.func,
-	    categoryId: React.PropTypes.number
-	}
-
-	componentWillReceiveProps(nextProps) {
-		if (this.props.id === nextProps.categoryId) {
-			this.setState({
-				activeClass: 'active'
-			})
-		} else {
-			this.setState({
-				activeClass: ''
-			})
-		}
+	    selectCategory: React.PropTypes.func
 	}
 
 	render() {
+		const isSelected = this.props.isSelected ? 'active' : '';
 		return (
 			<li
 				key={`cat_${this.props.id}`}
 				onClick={() => this.props.selectCategory(this.props.categoryName, this.props.id)}
-				className={this.state.activeClass}
+				className={isSelected}
 			>
 				<i className='radio'/>
 				<span>{this.props.categoryName}</span>

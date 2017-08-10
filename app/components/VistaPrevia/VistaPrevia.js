@@ -37,39 +37,41 @@ class VistaPrevia extends Component {
 		ServiciosStore.addChangeListener(this.onChange);
 	}
 
-	componentWillMount() {
+	componentWillUnmount() {
 		ServiciosStore.removeChangeListener(this.onChange);
 	}
 
 	onChange() {
 		const action = ServiciosStore.getLastAction();
-		if (action && action.type === ActionTypes.SUBMIT_SERVICE_SUCCESS) {
-			ServiciosStore.clearCategoryService();
-			this.props.history.push('/felicitaciones');
-		} else if (action.type === ActionTypes.ACCEPT_SERVICE_SUCCESS) {
-			this.setState({
-				showSuccessAlert: 'This post is active now'
-			}, () => {
-				$('html,body').animate({
-		        scrollTop: $('.alert').offset().top},'slow');
-			})
-			setTimeout(() => {
+		if (action) {
+			if (action.type === ActionTypes.SUBMIT_SERVICE_SUCCESS|| action.type === ActionTypes.UPDATE_SERVICE_SUCCESS) {
+				ServiciosStore.clearCategoryService();
+				this.props.history.push('/felicitaciones');
+			} else if (action.type === ActionTypes.ACCEPT_SERVICE_SUCCESS) {
 				this.setState({
-					showSuccessAlert: false
-				})	
-			}, 5000)
-		} else if (action.type === ActionTypes.REJECT_SERVICE_SUCCESS) {
-			this.setState({
-				showErrorAlert: 'This post is disable now'
-			}, () => {
-				$('html,body').animate({
-		        scrollTop: $('.alert').offset().top},'slow');
-			})
-			setTimeout(() => {
-				this.setState({
-					showErrorAlert: false
+					showSuccessAlert: 'This post is active now'
+				}, () => {
+					$('html,body').animate({
+			        scrollTop: $('.alert').offset().top},'slow');
 				})
-			}, 5000)
+				setTimeout(() => {
+					this.setState({
+						showSuccessAlert: false
+					})	
+				}, 5000)
+			} else if (action.type === ActionTypes.REJECT_SERVICE_SUCCESS) {
+				this.setState({
+					showErrorAlert: 'This post is disable now'
+				}, () => {
+					$('html,body').animate({
+			        scrollTop: $('.alert').offset().top},'slow');
+				})
+				setTimeout(() => {
+					this.setState({
+						showErrorAlert: false
+					})
+				}, 5000)
+			}
 		}
 	}
 
@@ -84,8 +86,12 @@ class VistaPrevia extends Component {
 				sub: category.subCat
 			}
 		}
-		
-		ServiciosActionCreator.submitService(params);
+
+		if (this.props.match.params.serviceId) {
+			ServiciosActionCreator.updateService(params, this.props.match.params.serviceId);
+		} else {
+			ServiciosActionCreator.submitService(params);
+		}
 	}
 
 	acceptPost() {
@@ -106,6 +112,7 @@ class VistaPrevia extends Component {
 
 	render() {
 		const {user, service, category} = this.state;
+		const serviceId = this.props.match.params.serviceId ? this.props.match.params.serviceId : '';
 
 		const fullName = user && user.fullName || '';
 		const country = user && user.country || '';
@@ -139,7 +146,7 @@ class VistaPrevia extends Component {
 					<div className='container'>
 						<ol className='breadcrumb'>
 						  <li className='breadcrumb-item'>
-						  	<Link to='/areas'>{category.title}</Link>
+						  	<Link to={`/areas/${serviceId}`}>{category.title}</Link>
 						  </li>
 						  {subcatList}
 						</ol>

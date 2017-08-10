@@ -77,6 +77,18 @@ class AreasStore extends BaseStore {
 				this.emitChange();
 				break;
 
+			case ActionTypes.GET_SERVICES_BYID_SUCCESS:
+				this._error = null;
+				this._success = true;
+				this.emitChange();
+				break;
+
+			case ActionTypes.UPDATE_SERVICE_SUCCESS:
+				this._error = null;
+				this._success = true;
+				this.emitChange();
+				break;				
+
 			default:
 				this._action = action;
 				break;

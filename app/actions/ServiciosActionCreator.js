@@ -24,6 +24,14 @@ export default {
 		WebAPIUtils.sendPOST(success, error, url, data);
 	},
 
+	updateService: (data, id) => {
+		const success = ActionTypes.UPDATE_SERVICE_SUCCESS;
+		const error = ActionTypes.UPDATE_SERVICE_ERROR;
+		const url = `${Config.API_URL}/services/${id}`;
+
+		WebAPIUtils.sendPUT(success, error, url, data);
+	},
+
 	getServices: () => {
 		const success = ActionTypes.GET_SERVICES_SUCCESS;
 		const error = ActionTypes.GET_SERVICES_ERROR;
