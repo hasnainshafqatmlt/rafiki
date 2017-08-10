@@ -20,6 +20,11 @@ class UsuariosListing extends Component {
 	    };
 	}
 
+	static propTypes = {
+		listingData: React.PropTypes.object,
+	  openModal: React.PropTypes.func
+	}
+
 
 	saveSales(id) {
 		const sales = this.refs.sales.value.trim() ? this.refs.sales.value.trim() : 0;
@@ -55,7 +60,7 @@ class UsuariosListing extends Component {
 		      	<img
 		      		src='/images/del-icon.png'
 		      		className='icon'
-		      		//onClick={this.deleteUser(data._id)}
+		      		onClick={() => this.props.openModal(data._id)}
 		      	/>
 		    </td>
 		  </tr>

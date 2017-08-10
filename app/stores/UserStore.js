@@ -66,11 +66,19 @@ class UserStore extends BaseStore {
 				this.emitChange();
 				break;
 
+			case ActionTypes.DELETE_USER_SUCCESS:
+				this._error = null;
+				this._success = true;
+				this._action = action;
+				this.emitChange();
+				break;
+
 			case ActionTypes.GET_PROFILE_ERROR:
 			case ActionTypes.GET_MEMBERS_ERROR:
 			case ActionTypes.UPDATE_PROFILE_ERROR:
 			case ActionTypes.GET_MYINFO_ERROR:
 			case ActionTypes.GET_USERS_ERROR:
+			case ActionTypes.DELETE_USER_ERROR:
 				if (action.error) {
 					this._error = action.error.message || 'none';
 				} else {

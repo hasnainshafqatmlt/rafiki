@@ -34,7 +34,7 @@ class Servicios extends Component {
 		ServiciosStore.addChangeListener(this.onChange);
 	}
 
-	componentWillMount() {
+	componentWillUnmount() {
 		ServiciosStore.removeChangeListener(this.onChange);
 	}
 

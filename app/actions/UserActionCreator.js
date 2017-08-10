@@ -63,4 +63,12 @@ export default {
 		WebAPIUtils.sendPUT(success, error, url, data);
 	},
 
+	deleteUser: (data, id) => {
+		const success = ActionTypes.DELETE_USER_SUCCESS;
+		const error = ActionTypes.DELETE_USER_ERROR;
+		const url = `${Config.API_URL}/users/status/${id}`;
+
+		WebAPIUtils.sendPUT(success, error, url, data);
+	},
+
 };

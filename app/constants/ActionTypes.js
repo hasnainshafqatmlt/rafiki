@@ -50,6 +50,8 @@ export default keyMirror({
 	GET_USERS_ERROR: null,
 	UPDATE_SALES_SUCCESS: null,
 	UPDATE_SALES_ERROR: null,
+	DELETE_USER_SUCCESS: null,
+	DELETE_USER_ERROR: null,
 
 	/**
 	* Registration

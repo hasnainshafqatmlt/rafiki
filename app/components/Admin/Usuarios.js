@@ -13,11 +13,14 @@ class Usuarios extends Component {
 	constructor(props) {
 	    super(props);
 	    this.onChange = this.onChange.bind(this);
+	    this.openModal = this.openModal.bind(this);
+	    this.deleteUser = this.deleteUser.bind(this);
 
 	    this.state = {
 	    	users: [],
 	    	showSuccessAlert: false,
-	    	toggleSorting: 'asc'
+	    	toggleSorting: 'asc',
+	    	userId: ''
 	    };
 	}
 
@@ -51,6 +54,9 @@ class Usuarios extends Component {
 					showSuccessAlert: false
 				})	
 			}, 5000);
+		} else if (action.type === ActionTypes.DELETE_USER_SUCCESS) {
+			UserActionCreator.getUsers();
+			$('#myModal').modal('hide')
 		}
 	}
 
@@ -65,17 +71,58 @@ class Usuarios extends Component {
 		});
 	}
 
+	deleteUser() {
+		const userId = this.state.userId;
+		const param = {status: 'INACTIVE'}
+		UserActionCreator.deleteUser(param, userId);
+	}
+
+	openModal(id) {
+		$('#myModal').modal('show')
+		this.setState({
+			userId: id
+		});
+	}
+
+	renderAlertModal() {
+		return(
+			<div className="modal fade" id="myModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			  <div className="modal-dialog" role="document">
+			    <div className="modal-content">
+			      <div className="modal-header">
+			        <h5 className="modal-title" id="exampleModalLabel">Delete Usuarios?</h5>
+			        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div className="modal-body">
+			        {'Are you sure you want to delete?'}
+			      </div>
+			      <div className="modal-footer">
+			        <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+			        <button
+			        	type="button"
+			        	className="btn btn-danger"
+			        	onClick={this.deleteUser}
+			        >Delete</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+		)
+	}
+
 	renderUsersList() {
 		const users = this.state.users;
 		let usersList = [];
-		console.log(' in in ', users)
 		if (!_.isEmpty(users)) {
 		users.forEach((data) => {
-				if (data.role === 'USER') {
+				if (data.role === 'USER' && data.status === 'ACTIVE') {
 					usersList.push(
 						<UsuariosListing
 							key={data._id}
 							listingData={data}
+							openModal={this.openModal}
 						/>
 					);
 				}
@@ -131,6 +178,7 @@ class Usuarios extends Component {
 						</table>
 					</div>
 				</div>
+				{this.renderAlertModal()}
 			</div>
 		);
 	}

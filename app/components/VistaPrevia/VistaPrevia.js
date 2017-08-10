@@ -98,7 +98,7 @@ class VistaPrevia extends Component {
 		const param = {
 			status: 'ACTIVE'
 		}
-		const id = this.props.match.params.id;
+		const id = this.props.match.params.serviceId;
 		ServiciosActionCreator.acceptService(param, id);
 	}
 
@@ -106,7 +106,7 @@ class VistaPrevia extends Component {
 		const param = {
 			status: 'INACTIVE'
 		}
-		const id = this.props.match.params.id;
+		const id = this.props.match.params.serviceId;
 		ServiciosActionCreator.rejectService(param, id);
 	}
 
