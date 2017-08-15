@@ -62,7 +62,7 @@ class Usuarios extends Component {
 		} else if (action.type === ActionTypes.EXPORT_USERS_SUCCESS) {
 			const randomNum = Math.floor((Math.random() * 10000000000) + 100000000000);
 			const a = $("<a>")
-			    .attr("href", action.data.file.filePath)
+			    .attr("href", action.data.file.uplodsPath)
 			    .attr("download", `services-${randomNum}.pdf`)
 			    .appendTo("body");
 			a[0].click();
@@ -77,7 +77,6 @@ class Usuarios extends Component {
 		let param = title;
 		const toggle = this.state.toggleSorting === 'asc' ? 'desc' : 'asc';
 		const users = _.orderBy(this.state.users, title, toggle);
-		console.log('users >>',  toggle)
 		this.setState({
 			users,
 			toggleSorting: toggle
@@ -148,7 +147,6 @@ class Usuarios extends Component {
 				}
 			})
 		}
-		console.log(' users', usersList)
 		return usersList;
 	}
 

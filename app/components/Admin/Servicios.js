@@ -53,7 +53,7 @@ class Servicios extends Component {
 		} else if (action.type === ActionTypes.EXPORT_SERVICES_SUCCESS) {
 			const randomNum = Math.floor((Math.random() * 10000000000) + 100000000000);
 			const a = $("<a>")
-			    .attr("href", action.data.file.filePath)
+			    .attr("href", action.data.file.uplodsPath)
 			    .attr("download", `services-${randomNum}.pdf`)
 			    .appendTo("body");
 			a[0].click();
