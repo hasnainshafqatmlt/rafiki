@@ -103,7 +103,8 @@ class AuthStore extends BaseStore {
         country: this._user.country,
         about: this._user.about,
         role: this._user.role,
-        sales: this._user.sales
+        sales: this._user.sales,
+        avatar: this._user.avatar,
       },
     };
 

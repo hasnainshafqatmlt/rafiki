@@ -87,6 +87,12 @@ class AreasStore extends BaseStore {
 				this._error = null;
 				this._success = true;
 				this.emitChange();
+				break;
+
+			case ActionTypes.EXPORT_SERVICES_SUCCESS:
+				this._error = null;
+				this._success = true;
+				this.emitChange();
 				break;				
 
 			default:

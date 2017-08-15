@@ -21,7 +21,8 @@ class VistaPrevia extends Component {
 	    	category: ServiciosStore.getSelectedCategory,
 	    	service: ServiciosStore.getServiceDescription,
 	    	showSuccessAlert: false,
-	    	showErrorAlert: false
+	    	showErrorAlert: false,
+	    	userImage: AuthStore.user && AuthStore.user.avatar ? AuthStore.user.avatar : ''
 	    };
 	}
 
@@ -162,14 +163,19 @@ class VistaPrevia extends Component {
 						}
 						<div className='info-block float-left col-100'>
 							<i className='thumb'>
-								<img src='/images/profile-pic-lg.png' className='icon'/>
+								{!this.state.userImage &&
+									<img src='/images/profile-pic-lg.png' className='icon'/>
+								}
+								{this.state.userImage &&
+									<img src={this.state.userImage} className='icon thumb'/>
+								}
 							</i>
 							<div className='float-left col-100'>
 								<h3>{title}</h3>
 								<small>
 									{`${fullName}, ${country}`}
 								</small>
-								<price>{price}</price>
+								<price>${price}</price>
 								<p>{description}</p>
 								
 								<strong>Acerca de mi:</strong>

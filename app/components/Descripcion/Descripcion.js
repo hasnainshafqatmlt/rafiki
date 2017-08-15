@@ -6,6 +6,7 @@ import ServiciosStore from '../../stores/ServiciosStore';
 import AuthStore from '../../stores/AuthStore';
 import ServiciosActionCreator from '../../actions/ServiciosActionCreator';
 import UserActionCreator from '../../actions/UserActionCreator';
+import UserStore from '../../stores/UserStore';
 import ActionTypes from '../../constants/ActionTypes';
 import {getCountries} from '../../utils/utils';
 import Validation from './Validation';
@@ -21,14 +22,20 @@ class Description extends Component {
 	    this.onChange = this.onChange.bind(this);
 	    this.handleUserInput = this.handleUserInput.bind(this);
 	    this.onAuthChange = this.onAuthChange.bind(this);
+	    this.selectImage = this.selectImage.bind(this);
+	    this.onUserChange = this.onUserChange.bind(this);
 
 	    this.state = {
 	      showForm: true,
+	      showError: false,
 	      postService: '',
 	      user: AuthStore.user,
 	      selectedCountry: AuthStore.user && AuthStore.user.country ? AuthStore.user.country : null,
 	      formErrors: {},
-	      service: ServiciosStore.getServiceDescription
+	      service: ServiciosStore.getServiceDescription,
+	      showImageSizeError: false,
+	      imageLoading: false,
+	      userImage: AuthStore.user && AuthStore.user.avatar ? AuthStore.user.avatar : ''
 	    };
 	}
 
@@ -42,11 +49,13 @@ class Description extends Component {
 		}
 		ServiciosStore.addChangeListener(this.onChange);
 		AuthStore.addChangeListener(this.onAuthChange);
+		UserStore.addChangeListener(this.onUserChange);
 	}
 
 	componentWillUnmount() {
 		ServiciosStore.removeChangeListener(this.onChange);
 		AuthStore.removeChangeListener(this.onAuthChange);
+		UserStore.removeChangeListener(this.onUserChange);
 	}
 
 	onChange() {
@@ -69,6 +78,27 @@ class Description extends Component {
 			setTimeout(() => {
 				ServiciosActionCreator.setServiceDescription(this.state.postService);
 			}, 10);
+		}
+	}
+
+	onUserChange() {
+		const action = AuthStore.getLastAction();
+		console.log('action >>', action)
+		if (action) {
+			if (action.type === ActionTypes.UPLOAD_USER_IMAGE_SUCCESS) {
+				console.log('action >>', action)
+				this.setState({
+					userImage: action.data.user.avatar,
+					imageLoading: false
+				})
+				AuthStore._updateUserData('avatar', action.data.user.avatar);
+			} else if (action.type === ActionTypes.UPLOAD_USER_IMAGE_ERROR) {
+				console.log('action >>', action)
+				this.setState({
+					showError: action.error.message,
+					imageLoading: false
+				});
+			}
 		}
 	}
 
@@ -164,8 +194,44 @@ class Description extends Component {
 		if (!_.isEmpty(error)) {
 			return(error.length === 0 ? '' : 'has-danger');	
 		}
-		return '';
-		
+		return '';		
+	}
+
+	selectImage(e) {
+		const image = e.target.files[0];
+		var _URL = window.URL || window.webkitURL;		
+		let file, img;
+		let sizeError = false;
+		if (image) {
+			this.setState({
+				imageLoading: true
+			});
+		    if ((file = e.target.files[0])) {
+		        img = new Image();
+		        img.onload = function () {
+		            console.log(this.width + " " + this.height);
+		            if (parseInt(this.width) === 200 && parseInt(this.height) === 200) {
+		            	console.log('upload image')
+		            } else {
+		            	sizeError = true;	            	
+		            }
+		        };
+		        img.src = _URL.createObjectURL(file);
+		        setTimeout(() => {
+		        	if (sizeError) {
+			        	this.setState({
+		            		showImageSizeError: 'Image size should be 200 x 200',
+		            		imageLoading: false
+		            	})
+			        } else {
+			        	this.setState({
+		            		showImageSizeError: false
+		            	})
+		            	UserActionCreator.uploadUserImage(image);
+			        }
+		        }, 500);
+		    }
+		}
 	}
 
 	render() {
@@ -173,6 +239,7 @@ class Description extends Component {
 		const fullNameDisable = user && user.fullName ? true : false;
 		const countryDisable = user && user.country ? true : false;
 		const aboutDisable = user && user.about ? true : false;
+		const userImage = this.state.userImage ? this.state.userImage : '/images/profile-pic.png';
 
 		return (
 			<div className="description-block">
@@ -205,11 +272,11 @@ class Description extends Component {
 								    	placeholder="DESCRIPCIÓN: 
 										que incluye, que lo hace especial, requisitos,
 										tiempo de entrega, etc."
-											defaultValue={service ? service.description : ''}
-											ref='description'
-											name='description'
-											onKeyUp={this.handleUserInput}
-
+										defaultValue={service ? service.description : ''}
+										ref='description'
+										name='description'
+										onKeyUp={this.handleUserInput}
+										maxLength='70'
 								   	/>
 								   	{this.errorClass(formErrors.description) &&
 									   	<div className='form-control-feedback'>
@@ -285,17 +352,46 @@ class Description extends Component {
 									   	</div>
 									  }
 								</div>
-								<div className='upload-pic'>
+								<div className='upload-pic'>								
 									<i>
-										<img src='/images/profile-pic.png' className='icon'/>
+										{!this.state.imageLoading &&
+											<img src={userImage} className={`icon ${this.state.userImage ? 'thumb' : ''}`}/>
+										}
+										{this.state.imageLoading &&
+											<div className="spinner">
+											  <div className="rect1"></div>
+											  <div className="rect2"></div>
+											  <div className="rect3"></div>
+											  <div className="rect4"></div>
+											  <div className="rect5"></div>
+											</div>
+										}
 									</i>
 									<div className='float-left'>
-										<h3>{'Foto de perfil o logo'}</h3>
-										<p>{'Tamaño preferido: 200x200 px'}</p>
+										{this.state.userImage &&
+											<h3>{'Tu foto ha sido adjuntada'}</h3>
+										}
+										{!this.state.userImage &&
+											<div>
+												<h3>{'Foto de perfil o logo'}</h3>
+												<p>{'Tamaño preferido: 200x200 px'}</p>
+											</div>
+										}
 									</div>
 									<span>{'Adjuntar'}</span>
-									<input type='file'/>
+									<input
+										type='file'
+										onChange={this.selectImage}
+										accept="image/x-png,image/gif,image/jpeg"
+									/>
 								</div>
+								{this.state.showImageSizeError &&
+									<div className='form-group has-danger'>
+									   	<div className='form-control-feedback'>
+									   		{this.state.showImageSizeError}
+									   	</div>
+									</div>
+								}
 								<button
 									type="button"
 									className="btn btn-success col-100"

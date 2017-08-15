@@ -44,6 +44,18 @@ class WebAPIUtils {
 		.catch(WebAPIUtils._errorCallback.bind(null, SyncLayer.processingQueue, actionTypeSuccess, actionTypeError));
 	}
 
+	sendDataForm(actionTypeSuccess, actionTypeError, url, data, headers=WebAPIUtils._addJWT()) {
+	    const _queueName = SyncLayer.processingQueue;
+		var formData = new FormData();
+		formData.append("file", data);
+
+	    axios.post(url, formData, {
+	      headers
+	    })
+	    .then(WebAPIUtils._successCallback.bind(null, _queueName, actionTypeSuccess, actionTypeError))
+	    .catch(WebAPIUtils._errorCallback.bind(null, _queueName, actionTypeSuccess, actionTypeError));
+	  }
+
 	static _responseCallback(actionTypeSuccess, actionTypeError, _queueName, err, response, body) {
 		if (err) {
 			WebAPIUtils._errorCallback(_queueName, actionTypeSuccess, actionTypeError, err, response, body);

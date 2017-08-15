@@ -11,6 +11,7 @@
 			margin-top: 40px;
 			float: left;
 			width: 100%;
+			padding: 0;
 			div > li{
 				float: left;
 				width: 100%;
@@ -120,5 +121,25 @@
 			margin-top: 40px;
 			padding: 0 55px;
 		}
+	}
+}
+@media only screen and (max-width:768px) {
+	.areas-block {
+		.center{
+			width: 100%;
+		}
+		.form .subcategory .list li{
+			white-space: normal;
+			font-size: 16px;
+			line-height: 1.1;
+		}
+	}
+	.areas-block .form .next{
+		padding: 0;
+	}
+}
+@media only screen and (max-width:400px) {
+	.areas-block .form .category-list div > li{
+		font-size: 16px;
 	}
 }

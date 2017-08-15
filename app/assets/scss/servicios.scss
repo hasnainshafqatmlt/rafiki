@@ -77,3 +77,36 @@
 	}
 	
 }
+
+@media only screen and (max-width:992px) {
+	.servicios-block {
+		.status{
+			margin-top: 20px;
+		}
+		.table{
+			margin-top: 20px;
+		}
+	}
+}
+@media only screen and (max-width:768px) {
+	.ventas-block .add-btn{
+		text-align: center;
+		i{
+			float: none;
+		}
+		span{
+			width: 100%;
+		}
+		&:hover{
+			span{
+				color: $green;
+			}
+		}
+	}
+}
+@media only screen and (max-width:400px) {
+	.servicios-block .table td{
+		font-size: 16px;
+		padding-bottom: 23px;
+	}
+}

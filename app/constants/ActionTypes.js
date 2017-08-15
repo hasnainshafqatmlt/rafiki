@@ -53,6 +53,14 @@ export default keyMirror({
 	DELETE_USER_SUCCESS: null,
 	DELETE_USER_ERROR: null,
 
+	EXPORT_SERVICES_SUCCESS: null,
+	EXPORT_SERVICES_ERROR: null,
+	EXPORT_USERS_SUCCESS: null,
+	EXPORT_USERS_ERROR: null,
+
+	UPLOAD_USER_IMAGE_SUCCESS: null,
+	UPLOAD_USER_IMAGE_ERROR: null,
+
 	/**
 	* Registration
 	*/

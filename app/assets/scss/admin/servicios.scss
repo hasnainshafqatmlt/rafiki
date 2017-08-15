@@ -46,6 +46,7 @@
       padding-top: 0;
       padding-bottom: 50px;
       position: relative;
+      cursor: pointer;
       .filter-status{
         position: absolute;
         left: 12px;
@@ -220,4 +221,16 @@
     }
   }
   
+}
+@media only screen and (max-width:768px) {
+  .admin-servicios {
+    .table{
+      td{
+        padding-bottom: 20px;
+        a{
+          font-size: 16px;
+        }
+      }
+    }
+  }
 }

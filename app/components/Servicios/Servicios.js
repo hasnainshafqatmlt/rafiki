@@ -123,20 +123,37 @@ class Servicios extends Component {
 					<h1 className='col-sm-12 text-center heading-1'>						
 						{'Mis Servicios'}
 					</h1>
-					<ul className='status'>
-						<li>
-							<i className='green'/>
-							<span> Al aire</span>
-						</li>
-						<li>
-							<i className='red'/>
-							<span> Rechazado</span>
-						</li>
-						<li>
-							<i className='yellow'/>
-							<span> En revisión</span>
-						</li>
-					</ul>
+					{this.state.services.length === 0 &&
+						<div className='float-left w-100 m-t-40'>
+							<div className="sk-cube-grid">
+							  <div className="sk-cube sk-cube1"></div>
+							  <div className="sk-cube sk-cube2"></div>
+							  <div className="sk-cube sk-cube3"></div>
+							  <div className="sk-cube sk-cube4"></div>
+							  <div className="sk-cube sk-cube5"></div>
+							  <div className="sk-cube sk-cube6"></div>
+							  <div className="sk-cube sk-cube7"></div>
+							  <div className="sk-cube sk-cube8"></div>
+							  <div className="sk-cube sk-cube9"></div>
+							</div>
+						</div>
+					}
+					{this.state.services.length > 0 &&
+						<ul className='status'>
+							<li>
+								<i className='green'/>
+								<span> Al aire</span>
+							</li>
+							<li>
+								<i className='red'/>
+								<span> Rechazado</span>
+							</li>
+							<li>
+								<i className='yellow'/>
+								<span> En revisión</span>
+							</li>
+						</ul>
+					}
 					<div className='float-left col-100'>
 						<table className='table'>
 						  <tbody>

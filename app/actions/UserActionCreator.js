@@ -71,4 +71,19 @@ export default {
 		WebAPIUtils.sendPUT(success, error, url, data);
 	},
 
+	exportUsers: () => {
+		const success = ActionTypes.EXPORT_USERS_SUCCESS;
+		const error = ActionTypes.EXPORT_USERS_ERROR;
+		const url = `${Config.API_URL}/users/export`;
+
+		WebAPIUtils.sendGET(success, error, url);
+	},
+
+	uploadUserImage: (data) => {
+		const success = ActionTypes.UPLOAD_USER_IMAGE_SUCCESS;
+		const error = ActionTypes.UPLOAD_USER_IMAGE_ERROR;
+		const url = `${Config.API_URL}/users/image`;
+		WebAPIUtils.sendDataForm(success, error, url, data);
+	},
+
 };

@@ -102,7 +102,7 @@ class Main extends Component {
 				<div className={`col-100 float-left main-wrap`}>
 					{this.props.children}
 				</div>
-				{isAuthenticated && AuthStore.user.role !== 'ADMIN' &&
+				{(isAuthenticated && AuthStore.user.role === 'USER' || this.props.location.pathname === '/') &&
 					<Footer />
 				}
 			</div>

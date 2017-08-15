@@ -196,6 +196,7 @@ class Areas extends Component {
 				data.selected = true;
 			} else {
 				data.selected = false;
+				data.subCat = []
 			}
 		})
 
@@ -297,7 +298,7 @@ console.log('selectedCat $$$$', this.state.selectedData)
 				<div className='container'>
 					<div className='row'>
 						<h1 className='col-sm-12 text-center heading-1 m-t-60'>{'Elige el área de tu servicio'}</h1>
-						<div className='pull-left col-100 form'>
+						<div className='pull-left col-100 form col-sm-12'>
 							<div className='center'>
 								{this.state.showError &&
 									<div className='alert alert-danger text-center m-t-30 m-b-0'>

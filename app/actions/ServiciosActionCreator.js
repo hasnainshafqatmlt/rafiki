@@ -85,4 +85,12 @@ export default {
 		WebAPIUtils.sendPUT(success, error, url, data);
 	},
 
+	exportServices: () => {
+		const success = ActionTypes.EXPORT_SERVICES_SUCCESS;
+		const error = ActionTypes.EXPORT_SERVICES_ERROR;
+		const url = `${Config.API_URL}/services/export`;
+
+		WebAPIUtils.sendGET(success, error, url);
+	},
+
 }

@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import _ from 'lodash';
 import Select from 'react-select';
 
-import UserStore from '../../stores/UserStore';
 import AuthStore from '../../stores/AuthStore';
+import UserStore from '../../stores/UserStore';
 import UserActionCreator from '../../actions/UserActionCreator';
 import ActionTypes from '../../constants/ActionTypes';
 import Validation from './Validation';
 import {getCountries} from '../../utils/utils';
+
 
 class Perfil extends Component {
 
@@ -17,12 +18,17 @@ class Perfil extends Component {
 	    this.handleSubmit = this.handleSubmit.bind(this);
 	    this.handleUserInput = this.handleUserInput.bind(this);
 	    this.logChange = this.logChange.bind(this);
+	    this.selectImage = this.selectImage.bind(this);
 
 	    this.state = {
 	      user: AuthStore.user,
 	      showSuccess: false,
+	      showError: false,
 	      selectedCountry: AuthStore.user && AuthStore.user.country ? AuthStore.user.country : null,
-	      formErrors: {}
+	      formErrors: {},
+	      showImageSizeError: false,
+	      imageLoading: false,
+	      userImage: AuthStore.user && AuthStore.user.avatar ? AuthStore.user.avatar : ''
 	    };
 	}
 
@@ -47,6 +53,19 @@ class Perfil extends Component {
 			});
 			AuthStore.updateNewData(action);
 			window.scrollTo(0,0);
+		} else if (action.type === ActionTypes.UPLOAD_USER_IMAGE_SUCCESS) {
+			console.log('action >>', action)
+			this.setState({
+				userImage: action.data.user.avatar,
+				imageLoading: false
+			})
+			AuthStore._updateUserData('avatar', action.data.user.avatar);
+		} else if (action.type === ActionTypes.UPLOAD_USER_IMAGE_ERROR) {
+			console.log('action >>', action)
+			this.setState({
+				showError: action.error.message,
+				imageLoading: false
+			});
 		}
 	}
 
@@ -133,9 +152,49 @@ console.log('userData' , userData)
 		}
 
 	}
+//const imagePath = URL.createObjectURL(e.target.files[0]);
+	selectImage(e) {
+		const image = e.target.files[0];
+		var _URL = window.URL || window.webkitURL;		
+		let file, img;
+		let sizeError = false;
+		if (image) {
+			this.setState({
+				imageLoading: true
+			});
+		    if ((file = e.target.files[0])) {
+		        img = new Image();
+		        img.onload = function () {
+		            console.log(this.width + " " + this.height);
+		            if (parseInt(this.width) === 200 && parseInt(this.height) === 200) {
+		            	console.log('upload image')
+		            } else {
+		            	sizeError = true;	            	
+		            }
+		        };
+		        img.src = _URL.createObjectURL(file);
+		        setTimeout(() => {
+		        	if (sizeError) {
+			        	this.setState({
+		            		showImageSizeError: 'Image size should be 200 x 200',
+		            		imageLoading: false
+		            	})
+			        } else {
+			        	this.setState({
+		            		showImageSizeError: false
+		            	})
+		            	UserActionCreator.uploadUserImage(image);
+			        }
+		        }, 500);
+		    }
+		}
+	}
+
+	
 
 	render() {
 		const {user, selectedCountry, formErrors} = this.state;
+		const userImage = this.state.userImage ? this.state.userImage : '/images/profile-pic.png';
 
 		return (
 			<div className="perfil-block">
@@ -147,6 +206,12 @@ console.log('userData' , userData)
 							{this.state.showSuccess &&
 								<div className='alert alert-success col-100 m-t-20'>
 									{'Profile updated successfully'}
+								</div>
+							}
+
+							{this.state.showError &&
+								<div className='alert alert-danger col-100 m-t-20'>
+									{this.state.showError}
 								</div>
 							}
 							<div className={`form-group ${this.errorClass(formErrors.fullName)}`}>
@@ -198,18 +263,39 @@ console.log('userData' , userData)
 							   	</div>
 							  }
 							</div>
-							<div className='upload-pic'>
+							<div className='upload-pic'>								
 								<i>
-									<img src='/images/profile-pic.png' className='icon'/>
+									{!this.state.imageLoading &&
+										<img src={userImage} className={`icon ${this.state.userImage ? 'thumb' : ''}`}/>
+									}
+									{this.state.imageLoading &&
+										<div className="spinner">
+										  <div className="rect1"></div>
+										  <div className="rect2"></div>
+										  <div className="rect3"></div>
+										  <div className="rect4"></div>
+										  <div className="rect5"></div>
+										</div>
+									}
 								</i>
 								<div className='float-left'>
 									<h3>{'Foto de perfil o logo'}</h3>
 									<p>{'Tamaño preferido: 200x200 px'}</p>
 								</div>
 								<span>{'Adjuntar'}</span>
-								<input type='file'/>
+								<input
+									type='file'
+									onChange={this.selectImage}
+									accept="image/x-png,image/gif,image/jpeg"
+								/>
 							</div>
-
+							{this.state.showImageSizeError &&
+								<div className='form-group has-danger'>
+								   	<div className='form-control-feedback'>
+								   		{this.state.showImageSizeError}
+								   	</div>
+								</div>
+							}
 							<div className={`form-group ${this.errorClass(formErrors.email)}`}>
 							  <input
 							  	type="text"

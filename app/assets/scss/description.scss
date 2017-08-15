@@ -44,6 +44,17 @@
 					top: 0;
 					bottom: 0;
 					margin: auto;
+					&.thumb{
+						width: 100%;
+					}
+				}
+				.spinner{
+					position: absolute;
+					margin: auto;
+					top: 0;
+					bottom:0;
+					left: 0;
+					right: 0;
 				}
 			}
 			h3{
@@ -96,6 +107,13 @@
 				font-size: 18px;
 				color: $gray;
 			}
+		}
+	}
+}
+@media only screen and (max-width:768px) {
+	.description-block {
+		.center{
+			width: 100%;
 		}
 	}
 }

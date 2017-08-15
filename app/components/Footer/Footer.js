@@ -19,6 +19,18 @@ class Footer extends Component {
 									width='12'
 								/>
 							</i>
+							<i>
+								<img
+									src='/images/google-plus-logo.png'
+									width='12'
+								/>
+							</i>
+							<i>
+								<img
+									src='/images/pinterest.png'
+									width='17'
+								/>
+							</i>							
 						</div>
 						<div className='col-sm-12 float-left nav-links'>
 							<a href='#'>

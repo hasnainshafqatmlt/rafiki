@@ -15,12 +15,14 @@ class Usuarios extends Component {
 	    this.onChange = this.onChange.bind(this);
 	    this.openModal = this.openModal.bind(this);
 	    this.deleteUser = this.deleteUser.bind(this);
+	    this.handleExportUsers = this.handleExportUsers.bind(this);
 
 	    this.state = {
 	    	users: [],
 	    	showSuccessAlert: false,
 	    	toggleSorting: 'asc',
-	    	userId: ''
+	    	userId: '',
+	    	isDownload: false
 	    };
 	}
 
@@ -57,6 +59,17 @@ class Usuarios extends Component {
 		} else if (action.type === ActionTypes.DELETE_USER_SUCCESS) {
 			UserActionCreator.getUsers();
 			$('#myModal').modal('hide')
+		} else if (action.type === ActionTypes.EXPORT_USERS_SUCCESS) {
+			const randomNum = Math.floor((Math.random() * 10000000000) + 100000000000);
+			const a = $("<a>")
+			    .attr("href", action.data.file.filePath)
+			    .attr("download", `services-${randomNum}.pdf`)
+			    .appendTo("body");
+			a[0].click();
+			a.remove();
+			this.setState({
+				isDownload: false
+			});
 		}
 	}
 
@@ -81,6 +94,13 @@ class Usuarios extends Component {
 		$('#myModal').modal('show')
 		this.setState({
 			userId: id
+		});
+	}
+
+	handleExportUsers() {
+		UserActionCreator.exportUsers();
+		this.setState({
+			isDownload: true
 		});
 	}
 
@@ -144,39 +164,73 @@ class Usuarios extends Component {
 						  <strong>Accepted!</strong> {this.state.showSuccessAlert} 
 						</div>
 					}
-					<div className='float-left col-100'>
-						<table className='table'>
-							<thead>
-								<tr>
-									<th
-										onClick={() => this.handleSort('fullName')}
-									>
-										Usuario 
-									</th>
-									<th
-										onClick={() => this.handleSort('country')}
-									>
-										Pais 
-									</th>
-									<th
-										onClick={() => this.handleSort('email')}
-									>
-										Email
-									</th>
-									<th
-										width='170'
-										onClick={() => this.handleSort('sales')}
-									>
-										Ventas
-									</th>
-									<th width='40'><img src='/images/download-icon.png'/></th>
-								</tr>
-							</thead>
-						  <tbody>
-						  	{this.renderUsersList()}
-						  </tbody>
-						</table>
-					</div>
+
+					{this.state.users.length === 0 &&
+						<div className='float-left w-100 m-t-40'>
+							<div className="sk-cube-grid">
+							  <div className="sk-cube sk-cube1"></div>
+							  <div className="sk-cube sk-cube2"></div>
+							  <div className="sk-cube sk-cube3"></div>
+							  <div className="sk-cube sk-cube4"></div>
+							  <div className="sk-cube sk-cube5"></div>
+							  <div className="sk-cube sk-cube6"></div>
+							  <div className="sk-cube sk-cube7"></div>
+							  <div className="sk-cube sk-cube8"></div>
+							  <div className="sk-cube sk-cube9"></div>
+							</div>
+						</div>
+					}
+					{this.state.users.length > 0 &&
+						<div className='float-left col-100'>
+							<table className='table'>
+								<thead>
+									<tr>
+										<th
+											onClick={() => this.handleSort('fullName')}
+										>
+											Usuario 
+										</th>
+										<th
+											onClick={() => this.handleSort('country')}
+										>
+											Pais 
+										</th>
+										<th
+											onClick={() => this.handleSort('email')}
+										>
+											Email
+										</th>
+										<th
+											width='170'
+											onClick={() => this.handleSort('sales')}
+										>
+											Ventas
+										</th>
+										<th width='40'>
+											{this.state.isDownload &&
+												<div className="spinner">
+												  <div className="rect1"></div>
+												  <div className="rect2"></div>
+												  <div className="rect3"></div>
+												  <div className="rect4"></div>
+												  <div className="rect5"></div>
+												</div>
+											}
+											{!this.state.isDownload &&
+												<img
+													onClick={this.handleExportUsers}
+													src='/images/download-icon.png'
+												/>
+											}
+										</th>
+									</tr>
+								</thead>
+							  <tbody>
+							  	{this.renderUsersList()}
+							  </tbody>
+							</table>
+						</div>
+					}
 				</div>
 				{this.renderAlertModal()}
 			</div>

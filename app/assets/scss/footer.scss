@@ -1,7 +1,7 @@
 .footer{
 	float: left;
 	width: 100%;
-	background: $offwhite;
+	background: #354051;
 	padding: 56px 0 40px;
 	.row{ margin: 0;}
 	.social-icons{
@@ -16,11 +16,11 @@
 			position: relative;
 			margin: 0 3.5px;
 			border-radius: 50%;
-			background-color: $darkOffwhite;
+			background-color: #535c6c;
 			@include transition(.3s);
 			cursor: pointer;
 			&:hover{
-				background-color: #c3bebe;
+				background-color: $green;
 			}
 			img{
 				position: absolute;
@@ -37,18 +37,18 @@
 		margin-bottom: 52px;
 		a{
 			display: inline-block;
-			color: $darkGray;
+			color: $white;
 			font-size: 16px;
 			margin: 0 20px;
 			text-decoration: none;
 			@include transition(.3s);
 			&:hover{
-				color: $gray;
+				color: $green;
 			}
 		}
 	}
 	.info{
-		color: $lightGray;
+		color: $white;
 		font-size: 14px;
 		margin-bottom: 7px;
 		text-align: center;

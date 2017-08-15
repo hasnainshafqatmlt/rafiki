@@ -17,14 +17,21 @@ class Header extends Component {
 	}
 
 	componentDidMount() {
-		//console.log('Header DID Mount', this.props)
+		$(document).ready(function(){
+		    $('#menu-open').click(function(){
+		      $(this).toggleClass('opened');
+		      $('.mobile-menu').toggleClass('opened');
+		      $('body').toggleClass('opened');
+		    })
+		    $('.mobile-menu').click(function() {
+		    	$(this).removeClass('opened');
+		    	$('.mobile-menu, body').removeClass('opened');
+		    })
+		})
 	}
 
-	componentWillReceiveProps(props) {
-		//console.log('Header Rec Props', this.props)
-	}
-
-	logoutUser = () => {
+	logoutUser = (e) => {
+		e.preventDefault();
 		AuthStore.logoutUser();
 	}
 
@@ -33,8 +40,11 @@ class Header extends Component {
 
 		return (
 
-			<header className='header'>
+			<header className='header navbar-light'>
 				<div className='container'>
+					<button className="navbar-toggler navbar-toggler-right" type="button" id='menu-open'>
+				    	<span className="navbar-toggler-icon"></span>
+				  	</button>
 					<Link
 						to='/'
 						className='logo'
@@ -94,11 +104,71 @@ class Header extends Component {
 					{!isAuthenticated &&
 						<ul className='nav'>
 							<li>
-								<Link to='/signup'>
-									{'Signup'}
+								<Link to='#'>
+									{'Compra servicios'}
+								</Link>
+							</li>
+							<li>
+								<Link to='/login'>
+									{'Iniciar sesión'}
+								</Link>
+							</li>
+							<li>	
+								<Link to='/signup' className='rounded-link'>
+									{'Crea tu cuenta'}
 								</Link>
 							</li>
 						</ul>
+					}
+				</div>
+
+				<div className="mobile-menu">				  
+				  	{isAuthenticated && AuthStore.user.role === 'USER' &&
+				  		<div className="list-group">
+							<Link to='/servicios' className='list-group-item list-group-item-action'>
+								{'Mis Servicios'}
+							</Link>
+							<Link to='/ventas' className='list-group-item list-group-item-action'>
+								{'Mis Ventas'}
+							</Link>
+							<Link to='/perfil' className='list-group-item list-group-item-action'>
+								{'Perfil'}
+							</Link>
+							<a  href='/' onClick={this.logoutUser} className='list-group-item list-group-item-action'>
+								{'Cerrar Sesión'}
+							</a>
+						</div>
+					}
+
+					{isAuthenticated && AuthStore.user.role === 'ADMIN' &&
+						<div className="list-group">
+							<Link to='/admin/servicios' className='list-group-item list-group-item-action'>
+								{'Servicios'}
+							</Link>
+							<Link to='/admin/usuarios' className='list-group-item list-group-item-action'>
+								{'Usuarios'}
+							</Link>
+							<Link to='/admin/perfil' className='list-group-item list-group-item-action'>
+								{'Perfil'}
+							</Link>
+							<a  href='/' onClick={this.logoutUser} className='list-group-item list-group-item-action'>
+								{'Cerrar Sesión'}
+							</a>
+						</div>
+					}
+
+					{!isAuthenticated &&
+						<div className="list-group">
+							<a href='#' className='list-group-item list-group-item-action'>
+								{'Compra servicios'}
+							</a>
+							<Link to='/login' className='list-group-item list-group-item-action'>
+								{'Iniciar sesión'}
+							</Link>
+							<Link to='/signup' className='list-group-item list-group-item-action'>
+								{'Crea tu cuenta'}
+							</Link>
+						</div>
 					}
 				</div>
 			</header>

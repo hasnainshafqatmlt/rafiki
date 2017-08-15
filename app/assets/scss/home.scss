@@ -3,6 +3,9 @@
 	width: 100%;
 	margin-bottom: 150px;
 	min-height: 600px;
+	.hero-section{
+		min-height: 300px;
+	}
 	h1{
 		margin-top: 32px;
 		margin-bottom: 57px;
@@ -24,12 +27,175 @@
 		position: relative;
 	}
 	.photo{
-		position: absolute;
-		right: 0;
-		top: -70px;
+		float: right;
+		margin-top: -60px;
 	}
 	.btn-success{
 		width: 350px;
 		max-width: 100%;
+	}
+
+	.como-block{
+	  background-color: #F9F9F9;
+	  padding: 44px 0 76px;
+	}
+	.como-block h2{
+	  text-align: center;
+	  margin:0;
+	}
+	.como-block section{
+	  margin-top: 35px;
+	  text-align: center;
+	}
+	.como-block section i{
+	  width: 60px;
+	  height: 60px;
+	  display: block;
+	  margin: 0 auto;
+	  background-color: #1EB623;
+	  font-style: normal;
+	  color: #fff;
+	  font-size: 33px;
+	  border-radius: 50%;
+	  text-align: center;
+	  font-weight: 600;
+	  line-height: 1.7;
+	}
+	.como-block section h3{
+	  margin: 33px 0 36px;
+	}
+	.como-block section p{
+	  color: #000000;
+	  font-size: 22px;
+	  font-weight: 300;
+	  margin-bottom: 0;
+	}
+	.seguro-block{
+	  padding: 108px 0;
+	  .btn{
+	  	width: 350px;
+	  }
+	}
+	.seguro-block h2{
+	  margin: 0 0;
+	  text-align: center;
+	}
+	.seguro-block h3{
+	  text-align: center;
+	  color: #767676;
+	  font-size: 25px;
+	  font-weight: 400;
+	  margin:19px 0 0;
+	}
+	.seguro-block ul{
+	  float: left;
+	  width: 100%;
+	  list-style: none;
+	  padding: 0;
+	  margin-top: 50px;
+	  margin-bottom: 100px;
+	}
+	.seguro-block ul li{
+	  float: left;
+	  width: 100%;
+	  padding:20px 50px 20px 0;
+	  font-size: 22px;
+	  color: #767676;
+	  border-bottom: 1px solid #979797;
+	  position: relative;
+	  font-weight: 300;
+	}
+	.seguro-block ul li .tick-icon{
+	  position: absolute;
+	  right: 15px;
+	  top: 0;
+	  bottom: 0;
+	  margin: auto;
+	}
+	.banner-block{
+	  background-image: url('../images/banner.png');
+	  background-repeat: no-repeat;
+	  background-position: center bottom;
+	  background-attachment: fixed;  
+	  height: 529px;  
+	}
+	.banner-block .container{
+	  height: 529px;
+	  position: relative;
+	}
+	.banner-block .text{
+	  position: absolute;
+	  left: 16px;
+	  bottom: 30px;
+	  color: #fff;
+	  font-size: 20px;
+	  font-weight: 300;
+	}
+	.bussiness-block{
+	  background-color: #F9F9F9;
+	  padding: 142px 0 112px;
+	  text-align: center;
+	}
+	.bussiness-block .col-sm-4{
+	  padding: 0;
+	}
+	.bussiness-block h3{
+	  color: #1FB623;
+	  font-size: 50px;
+	  font-weight: 400;  
+	  margin:0;
+	}
+	.bussiness-block p{
+	  font-size: 22px;
+	  color: #767676;
+	  margin: 0;
+	  font-weight: 300;
+	}
+	.bussiness-block .first{
+	  padding-right: 50px;
+	}
+	.bussiness-block .second p{
+	  padding: 0 30px;
+	}
+	.contact-info-block{
+	  padding: 120px 0 0;
+	}
+	.contact-info-block h2{
+	  margin: 0 0 46px;
+	}
+}
+@media only screen and (max-width:992px) {
+	.home-block {
+		.hero-section{
+			.btn{
+				margin-bottom: 30px;
+			}
+		}
+		.photo{
+			max-width: 100%;
+		}
+		.banner-block{
+	    	height: 350px;
+	    	.container {
+	    		height: 350px;
+	    	}
+	    }	
+	}	
+}
+@media only screen and (max-width:768px) {
+	.heading-2 {
+	    font-size: 30px;
+	}
+	.home-block{
+		.photo{
+			margin-top: 0;
+		}
+	}
+	.como-block, .bussiness-block{
+		.row {
+			> div{
+				margin-bottom: 30px;
+			}
+		}
 	}
 }
