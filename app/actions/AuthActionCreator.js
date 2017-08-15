@@ -30,10 +30,7 @@ export default {
 	},
 
 	logoutUser: () => {
-		const success = ActionTypes.LOGOUT_SUCCESS;
-		const error = ActionTypes.LOGOUT_FAIL;
-		const url = `${Config.API_URL}/auth/logout`;
-		const form = {};
-		WebAPIUtils.sendPOST(success, error, url, form);
+		const action = ActionTypes.LOGOUT_SUCCESS;
+		dispatch(action);
 	},
 }

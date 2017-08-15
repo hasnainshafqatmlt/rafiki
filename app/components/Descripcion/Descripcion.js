@@ -253,7 +253,7 @@ class Description extends Component {
 								    <input
 								    	type="text"
 								    	className={`form-control`}
-								    	placeholder="TÍTULO:  por ejemplo “Soy tu Social Media Manager”"
+								    	placeholder="TÍTULO: por ejemplo “Soy tu Social Media Manager”"
 								    	defaultValue={service ? service.title : ''}
 								    	ref='title'
 								    	name='title'

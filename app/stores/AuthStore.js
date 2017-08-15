@@ -4,7 +4,6 @@ import ActionTypes from '../constants/ActionTypes';
 import BaseStore from './BaseStore';
 import deepCopy from '../utils/deepCopy';
 import keyMirror from '../utils/keyMirror';
-import AuthActionCreator from '../actions/AuthActionCreator';
 
 
 const USER_DATA = keyMirror(
@@ -180,12 +179,6 @@ class AuthStore extends BaseStore {
    */
   clearJwtStore() {
     this._clearStore();
-  }
-
-
-  logoutUser() {
-    this._logout();
-    window.location = "/";
   }
 
   updateNewData(action) {

@@ -12,6 +12,14 @@ import Validation from './LoginValidation';
 class LoginPage extends Component {
 	constructor () {
 		super();
+
+		this.validateForm = this.validateForm.bind(this);
+		this.validateField = this.validateField.bind(this);
+		this.errorClass = this.errorClass.bind(this);
+		this.handleUserInput = this.handleUserInput.bind(this);
+		this.handleLoginChange = this.handleLoginChange.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
+
 		this.state = {
 			showForm: true,
 
@@ -34,9 +42,25 @@ class LoginPage extends Component {
 			}
 		};
 	}
+	
 
+	static doLogin (email, password) {
+		AuthActionCreator.loginUser(email, password);
+	}
 
-	handleUserInput = (e) => {
+	componentDidMount() {
+		const isLoggedIn = AuthStore.isLoggedIn();
+		AuthStore.addChangeListener(this.handleLoginChange);
+		if (isLoggedIn) {
+			this.props.history.push('/')
+		}
+	}
+
+	componentWillUnmount() {
+		AuthStore.removeChangeListener(this.handleLoginChange);
+	}
+
+	handleUserInput(e) {
 		const name = e.target.name;
 		let value = e.target.value;
 
@@ -64,23 +88,7 @@ class LoginPage extends Component {
 		return(error.length === 0 ? '' : 'has-error');
 	}
 
-	static doLogin (email, password) {
-		AuthActionCreator.loginUser(email, password);
-	}
-
-	componentDidMount() {
-		const isLoggedIn = AuthStore.isLoggedIn();
-		AuthStore.addChangeListener(this.handleLoginChange);
-		if (isLoggedIn) {
-			this.props.history.push('/')
-		}
-	}
-
-	componentWillUnmount() {
-		AuthStore.removeChangeListener(this.handleLoginChange);
-	}
-
-	handleLoginChange = () => {
+	handleLoginChange() {
 		const action = AuthStore.getLastAction();
 		const error = AuthStore.error;
 
@@ -108,7 +116,7 @@ class LoginPage extends Component {
 		});
 	}
 
-	handleSubmit = (e) => {
+	handleSubmit(e) {
 
 		
 		e.preventDefault();
@@ -145,7 +153,9 @@ class LoginPage extends Component {
 						<div className='col-sm-12 form'>
 							<form className='' onSubmit={this.handleSubmit}>
 								<div className='center'>
-									{errorMsg && <div className="text-danger">Invalid email or password</div>}
+									{errorMsg &&
+										<div className="text-danger m-b-10">Invalid email or password</div>
+									}
 									<div className="form-group">
 										<div className={`form-group ${this.errorClass(form.errors.email)}`}>
 										    <input

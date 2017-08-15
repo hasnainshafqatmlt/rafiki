@@ -1,14 +1,17 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router-dom';
-
+import ActionTypes from '../../constants/ActionTypes';
 import AuthStore from '../../stores/AuthStore';
-
+import AuthActionCreator from '../../actions/AuthActionCreator';
+import {withRouter} from "react-router-dom";
 
 
 class Header extends Component {
 
 	constructor(props) {
 		super(props);
+
+		this.onChange = this.onChange.bind(this);
 	}
 
 	static propTypes = {
@@ -28,11 +31,25 @@ class Header extends Component {
 		    	$('.mobile-menu, body').removeClass('opened');
 		    })
 		})
+
+		AuthStore.addChangeListener(this.onChange);
+	}
+
+	componentWillUnmount() {
+		AuthStore.removeChangeListener(this.onChange);
 	}
 
 	logoutUser = (e) => {
 		e.preventDefault();
-		AuthStore.logoutUser();
+		AuthActionCreator.logoutUser();
+	}
+
+	onChange() {		
+		const action = AuthStore.getLastAction();
+		console.log('this.props >>', this.props)
+		if (action && action.type === ActionTypes.LOGOUT_SUCCESS) {
+			this.props.history.push('/login')
+		} 
 	}
 
 	render() {
@@ -176,5 +193,5 @@ class Header extends Component {
 	}
 }
 
-export default Header;
+export default withRouter(Header);
 
