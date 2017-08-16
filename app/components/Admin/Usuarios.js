@@ -22,7 +22,8 @@ class Usuarios extends Component {
 	    	showSuccessAlert: false,
 	    	toggleSorting: 'asc',
 	    	userId: '',
-	    	isDownload: false
+	    	isDownload: false,
+	    	showLoader: true
 	    };
 	}
 
@@ -34,7 +35,7 @@ class Usuarios extends Component {
 		UserStore.addChangeListener(this.onChange);
 	}
 
-	componentWillMount() {
+	componentWillUnmount() {
 		UserStore.removeChangeListener(this.onChange);
 	}
 
@@ -42,7 +43,8 @@ class Usuarios extends Component {
 		const action = UserStore.getLastAction();
 		if (action && action.type === ActionTypes.GET_USERS_SUCCESS) {
 			this.setState({
-				users: action.data.users
+				users: action.data.users,
+				showLoader: false
 			});
 		} else if (action.type === ActionTypes.UPDATE_SALES_SUCCESS) {
 			this.setState({
@@ -163,7 +165,7 @@ class Usuarios extends Component {
 						</div>
 					}
 
-					{this.state.users.length === 0 &&
+					{this.state.showLoader &&
 						<div className='float-left w-100 m-t-40'>
 							<div className="sk-cube-grid">
 							  <div className="sk-cube sk-cube1"></div>

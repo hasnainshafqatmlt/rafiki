@@ -54,9 +54,8 @@ class Servicios extends Component {
 		const services = this.state.services;
 		let servicesList = [];
 		services.forEach((data) => {
-			if (data.status !== 'DELETED') {
-				servicesList.push(
-					<tr key={data._id}>
+			servicesList.push(
+				<tr key={data._id}>
 			      <td width='40px'>
 			      	<Link to={`/areas/${data._id}`}>
 				      	<img
@@ -81,8 +80,7 @@ class Servicios extends Component {
 			      	{data.title}
 			      </td>
 			    </tr>
-				);
-			}
+			);
 		})
 		return servicesList;
 	}

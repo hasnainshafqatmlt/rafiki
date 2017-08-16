@@ -24,7 +24,8 @@ class Servicios extends Component {
 	    	serviceId: null,
 	    	filter: '',
 	    	toggleSorting: 'asc',
-	    	isDownload: false
+	    	isDownload: false,
+	    	showLoader: true
 	    };
 	}
 
@@ -45,7 +46,8 @@ class Servicios extends Component {
 
 		if (action && action.type === ActionTypes.GET_SERVICES_SUCCESS) {
 			this.setState({
-				services: ServiciosStore.getServices.services
+				services: ServiciosStore.getServices.services,
+				showLoader: false
 			});
 		} else if (action.type === ActionTypes.DELETE_SERVICE_SUCCESS) {
 			ServiciosActionCreator.getAdminServices();
@@ -188,20 +190,18 @@ class Servicios extends Component {
 		const services = this.state.services;		
 		let servicesList = [];		
 		services.forEach((data) => {
-			if (data.status !== 'DELETED') {
-				if (this.state.filter ) {
-					if (this.state.filter === data.status) {
-						servicesList.push(this.listing(data));
-					}	
-				} else {
+			if (this.state.filter ) {
+				if (this.state.filter === data.status) {
 					servicesList.push(this.listing(data));
-				}
+				}	
+			} else {
+				servicesList.push(this.listing(data));
 			}
 		})
 		return servicesList;
 	}	
 
-	render() {
+	render() { console.log(this.state.services.length)
 		return (
 			<div className="admin-servicios">
 				<div className='container'>
@@ -209,7 +209,7 @@ class Servicios extends Component {
 						{'Servicios'}
 					</h1>
 
-					{this.state.services.length === 0 &&
+					{this.state.showLoader &&
 						<div className='float-left w-100 m-t-40'>
 							<div className="sk-cube-grid">
 							  <div className="sk-cube sk-cube1"></div>
@@ -224,6 +224,7 @@ class Servicios extends Component {
 							</div>
 						</div>
 					}
+					
 					{this.state.services.length > 0 &&
 
 						<div className='float-left col-100'>
