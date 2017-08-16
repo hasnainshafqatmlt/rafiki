@@ -17,7 +17,8 @@ class Servicios extends Component {
 
 	    this.state = {
 	    	services: [],
-	    	serviceId: null
+	    	serviceId: null,
+	    	showLoader: true
 	    };
 	}
 
@@ -37,7 +38,8 @@ class Servicios extends Component {
 		const action = ServiciosStore.getLastAction();
 		if (action && action.type === ActionTypes.GET_SERVICES_SUCCESS) {
 			this.setState({
-				services: ServiciosStore.getServices.services
+				services: ServiciosStore.getServices.services,
+				showLoader: false
 			});
 		} else if (action.type === ActionTypes.DELETE_SERVICE_SUCCESS) {
 			ServiciosActionCreator.getServices();
@@ -121,7 +123,7 @@ class Servicios extends Component {
 					<h1 className='col-sm-12 text-center heading-1'>						
 						{'Mis Servicios'}
 					</h1>
-					{this.state.services.length === 0 &&
+					{this.state.showLoader &&
 						<div className='float-left w-100 m-t-40'>
 							<div className="sk-cube-grid">
 							  <div className="sk-cube sk-cube1"></div>
