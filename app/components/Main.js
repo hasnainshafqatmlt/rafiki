@@ -31,9 +31,13 @@ class Main extends Component {
 		this.updateTitle();
 	}
 
+	toTitleCase(str) {
+	    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+	}
+
 	updateTitle() {
 		const pathname = this.props.location.pathname;
-		document.title = pathname.split('/')[1];
+		document.title = `Kogno - ${this.toTitleCase(pathname.split('/')[1])}`;
 	}
 
 
