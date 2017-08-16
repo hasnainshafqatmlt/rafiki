@@ -136,7 +136,7 @@ class Usuarios extends Component {
 		let usersList = [];
 		if (!_.isEmpty(users)) {
 		users.forEach((data) => {
-				if (data.role === 'USER' && data.status === 'ACTIVE') {
+				if (data.role === 'USER') {
 					usersList.push(
 						<UsuariosListing
 							key={data._id}
