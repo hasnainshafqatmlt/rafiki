@@ -53,3 +53,9 @@
 		}
 	}
 }
+
+@media only screen and (max-width:768px) {
+	.signup-block .center, .login-block .center, .forgot-block .center{
+		width: 100%;
+	}
+}
