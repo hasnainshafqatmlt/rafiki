@@ -218,17 +218,18 @@ class Description extends Component {
 		        };
 		        img.src = _URL.createObjectURL(file);
 		        setTimeout(() => {
-		        	if (sizeError) {
-			        	this.setState({
-		            		showImageSizeError: 'Image size should be 200 x 200',
-		            		imageLoading: false
-		            	})
-			        } else {
-			        	this.setState({
-		            		showImageSizeError: false
-		            	})
-		            	UserActionCreator.uploadUserImage(image);
-			        }
+		        	// if (sizeError) {
+			        // 	this.setState({
+		         //    		showImageSizeError: 'Image size should be 200 x 200',
+		         //    		imageLoading: false
+		         //    	})
+			        // } else {
+			        	
+			        // }
+			        this.setState({
+	            		showImageSizeError: false
+	            	})
+	            	UserActionCreator.uploadUserImage(image);
 		        }, 500);
 		    }
 		}

@@ -185,6 +185,7 @@ class Usuarios extends Component {
 							<table className='table'>
 								<thead>
 									<tr>
+										<th></th>
 										<th
 											onClick={() => this.handleSort('fullName')}
 										>

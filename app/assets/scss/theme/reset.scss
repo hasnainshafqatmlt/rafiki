@@ -177,6 +177,10 @@ a.btn{
 	color: #4A4A4A !important;
 	text-align: center;
 	line-height: 1.9;
+	&:hover{
+		color: $green !important;
+		border-color: $green;
+	}
 }
 
 .spinner {

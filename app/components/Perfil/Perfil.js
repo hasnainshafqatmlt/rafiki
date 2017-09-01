@@ -54,14 +54,12 @@ class Perfil extends Component {
 			AuthStore.updateNewData(action);
 			window.scrollTo(0,0);
 		} else if (action.type === ActionTypes.UPLOAD_USER_IMAGE_SUCCESS) {
-			console.log('action >>', action)
 			this.setState({
 				userImage: action.data.user.avatar,
 				imageLoading: false
 			})
 			AuthStore._updateUserData('avatar', action.data.user.avatar);
 		} else if (action.type === ActionTypes.UPLOAD_USER_IMAGE_ERROR) {
-			console.log('action >>', action)
 			this.setState({
 				showError: action.error.message,
 				imageLoading: false
@@ -146,7 +144,6 @@ class Perfil extends Component {
 			userData.password = password;
 		}
 
-console.log('userData' , userData)
 		if (!isError) {
 			UserActionCreator.updateProfile(userData, userId);
 		}
@@ -165,7 +162,6 @@ console.log('userData' , userData)
 		    if ((file = e.target.files[0])) {
 		        img = new Image();
 		        img.onload = function () {
-		            console.log(this.width + " " + this.height);
 		            if (parseInt(this.width) === 200 && parseInt(this.height) === 200) {
 		            	console.log('upload image')
 		            } else {
@@ -174,17 +170,17 @@ console.log('userData' , userData)
 		        };
 		        img.src = _URL.createObjectURL(file);
 		        setTimeout(() => {
-		        	if (sizeError) {
-			        	this.setState({
-		            		showImageSizeError: 'Image size should be 200 x 200',
-		            		imageLoading: false
-		            	})
-			        } else {
-			        	this.setState({
-		            		showImageSizeError: false
-		            	})
-		            	UserActionCreator.uploadUserImage(image);
-			        }
+		        	// if (sizeError) {
+			        // 	this.setState({
+		         //    		showImageSizeError: 'Image size should be 200 x 200',
+		         //    		imageLoading: false
+		         //    	})
+			        // } else {			        	
+			        // }
+			        this.setState({
+	            		showImageSizeError: false
+	            	})
+	            	UserActionCreator.uploadUserImage(image);
 		        }, 500);
 		    }
 		}
