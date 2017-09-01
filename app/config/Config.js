@@ -18,19 +18,19 @@ if(process.env.NODE_ENV == 'development') {
 }
 
 const App = {
-	title: 'KOGNO',
-	description: 'KOGNO',
+	title: 'RAFIKI',
+	description: 'RAFIKI',
 	head: {
-		defaultTitle: 'KOGNO',
-		titleTemplate: '%s | KOGNO',
+		defaultTitle: 'RAFIKI',
+		titleTemplate: '%s | RAFIKI',
 		meta: [
-			{name: 'description', content: 'KOGNO'},
+			{name: 'description', content: 'RAFIKI'},
 			{charset: 'utf-8'},
 			{property: 'og:locale', content: 'en_US'},
-			{property: 'og:title', content: 'KOGNO'},
-			{property: 'og:description', content: 'KOGNO'},
-			{property: 'og:site', content: 'KOGNO'},
-			{property: 'og:creator', content: 'KOGNO'},
+			{property: 'og:title', content: 'RAFIKI'},
+			{property: 'og:description', content: 'RAFIKI'},
+			{property: 'og:site', content: 'RAFIKI'},
+			{property: 'og:creator', content: 'RAFIKI'},
 		]
 	}
 };

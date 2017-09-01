@@ -47,7 +47,7 @@ class Footer extends Component {
 							</a>
 						</div>
 						<div className='col-sm-12 float-left info'>{'Términos y Privacidad'}</div>
-						<div className='col-sm-12 float-left info bottom'>{'© kogno 2017'}</div>
+						<div className='col-sm-12 float-left info bottom'>{'© RAFIKI 2017'}</div>
 					</div>
 				</div>
 			</footer>

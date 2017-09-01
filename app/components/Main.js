@@ -37,7 +37,7 @@ class Main extends Component {
 
 	updateTitle() {
 		const pathname = this.props.location.pathname;
-		document.title = `Kogno - ${this.toTitleCase(pathname.split('/')[1])}`;
+		document.title = `RAFIKI - ${this.toTitleCase(pathname.split('/')[1])}`;
 	}
 
 
