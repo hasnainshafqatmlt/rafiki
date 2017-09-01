@@ -27,17 +27,15 @@ class SubCategory extends Component {
 		const showSubCategory = this.props.showSubCategory ? 'active' : '';
 		let subCategory = [];
 		let subCategory2 = [];
-		//console.log('selectedCat', selectedCat)
+
 		if (subCat.subCategory) {
 			subCat.subCategory.forEach((name, i) => {
 				let isSelected = false;			
 				if (selectedCat && selectedCat.subCat.length > 0) {
 					const isFound = _.find(selectedCat.subCat, function(o) {
-						//console.log('0', o, '<>', name)
 						return o === name;
 					});
 					if (isFound) {isSelected = true;}
-					//console.log('isFound >>', isFound, '==', isSelected)
 				}				
 
 				if (subCat.title1 && i < 7) {

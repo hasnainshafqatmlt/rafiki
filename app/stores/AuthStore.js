@@ -155,6 +155,7 @@ class AuthStore extends BaseStore {
       jwt.userData[field] = data;
       localStorage.setItem('kongo-jwt', JSON.stringify(jwt));
       this._user[field] = data;
+      this.emitChange();
     }
   }
 
@@ -191,7 +192,8 @@ class AuthStore extends BaseStore {
       country: user.country,
       about: user.about,
       role: user.role,
-      sales: user.sales
+      sales: user.sales,
+      avatar: user.avatar
     }
     this.updateUser(data);
   }
@@ -209,7 +211,7 @@ class AuthStore extends BaseStore {
   
 
   get user() {
-    return deepCopy(this._user);
+    return this._user;
   }
 
   get error() {

@@ -65,7 +65,7 @@ class Usuarios extends Component {
 			const randomNum = Math.floor((Math.random() * 10000000000) + 100000000000);
 			const a = $("<a>")
 			    .attr("href", action.data.file.uplodsPath)
-			    .attr("download", `Usuarios-${randomNum}.pdf`)
+			    .attr("download", action.data.file.fileName)
 			    .appendTo("body");
 			a[0].click();
 			a.remove();

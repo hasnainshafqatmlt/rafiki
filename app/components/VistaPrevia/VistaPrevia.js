@@ -83,9 +83,12 @@ class VistaPrevia extends Component {
 			description: service.description,
 			price: service.price,
 			category: {
-				title: category.title,
-				sub: category.subCat
+				title: category.title
 			}
+		}
+
+		if (category.subCat.length > 0) {
+			params.category.sub = category.subCat
 		}
 
 		if (this.props.match.params.serviceId) {

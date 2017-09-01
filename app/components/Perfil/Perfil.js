@@ -163,7 +163,6 @@ class Perfil extends Component {
 		        img = new Image();
 		        img.onload = function () {
 		            if (parseInt(this.width) === 200 && parseInt(this.height) === 200) {
-		            	console.log('upload image')
 		            } else {
 		            	sizeError = true;	            	
 		            }
@@ -276,7 +275,7 @@ class Perfil extends Component {
 								</i>
 								<div className='float-left'>
 									<h3>{'Foto de perfil o logo'}</h3>
-									<p>{'Tamaño preferido: 200x200 px'}</p>
+									{/*<p>{'Tamaño preferido: 200x200 px'}</p>*/}
 								</div>
 								<span>{'Adjuntar'}</span>
 								<input

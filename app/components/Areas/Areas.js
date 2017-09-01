@@ -224,7 +224,6 @@ class Areas extends Component {
 	selectSubCategory = (catName, subCatNewname, subCatId) => {
 		let selectedData = this.state.selectedData;
 		selectedData.forEach((data) => {
-			console.log('**', data.title ,'===', catName)
 			if (data.title === catName) {
 				if (data.subCat.length > 0) {
 					let push = true;
@@ -261,14 +260,13 @@ class Areas extends Component {
 				showError: 'Please Select Subcategories'
 			})
 			window.scrollTo(0,0);
-		} else { console.log('selectedCat >>', selectedCat)
+		} else {
 			ServiciosActionCreator.setCategories(selectedCat);
 		}
 	}
 
 	render() {
 		const selectedCat = _.find(this.state.selectedData, {selected: true})
-console.log('selectedCat $$$$', this.state.selectedData)
 		let categories = [];
 		categoryArray.forEach((data, i) => {
 			let isSelected = false;			

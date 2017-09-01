@@ -72,7 +72,6 @@ class Description extends Component {
 
 	onAuthChange() {
 		const action = AuthStore.getLastAction();
-		console.log('action >>', action)
 		if (action && action.type === ActionTypes.UPDATE_PROFILE_SUCCESS) {
 			AuthStore.updateNewData(action);
 			setTimeout(() => {
@@ -83,17 +82,14 @@ class Description extends Component {
 
 	onUserChange() {
 		const action = AuthStore.getLastAction();
-		console.log('action >>', action)
 		if (action) {
 			if (action.type === ActionTypes.UPLOAD_USER_IMAGE_SUCCESS) {
-				console.log('action >>', action)
 				this.setState({
 					userImage: action.data.user.avatar,
 					imageLoading: false
 				})
 				AuthStore._updateUserData('avatar', action.data.user.avatar);
 			} else if (action.type === ActionTypes.UPLOAD_USER_IMAGE_ERROR) {
-				console.log('action >>', action)
 				this.setState({
 					showError: action.error.message,
 					imageLoading: false
@@ -172,7 +168,6 @@ class Description extends Component {
 		})
 
 		if (!isError) {
-			console.log(user, '_.isEmpty(user) ', _.isEmpty(user.fullName) ,'>>', _.isEmpty(user.country) ,'>>', _.isEmpty(user.about) )
 			const serviceData = {
 				title,
 				description,
@@ -209,7 +204,6 @@ class Description extends Component {
 		    if ((file = e.target.files[0])) {
 		        img = new Image();
 		        img.onload = function () {
-		            console.log(this.width + " " + this.height);
 		            if (parseInt(this.width) === 200 && parseInt(this.height) === 200) {
 		            	console.log('upload image')
 		            } else {
