@@ -168,7 +168,7 @@ class Servicios extends Component {
 							className='add-btn'
 						>
 							<i className='plus-icon' />
-							<span>Agregar otro servicio</span>
+							<span>Agregar	servicio</span>
 						</Link>
 					</div>
 				</div>

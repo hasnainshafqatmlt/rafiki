@@ -219,7 +219,7 @@ class VistaPrevia extends Component {
 							<button
 								type='button'
 								className='btn btn-secondary sm'
-								onClick={() => this.props.history.push('/descripcion')}
+								onClick={() => this.props.history.push('/areas')}
 							>
 								{'Editar'}
 							</button>

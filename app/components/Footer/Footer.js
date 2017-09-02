@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class Footer extends Component {
 	render() {
@@ -33,9 +34,9 @@ class Footer extends Component {
 							</i>							
 						</div>
 						<div className='col-sm-12 float-left nav-links'>
-							<a href='#'>
+							<Link to='/'>
 								{'Home'}
-							</a>
+							</Link>
 							<a href='#'>
 								{'Crea tu cuenta'}
 							</a>
