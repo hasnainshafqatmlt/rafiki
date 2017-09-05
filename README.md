@@ -6,8 +6,8 @@ This is a React App created using Webpack 3 and ExpressJs!
 
 Make sure you have Node.js installed.
 
-1. Clone the repo: `git clone git@bitbucket.org:hunainkapadia/inseaders-app-v2.git`
-2. Run `npm install` or `yarn install`
+1. Clone the repo: `git clone git clone git@bitbucket.org:kogno/rafiki-app.git`
+2. Run `npm install`
 3. Start the dev server using `npm start`
 3. Open [http://localhost:8080](http://localhost:8080)
 
