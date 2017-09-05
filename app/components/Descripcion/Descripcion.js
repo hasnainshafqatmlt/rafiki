@@ -240,7 +240,7 @@ class Description extends Component {
 			<div className="description-block">
 				{this.state.showForm &&
 					<div className='container'>
-						<h1 className='col-sm-12 text-center heading-1'>{'Describe de tu servicio'}</h1>
+						<h1 className='col-sm-12 text-center heading-1'>{'Describe tu servicio'}</h1>
 						<h2 className='col-sm-12 text-center'>{'Entre más específico seas, más clientes tendrás'}</h2>
 						<div className='col-sm-12 form'>
 							<div className='center'>

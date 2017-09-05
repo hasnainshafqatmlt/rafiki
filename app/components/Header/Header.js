@@ -66,7 +66,7 @@ class Header extends Component {
 						to='/'
 						className='logo'
 					>
-						<img src='/images/kogno-logo.png'/>
+						<img src='/images/rafiki-logo.png'/>
 					</Link>
 					{isAuthenticated && AuthStore.user.role === 'USER' &&
 						<ul className='nav'>
@@ -121,7 +121,7 @@ class Header extends Component {
 					{!isAuthenticated &&
 						<ul className='nav'>
 							<li>
-								<Link to='#'>
+								<Link to='http://www.marketing-digital.rafiki.co/'>
 									{'Compra servicios'}
 								</Link>
 							</li>

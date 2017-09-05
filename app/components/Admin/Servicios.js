@@ -108,7 +108,8 @@ class Servicios extends Component {
 		const userData = {
 			fullName: data.createdBy.fullName,
 			country: data.createdBy.country,
-			about: data.createdBy.about
+			about: data.createdBy.about,
+			avatar: data.createdBy.avatar ? data.createdBy.avatar : ''
 		}
 		ServiciosActionCreator.setCategories(selectedCat);
 		ServiciosActionCreator.setServiceDescription(serviceData);
@@ -154,34 +155,34 @@ class Servicios extends Component {
 	listing(data) {
 		return(
 			<tr key={data._id}>
-	      <td width='40px'>
-	      	<i className={`status-icon green ${data.status}`}/>
-	      </td>
-	      <td>
-	      	{this.generateId(data._id)}
-	      </td>
-	      <td>
-	      	{data.category.title}
-	      </td>
-	      <td>
-	      	<a href={`/admin/vistaPrevia/${data._id}`}
-	      		onClick={(e) => this.gotToPreview(e, data)}
-	      	>
-	      		{data.title}
-	      	</a>
-	      </td>
-	      <td>
-	      	{data.createdBy.fullName}
-	      </td>
-	      <td>
-	      	<img
-	      		src='/images/del-icon.png'
-	      		className='icon'
-	      		data-toggle="modal"
-	      		data-target="#myModal"
-	      		onClick={() => this.setState({serviceId: data._id})}
-	      	/>
-	      </td>
+		      <td width='40px'>
+		      	<i className={`status-icon green ${data.status}`}/>
+		      </td>
+		      <td>
+		      	{this.generateId(data._id)}
+		      </td>
+		      <td>
+		      	{data.category.title}
+		      </td>
+		      <td>
+		      	<a href={`/admin/vistaPrevia/${data._id}`}
+		      		onClick={(e) => this.gotToPreview(e, data)}
+		      	>
+		      		{data.title}
+		      	</a>
+		      </td>
+		      <td>
+		      	{data.createdBy.fullName}
+		      </td>
+		      <td>
+		      	<img
+		      		src='/images/del-icon.png'
+		      		className='icon'
+		      		data-toggle="modal"
+		      		data-target="#myModal"
+		      		onClick={() => this.setState({serviceId: data._id})}
+		      	/>
+		      </td>
 		  </tr>
 		)
 	}

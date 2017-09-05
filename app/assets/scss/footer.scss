@@ -9,7 +9,7 @@
 		width: 100%;
 		text-align: center;
 		margin-bottom: 42px;
-		i{
+		> a{
 			display: inline-block;
 			width: 26px;
 			height: 26px;
@@ -52,6 +52,13 @@
 		font-size: 14px;
 		margin-bottom: 7px;
 		text-align: center;
+		> a{
+			color: $white;
+			font-size: 14px;
+			&:hover{
+				color: $green;
+			}
+		}
 		&.bottom{
 			margin-bottom: 0;
 		}

@@ -124,6 +124,8 @@ class VistaPrevia extends Component {
 		const title = service.title || '';
 		const description = service.description || '';
 		const price = service.price || '';
+		const isAdmin = AuthStore.user.role === 'ADMIN' ? true : false;
+		const userImage = isAdmin ? user.avatar : this.state.userImage;
 
 		let subcatList = [];
 		if (!_.isEmpty(category)) {
@@ -150,7 +152,12 @@ class VistaPrevia extends Component {
 					<div className='container'>
 						<ol className='breadcrumb'>
 						  <li className='breadcrumb-item'>
-						  	<Link to={`/areas/${serviceId}`}>{category.title}</Link>
+						  	{isAdmin &&
+						  		category.title
+						  	}
+						  	{!isAdmin &&
+						  		<Link to={`/areas/${serviceId}`}>{category.title}</Link>
+						  	}						  	
 						  </li>
 						  {subcatList}
 						</ol>
@@ -166,11 +173,11 @@ class VistaPrevia extends Component {
 						}
 						<div className='info-block float-left col-100'>
 							<i className='thumb'>
-								{!this.state.userImage &&
+								{!userImage &&
 									<img src='/images/profile-pic-lg.png' className='icon'/>
 								}
-								{this.state.userImage &&
-									<img src={this.state.userImage} className='icon thumb'/>
+								{userImage &&
+									<img src={userImage} className='icon thumb'/>
 								}
 							</i>
 							<div className='float-left col-100'>
@@ -196,7 +203,7 @@ class VistaPrevia extends Component {
 				<hr className='bottom-horizental-line'/>
 				<div className='float-left col-100 actions'>
 					
-					{AuthStore.user.role === 'ADMIN' &&
+					{isAdmin &&
 						<div className='container'>
 							<button
 								type='button'
@@ -214,7 +221,7 @@ class VistaPrevia extends Component {
 							</button>
 						</div>
 					}
-					{AuthStore.user.role === 'USER' &&
+					{!isAdmin &&
 						<div className='container'>
 							<button
 								type='button'

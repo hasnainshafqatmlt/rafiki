@@ -151,9 +151,9 @@ class Forgot extends Component {
 				}
 				{!this.state.showForm &&
 					<div className='container message'>
-						<h1 className='col-sm-12 text-center'>{'¡Has tomado la decisión correcta!'}</h1>
+						<h1 className='col-sm-12 text-center'>{'Te hemos enviado un link para restablecer tu contraseña'}</h1>
 						<div className='col-sm-12 form'>
-							<p>{'Te hemos enviado el link para activar tu cuenta. Revisa tu email'}</p>
+							<p>{'Revisa tu email'}</p>
 							<small>{'Si no lo ves en tu inbox, revisa la bandeja de spam'}</small>
 						</div>
 					</div>

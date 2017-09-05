@@ -37,9 +37,6 @@ class UsuariosListing extends Component {
 		return (
 			<tr>
 		      <td>
-		      	<img src={data.avatar} width={50}/>
-		      </td>
-		      <td>
 		      	{data.fullName}
 		      </td>
 		      <td>
