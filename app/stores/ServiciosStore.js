@@ -5,7 +5,7 @@ import deepCopy from '../utils/deepCopy';
 import UserActionCreator from '../actions/UserActionCreator';
 
 
-class AreasStore extends BaseStore {
+class ServiciosStore extends BaseStore {
 
 	constructor() {
 		super();
@@ -109,7 +109,7 @@ class AreasStore extends BaseStore {
 		return this._serviceDescription;
 	}
 
-	get getServices() { console.log(' in store >>', this._services)
+	get getServices() {
 		return this._services;
 	}
 
@@ -132,4 +132,4 @@ class AreasStore extends BaseStore {
 
 }
 
-export default new AreasStore();
+export default new ServiciosStore();

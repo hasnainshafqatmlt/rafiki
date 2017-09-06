@@ -6,6 +6,7 @@ import Header from './Header/Header';
 import Footer from './Footer/Footer';
 
 import AuthStore from '../stores/AuthStore';
+import ServiciosStore from '../stores/ServiciosStore';
 
 import Config from '../config/Config';
 
@@ -38,6 +39,13 @@ class Main extends Component {
 	updateTitle() {
 		const pathname = this.props.location.pathname;
 		document.title = `RAFIKI - ${this.toTitleCase(pathname.split('/')[1])}`;
+		let clearStore = true;
+		if (pathname.indexOf('/areas') > -1 || pathname.indexOf('/descripcion') > -1 || pathname.indexOf('/vistaPrevia') > -1){
+			clearStore = false;
+		}
+		if (clearStore) {
+			ServiciosStore.clearCategoryService();
+		}
 	}
 
 
