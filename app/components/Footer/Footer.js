@@ -40,7 +40,7 @@ class Footer extends Component {
 							<Link to='/signup'>
 								{'Crea tu cuenta'}
 							</Link>
-							<a target='_blank' href='www.rafiki.kogno.co/como-funciona'>
+							<a target='_blank' href='http://www.rafiki.kogno.co/como-funciona'>
 								{'Como funciona'}
 							</a>
 							<Link to='#zbwid-84b7d69f'>
