@@ -8,30 +8,30 @@ class Footer extends Component {
 				<div className='container'>
 					<div className='left col-100'>
 						<div className='col-sm-12 float-left social-icons'>
-							<Link to='https://www.facebook.com/sharer.php?u=http://rafiki.co'>
+							<a target='_blank' href='https://www.facebook.com/sharer.php?u=http://rafiki.co'>
 								<img
 									src='/images/facebook-logo.png'
 									width='12'
 								/>
-							</Link>
-							<Link to='https://twitter.com/share?url=http://rafiki.co'>
+							</a>
+							<a target='_blank' href='https://twitter.com/share?url=http://rafiki.co'>
 								<img
 									src='/images/twitter-logo-silhouette.png'
 									width='12'
 								/>
-							</Link>
-							<Link to='https://plus.google.com/share?url=h;p://rafiki.co'>
+							</a>
+							<a target='_blank' href='https://plus.google.com/share?url=h;p://rafiki.co'>
 								<img
 									src='/images/google-plus-logo.png'
 									width='12'
 								/>
-							</Link>
-							<Link to='https://pinterest.com/pin/create/button/?url=http://rafiki.co'>
+							</a>
+							<a target='_blank' href='https://pinterest.com/pin/create/button/?url=http://rafiki.co'>
 								<img
 									src='/images/pinterest.png'
 									width='17'
 								/>
-							</Link>							
+							</a>							
 						</div>
 						<div className='col-sm-12 float-left nav-links'>
 							<Link to='/'>
@@ -40,17 +40,17 @@ class Footer extends Component {
 							<Link to='/signup'>
 								{'Crea tu cuenta'}
 							</Link>
-							<Link to='www.rafiki.kogno.co/como-funciona'>
+							<a target='_blank' href='www.rafiki.kogno.co/como-funciona'>
 								{'Como funciona'}
-							</Link>
+							</a>
 							<Link to='#zbwid-84b7d69f'>
 								{'Contacto'}
 							</Link>
 						</div>
 						<div className='col-sm-12 float-left info'>
-							<Link to='http://www.rafiki.kogno.co/terminos'>
+							<a target='_blank' href='http://www.rafiki.kogno.co/terminos'>
 								{'Términos y Privacidad'}
-							</Link>
+							</a>
 						</div>
 						<div className='col-sm-12 float-left info bottom'>{'© RAFIKI 2017'}</div>
 					</div>

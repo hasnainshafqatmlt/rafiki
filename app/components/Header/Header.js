@@ -121,9 +121,9 @@ class Header extends Component {
 					{!isAuthenticated &&
 						<ul className='nav'>
 							<li>
-								<Link to='http://www.marketing-digital.rafiki.co/'>
+								<a target='_blank' href='http://www.marketing-digital.rafiki.co/'>
 									{'Compra servicios'}
-								</Link>
+								</a>
 							</li>
 							<li>
 								<Link to='/login'>
@@ -176,7 +176,11 @@ class Header extends Component {
 
 					{!isAuthenticated &&
 						<div className="list-group">
-							<a href='#' className='list-group-item list-group-item-action'>
+							<a
+								target='_blank'
+								href='http://www.marketing-digital.rafiki.co/'
+								className='list-group-item list-group-item-action'
+							>
 								{'Compra servicios'}
 							</a>
 							<Link to='/login' className='list-group-item list-group-item-action'>
