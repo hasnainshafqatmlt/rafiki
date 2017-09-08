@@ -9,7 +9,7 @@
     "local": "NODE_ENV=local node server",
     "dev": "NODE_ENV=development node server",
     "build": "cross-env npm run clean && NODE_ENV=production webpack --config ./webpack.production.config.js --progress --profile --colors",
-    "prod": "NODE_ENV=production PORT=80 node server",
+    "prod": "NODE_ENV=production PORT=3001 node server",
     "lint": "eslint ./app/**/**.js",
     "test": "mocha --compilers js:babel-core/register --recursive ./tests/**/*.js"
   },
