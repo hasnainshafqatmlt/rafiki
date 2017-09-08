@@ -109,7 +109,7 @@ class Home extends Component {
 					    </div>
 					    <div className="col-lg-4 col-md-12 col-sm-12 animate-fadeInRight">
 					      <h3>117.800</h3>
-					      <p>LosClientes buscando tus servicios</p>
+					      <p>Clientes buscando tus servicios</p>
 					    </div>
 				    </div>
 				  </div>

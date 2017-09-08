@@ -145,7 +145,7 @@ class VistaPrevia extends Component {
 			<div className="vista-previa-block">
 				<div className='container'>
 					<h1 className='col-sm-12 text-center heading-1'>{'Vista previa'}</h1>
-					<h2 className='col-sm-12 text-center'>{'Envíanos tu servicio. El equipo de Kogno lo revisará antes de salir al aire'}</h2>					
+					<h2 className='col-sm-12 text-center'>{'Haz click en el botón “Enviar” y nuestro equipo lo aprobará para salir al aire '}</h2>
 				</div>
 				<hr className='top-horizental-line'/>
 				<div className='float-left col-100'>
