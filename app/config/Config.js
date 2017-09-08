@@ -13,7 +13,7 @@ let API_URL = 'http://localhost:3333/api/v1'; // local env
 if(process.env.NODE_ENV == 'development') {
 	//API_URL = 'http://108.61.165.78:3333/api/v1';
 } else if (process.env.NODE_ENV == 'production') {
-	API_URL = 'http://rafiki.co:3333/api/v1';
+	API_URL = 'http://localhost:3333/api/v1';
 	SITE_STATIC_ASSETS = '../public/images/';
 }
 
