@@ -186,7 +186,9 @@ class VistaPrevia extends Component {
 									{`${fullName}, ${country}`}
 								</small>
 								<price>${price}</price>
-								<p>{description}</p>
+								<p>
+									<div dangerouslySetInnerHTML={{ __html: description }} />
+								</p>
 								
 								<strong>Acerca de mi:</strong>
 								<p>{about}</p>
@@ -226,7 +228,7 @@ class VistaPrevia extends Component {
 							<button
 								type='button'
 								className='btn btn-secondary sm'
-								onClick={() => this.props.history.push('/areas')}
+								onClick={() => this.props.history.push('/areas/edit')}
 							>
 								{'Editar'}
 							</button>

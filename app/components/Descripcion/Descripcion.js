@@ -271,7 +271,7 @@ class Description extends Component {
 										ref='description'
 										name='description'
 										onKeyUp={this.handleUserInput}
-										maxLength='70'
+										maxLength='3000'
 								   	/>
 								   	{this.errorClass(formErrors.description) &&
 									   	<div className='form-control-feedback'>

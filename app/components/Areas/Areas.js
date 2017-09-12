@@ -141,8 +141,14 @@ class Areas extends Component {
 			this.props.history.push('/login');
 		}
 		ServiciosStore.addChangeListener(this.onChange);
+		console.log('this.props.match.params >', this.props.match.params, '>>>', this.props.match.params.serviceId)
 		if (this.props.match.params.serviceId) {
-			ServiciosActionCreator.getServiceById(this.props.match.params.serviceId);
+			if (this.props.match.params.serviceId === 'edit') {
+				this.updateCatSubCatState();
+			} else {
+				ServiciosActionCreator.getServiceById(this.props.match.params.serviceId);
+			}
+			
 		}
 	}
 
@@ -159,7 +165,7 @@ class Areas extends Component {
 				this.props.history.push('/descripcion');
 			}
 			
-		} else if (action.type === ActionTypes.GET_SERVICES_BYID_SUCCESS) {
+		} else if (action.type === ActionTypes.GET_SERVICES_BYID_SUCCESS) {console.log(' in on change')
 			let saveData = [];
 			const category = action.data.service.category;
 			const title = action.data.service.title;
@@ -185,6 +191,42 @@ class Areas extends Component {
 				selectedData: saveData
 			});
 		}
+	}
+
+	updateCatSubCatState = () => {
+		const selectedCategory = ServiciosStore.getSelectedCategory;
+		const serviceDescription = ServiciosStore.getServiceDescription;
+		console.log(' %%%%', selectedCategory,'**', serviceDescription)
+
+		if (_.isEmpty(selectedCategory) ) {
+			this.props.history.push('/areas');
+			return;
+		}
+		let saveData = [];
+		const category = selectedCategory;
+
+		const title = serviceDescription.title;
+		const price = serviceDescription.price;
+		const description = serviceDescription.description;
+		const serviceData = {
+			title,
+			price,
+			description
+		}			
+		const catData = {
+			title: category.title,
+			subCat: category.subCat,
+			selected: true
+		}
+		saveData.push(catData);
+		setTimeout(() => {
+			ServiciosActionCreator.setServiceDescription(serviceData);
+		}, 10);
+
+		this.setState({
+			selectedCatName: category.title,
+			selectedData: saveData
+		});
 	}
 
 	selectCategory = (catName, id) => {
@@ -260,7 +302,7 @@ class Areas extends Component {
 				showError: 'Please Select Subcategories'
 			})
 			window.scrollTo(0,0);
-		} else {
+		} else {console.log('>>>>', selectedCat)
 			ServiciosActionCreator.setCategories(selectedCat);
 		}
 	}
