@@ -174,7 +174,7 @@ class Description extends Component {
 				price
 			}
 
-			if (_.isEmpty(user.fullName) || _.isEmpty(user.country) || _.isEmpty(user.about)) {
+			if (_.isEmpty(user.fullName) || _.isEmpty(user.country) || _.isEmpty(user.about) || user.fullName !== fullName || user.country !== country || user.about !== about) {
 				UserActionCreator.updateProfile(userData, userId);
 				this.setState({
 					postService: serviceData
@@ -231,9 +231,14 @@ class Description extends Component {
 
 	render() {
 		const {user, selectedCountry, formErrors, service} = this.state;
-		const fullNameDisable = user && user.fullName ? true : false;
-		const countryDisable = user && user.country ? true : false;
-		const aboutDisable = user && user.about ? true : false;
+		// const fullNameDisable = user && user.fullName ? true : false;
+		// const countryDisable = user && user.country ? true : false;
+		// const aboutDisable = user && user.about ? true : false;
+
+		const fullNameDisable = false;
+		const countryDisable = false;
+		const aboutDisable = false;
+
 		const userImage = this.state.userImage ? this.state.userImage : '/images/profile-pic.png';
 
 		return (
