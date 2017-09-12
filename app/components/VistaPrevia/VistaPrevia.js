@@ -91,7 +91,7 @@ class VistaPrevia extends Component {
 			params.category.sub = category.subCat
 		}
 
-		if (this.props.match.params.serviceId) {
+		if (this.props.match.params.serviceId & this.props.match.params.serviceId !== 'edit') {
 			ServiciosActionCreator.updateService(params, this.props.match.params.serviceId);
 		} else {
 			ServiciosActionCreator.submitService(params);
@@ -116,7 +116,8 @@ class VistaPrevia extends Component {
 
 	render() {
 		const {user, service, category} = this.state;
-		const serviceId = this.props.match.params.serviceId ? this.props.match.params.serviceId : '';
+
+		const serviceId = this.props.match.params.serviceId ? this.props.match.params.serviceId+'/edit' : 'edit';
 
 		const fullName = user && user.fullName || '';
 		const country = user && user.country || '';
@@ -228,7 +229,7 @@ class VistaPrevia extends Component {
 							<button
 								type='button'
 								className='btn btn-secondary sm'
-								onClick={() => this.props.history.push('/areas/edit')}
+								onClick={() => this.props.history.push(`/areas/${serviceId}`)}
 							>
 								{'Editar'}
 							</button>

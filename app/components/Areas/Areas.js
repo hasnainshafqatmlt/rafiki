@@ -141,9 +141,8 @@ class Areas extends Component {
 			this.props.history.push('/login');
 		}
 		ServiciosStore.addChangeListener(this.onChange);
-		console.log('this.props.match.params >', this.props.match.params, '>>>', this.props.match.params.serviceId)
 		if (this.props.match.params.serviceId) {
-			if (this.props.match.params.serviceId === 'edit') {
+			if (this.props.match.params.serviceId === 'edit' || this.props.match.params.edit === 'edit') {
 				this.updateCatSubCatState();
 			} else {
 				ServiciosActionCreator.getServiceById(this.props.match.params.serviceId);
@@ -165,7 +164,7 @@ class Areas extends Component {
 				this.props.history.push('/descripcion');
 			}
 			
-		} else if (action.type === ActionTypes.GET_SERVICES_BYID_SUCCESS) {console.log(' in on change')
+		} else if (action.type === ActionTypes.GET_SERVICES_BYID_SUCCESS) {
 			let saveData = [];
 			const category = action.data.service.category;
 			const title = action.data.service.title;
@@ -196,7 +195,6 @@ class Areas extends Component {
 	updateCatSubCatState = () => {
 		const selectedCategory = ServiciosStore.getSelectedCategory;
 		const serviceDescription = ServiciosStore.getServiceDescription;
-		console.log(' %%%%', selectedCategory,'**', serviceDescription)
 
 		if (_.isEmpty(selectedCategory) ) {
 			this.props.history.push('/areas');
@@ -302,7 +300,7 @@ class Areas extends Component {
 				showError: 'Please Select Subcategories'
 			})
 			window.scrollTo(0,0);
-		} else {console.log('>>>>', selectedCat)
+		} else {
 			ServiciosActionCreator.setCategories(selectedCat);
 		}
 	}
