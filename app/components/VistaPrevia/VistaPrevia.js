@@ -187,7 +187,7 @@ class VistaPrevia extends Component {
 									{`${fullName}, ${country}`}
 								</small>
 								<price>${price}</price>
-								<p dangerouslySetInnerHTML={{ __html: description }}/>
+								<pre dangerouslySetInnerHTML={{ __html: description }}/>
 								<strong>Acerca de mi:</strong>
 								<p>{about}</p>
 								<a

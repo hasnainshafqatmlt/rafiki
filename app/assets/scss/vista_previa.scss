@@ -86,12 +86,13 @@
 			color: $black;
 			margin-bottom: 15px;
 		}
-		p{
+		p,pre{
 			float: left;
 			width: 100%;
 			font-size: 18px;
 			color: $dark-gray;
 			margin-bottom: 23px;
+			font-family: Open Sans,sans-serif;
 		}
 		strong{
 			font-size: 18px;
