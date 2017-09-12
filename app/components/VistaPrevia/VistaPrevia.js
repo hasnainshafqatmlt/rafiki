@@ -91,7 +91,7 @@ class VistaPrevia extends Component {
 			params.category.sub = category.subCat
 		}
 
-		if (this.props.match.params.serviceId & this.props.match.params.serviceId !== 'edit') {
+		if (this.props.match.params.serviceId && this.props.match.params.serviceId !== 'edit') {
 			ServiciosActionCreator.updateService(params, this.props.match.params.serviceId);
 		} else {
 			ServiciosActionCreator.submitService(params);
@@ -187,10 +187,7 @@ class VistaPrevia extends Component {
 									{`${fullName}, ${country}`}
 								</small>
 								<price>${price}</price>
-								<p>
-									<div dangerouslySetInnerHTML={{ __html: description }} />
-								</p>
-								
+								<p dangerouslySetInnerHTML={{ __html: description }}/>
 								<strong>Acerca de mi:</strong>
 								<p>{about}</p>
 								<a
