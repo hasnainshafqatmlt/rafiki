@@ -109,6 +109,8 @@ class Description extends Component {
 
 		const title = this.refs.title.value.trim();
 		const description = this.refs.description.value.trim();
+		const serviceList = this.refs.serviceList.value.trim();
+		const serviceTime = this.refs.serviceTime.value.trim();
 		const price = this.refs.price.value.trim();
 
 		const fullName = this.refs.fullName.value.trim();
@@ -124,7 +126,7 @@ class Description extends Component {
 				formErrors: data
 			})
 		} else {
-			const formArray = ['title', 'description', 'price', 'fullName', 'country', 'about'];
+			const formArray = ['title', 'description','serviceList', 'serviceTime', 'price', 'fullName', 'country', 'about'];
 			_.each(formArray, (k) => {
 				let v;
 				if (k === 'country') {
@@ -150,6 +152,8 @@ class Description extends Component {
 		const userId = this.state.user._id;
 		const title = this.refs.title.value.trim();
 		const description = this.refs.description.value.trim();
+		const serviceList = this.refs.serviceList.value.trim();
+		const serviceTime = this.refs.serviceTime.value.trim();
 		const price = this.refs.price.value.trim();
 		
 		const userData = {
@@ -171,7 +175,9 @@ class Description extends Component {
 			const serviceData = {
 				title,
 				description,
-				price
+				price,
+				serviceList,
+				serviceTime
 			}
 
 			if (_.isEmpty(user.fullName) || _.isEmpty(user.country) || _.isEmpty(user.about) || user.fullName !== fullName || user.country !== country || user.about !== about) {
@@ -250,10 +256,12 @@ class Description extends Component {
 						<div className='col-sm-12 form'>
 							<div className='center'>
 								<div className={`form-group ${this.errorClass(formErrors.title)}`}>
+								    <label>
+								    	{'TÍTULO:  por ejemplo “Social Media Manager”'}
+								    </label>
 								    <input
 								    	type="text"
 								    	className={`form-control`}
-								    	placeholder="TÍTULO: por ejemplo “Soy tu Social Media Manager”"
 								    	defaultValue={service ? service.title : ''}
 								    	ref='title'
 								    	name='title'
@@ -267,11 +275,11 @@ class Description extends Component {
 									  }
 								</div>
 								<div className={`form-group ${this.errorClass(formErrors.description)}`}>
+								    <label>
+								    	{'DESCRIPCIÓN: por ejemplo que es, que lo hace especial, requisitos'}
+								    </label>
 								    <textarea
 								    	className={`form-control`}
-								    	placeholder="DESCRIPCIÓN: 
-										que incluye, que lo hace especial, requisitos,
-										tiempo de entrega, etc."
 										defaultValue={service ? service.description : ''}
 										ref='description'
 										name='description'
@@ -284,12 +292,49 @@ class Description extends Component {
 									   	</div>
 									  }
 								</div>
+								<div className={`form-group ${this.errorClass(formErrors.serviceList)}`}>
+								    <label>
+								    	{`LISTA TODO LO QUE INCLUYE:  por ejemplo “Entrego 5 Facebook posts, 10 Instagram posts, 1 reporte semanal y 100 likes” `}
+								    </label>
+								    <textarea
+								    	className={`form-control`}
+										defaultValue={service ? service.serviceList : ''}
+										ref='serviceList'
+										name='serviceList'
+										onKeyUp={this.handleUserInput}
+										maxLength='3000'
+								   	/>
+								   	{this.errorClass(formErrors.serviceList) &&
+									   	<div className='form-control-feedback'>
+									   		{formErrors.serviceList}
+									   	</div>
+									  }
+								</div>
+								<div className={`form-group ${this.errorClass(formErrors.serviceTime)}`}>
+								    <label>
+								    	{'POR CUANTO TIEMPO: por ejemplo “brindo este servicio por 1 mes”'}
+								    </label>
+								    <input
+								    	type="text"
+								    	className={`form-control`}
+								    	defaultValue={service ? service.serviceTime : ''}
+								    	ref='serviceTime'
+								    	name='serviceTime'
+								    	onKeyUp={this.handleUserInput}
+								    	maxLength='70'
+								   	/>
+								   	{this.errorClass(formErrors.serviceTime) &&
+									   	<div className='form-control-feedback'>
+									   		{formErrors.serviceTime}
+									   	</div>
+									  }
+								</div>
 								<div className={`form-group ${this.errorClass(formErrors.price)}`}>
 								  	<div className='col-lg-6 col-md-6 col-sm-12 row'>
+									  <label>{'Precio en USD $'}</label>
 									  <input
 									  	type='number'
 									  	className={`form-control sm `}
-									  	placeholder="Precio en USD $"
 									  	defaultValue={service ? service.price : ''}
 									  	ref='price'
 									  	name='price'
@@ -303,15 +348,16 @@ class Description extends Component {
 									</div>
 								</div>
 								<div className={`form-group ${this.errorClass(formErrors.fullName)}`}>
+								  <label>{'Tu Nombre'}</label>
 								  <input
 								  	type="text"
 								  	className={`form-control`}
-								  	placeholder='Tu Nombre'
 								  	defaultValue={user && user.fullName ? user.fullName : ''}
 								  	ref='fullName'
 								  	name='fullName'
 								  	onKeyUp={this.handleUserInput}
 								  	readOnly={fullNameDisable}
+								  	maxLength='30'
 								  />
 								  {this.errorClass(formErrors.fullName) &&
 								   	<div className='form-control-feedback'>
@@ -320,6 +366,7 @@ class Description extends Component {
 								  }
 								</div>
 								<div className={`form-group ${this.errorClass(formErrors.country)}`}>
+									<label>{'Tu País'}</label>
 									<Select
 									  name="form-field-name"
 									  placeholder={user && user.country ? user.country : 'Tu País'}
@@ -336,12 +383,12 @@ class Description extends Component {
 								  
 								</div>
 								<div className={`form-group ${this.errorClass(formErrors.about)}`}>
+								    <label>{'ACERCA DE TI: Por ejemplo cuantos años de experiencia, en que área es tu mayor conocimiento, perfil de LinkedIn'}</label>
 								    <textarea
 								    	className="form-control"
 								    	ref='about'
 								    	name='about'
-								    	className={`form-control`}								    	
-								    	placeholder='ACERCA DE TI: Por ejemplo años de experiencia, en que área es tu mayor conocimiento,que te apasiona'
+								    	className={`form-control`}
 								    	defaultValue={user && user.about ? user.about : ''}
 								    	onKeyUp={this.handleUserInput}
 								    	readOnly={aboutDisable}

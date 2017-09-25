@@ -81,6 +81,8 @@ class VistaPrevia extends Component {
 		const params = {
 			title: service.title,
 			description: service.description,
+			service_list: service.serviceList,
+			service_time: service.serviceTime,
 			price: service.price,
 			category: {
 				title: category.title
@@ -124,6 +126,8 @@ class VistaPrevia extends Component {
 		const about = user && user.about || '';
 		const title = service.title || '';
 		const description = service.description || '';
+		const serviceList = service.serviceList || '';
+		const serviceTime = service.serviceTime || '';
 		const price = service.price || '';
 		const isAdmin = AuthStore.user.role === 'ADMIN' ? true : false;
 		const userImage = isAdmin ? user.avatar : this.state.userImage;
@@ -188,14 +192,16 @@ class VistaPrevia extends Component {
 								</small>
 								<price>${price}</price>
 								<pre dangerouslySetInnerHTML={{ __html: description }}/>
+								<pre dangerouslySetInnerHTML={{ __html: serviceList }}/>
+								<pre dangerouslySetInnerHTML={{ __html: serviceTime }}/>
 								<strong>Acerca de mi:</strong>
 								<p>{about}</p>
-								<a
+								{/*<a
 									href='#'
 									className='btn btn-gray'
 								>
 									{'Comprar'}
-								</a>
+								</a>*/}
 							</div>
 						</div>
 					</div>

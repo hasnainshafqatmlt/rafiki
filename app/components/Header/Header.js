@@ -85,6 +85,11 @@ class Header extends Component {
 									{'Perfil'}
 								</Link>
 							</li>
+							<li>
+								<a target='_blank' href='http://www.marketing-digital.rafiki.co/'>
+									{'Compra servicios'}
+								</a>
+							</li>	
 							<li className='logout'>
 								<span onClick={this.logoutUser}>
 									<img src='/images/logout-icon.png'/>
@@ -109,22 +114,17 @@ class Header extends Component {
 								<Link to='/admin/perfil'>
 									{'Perfil'}
 								</Link>
-							</li>
+							</li>							
 							<li className='logout'>
 								<span onClick={this.logoutUser}>
 									<img src='/images/logout-icon.png'/>
 								</span>
-							</li>						
+							</li>
 						</ul>
 					}
 
 					{!isAuthenticated &&
-						<ul className='nav'>
-							<li>
-								<a target='_blank' href='http://www.marketing-digital.rafiki.co/'>
-									{'Compra servicios'}
-								</a>
-							</li>
+						<ul className='nav'>							
 							<li>
 								<Link to='/login'>
 									{'Iniciar sesión'}
@@ -151,9 +151,12 @@ class Header extends Component {
 							<Link to='/perfil' className='list-group-item list-group-item-action'>
 								{'Perfil'}
 							</Link>
+							<a target='_blank' href='http://www.marketing-digital.rafiki.co/' className='list-group-item list-group-item-action'>
+								{'Compra servicios'}
+							</a>
 							<a  href='/' onClick={this.logoutUser} className='list-group-item list-group-item-action'>
 								{'Cerrar Sesión'}
-							</a>
+							</a>							
 						</div>
 					}
 

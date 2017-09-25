@@ -5,6 +5,8 @@ export default function validateField(state, fieldName, value) {
 	let { formErrors } = state;
 	let titleValid = false;
 	let descriptionValid = false;
+	let serviceListValid = false;
+	let serviceTimeValid = false;
 
 	switch(fieldName) {
 		case 'title':
@@ -14,6 +16,14 @@ export default function validateField(state, fieldName, value) {
 		case 'description':
 			descriptionValid = !_.isEmpty(value);
 			formErrors.description = descriptionValid ? '': 'Please enter description';			
+			break;
+		case 'serviceList':
+			serviceListValid = !_.isEmpty(value);
+			formErrors.serviceList = serviceListValid ? '': 'This field is required';			
+			break;
+		case 'serviceTime':
+			serviceTimeValid = !_.isEmpty(value);
+			formErrors.serviceTime = serviceTimeValid ? '': 'Please enter service time';			
 			break;
 		case 'price':
 			formErrors.price = _.isEmpty(value) ? 'Please enter price': '';
