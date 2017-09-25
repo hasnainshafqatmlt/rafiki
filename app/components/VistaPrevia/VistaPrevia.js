@@ -195,7 +195,7 @@ class VistaPrevia extends Component {
 								<pre dangerouslySetInnerHTML={{ __html: serviceList }}/>
 								<pre dangerouslySetInnerHTML={{ __html: serviceTime }}/>
 								<strong>Acerca de mi:</strong>
-								<p>{about}</p>
+								<pre dangerouslySetInnerHTML={{ __html: about }}/>
 								{/*<a
 									href='#'
 									className='btn btn-gray'

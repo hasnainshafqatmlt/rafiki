@@ -103,7 +103,9 @@ class Servicios extends Component {
 		const serviceData = {
 			title: data.title,
 			description: data.description,
-			price: data.price
+			price: data.price,
+			serviceList: data.service_list,
+			serviceTime: data.srevice_time
 		}
 		const userData = {
 			fullName: data.createdBy.fullName,
