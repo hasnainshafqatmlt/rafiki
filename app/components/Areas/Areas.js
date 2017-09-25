@@ -210,11 +210,16 @@ class Areas extends Component {
 		const title = serviceDescription.title;
 		const price = serviceDescription.price;
 		const description = serviceDescription.description;
+		const serviceList = serviceDescription.serviceList;
+		const serviceTime = serviceDescription.serviceTime;
 		const serviceData = {
 			title,
 			price,
-			description
-		}			
+			description,
+			serviceList,
+			serviceTime
+		}
+		
 		const catData = {
 			title: category.title,
 			subCat: category.subCat,

@@ -118,7 +118,7 @@ class VistaPrevia extends Component {
 
 	render() {
 		const {user, service, category} = this.state;
-console.log('>', service)
+
 		const serviceId = this.props.match.params.serviceId ? this.props.match.params.serviceId+'/edit' : 'edit';
 
 		const fullName = user && user.fullName || '';
