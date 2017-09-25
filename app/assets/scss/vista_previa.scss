@@ -94,6 +94,13 @@
 			margin-bottom: 23px;
 			font-family: Open Sans,sans-serif;
 		}
+		pre{
+			white-space: pre-wrap;
+		    white-space: -moz-pre-wrap;
+		    white-space: -pre-wrap;
+		    white-space: -o-pre-wrap;
+		    word-wrap: break-word;  
+		}
 		strong{
 			font-size: 18px;
 			color: $dark-gray;

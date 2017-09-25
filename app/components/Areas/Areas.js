@@ -170,11 +170,15 @@ class Areas extends Component {
 			const title = action.data.service.title;
 			const price = action.data.service.price;
 			const description = action.data.service.description;
+			const serviceList = action.data.service.service_list;
+			const serviceTime = action.data.service.service_time;
 			const serviceData = {
 				title,
 				price,
-				description
-			}			
+				description,
+				serviceList,
+				serviceTime
+			}
 			const catData = {
 				title: category.title,
 				subCat: category.sub,
@@ -206,11 +210,16 @@ class Areas extends Component {
 		const title = serviceDescription.title;
 		const price = serviceDescription.price;
 		const description = serviceDescription.description;
+		const serviceList = serviceDescription.serviceList;
+		const serviceTime = serviceDescription.serviceTime;
 		const serviceData = {
 			title,
 			price,
-			description
-		}			
+			description,
+			serviceList,
+			serviceTime
+		}
+		
 		const catData = {
 			title: category.title,
 			subCat: category.subCat,
@@ -295,12 +304,14 @@ class Areas extends Component {
 				showError: 'Please Select Category'
 			})
 			window.scrollTo(0,0);
-		} else if (_.isEmpty(selectedCat.subCat) && selectedCat.title !== 'Otros') {
-			this.setState({
-				showError: 'Please Select Subcategories'
-			})
-			window.scrollTo(0,0);
-		} else {
+		} 
+		// else if (_.isEmpty(selectedCat.subCat) && selectedCat.title !== 'Otros') {
+		// 	this.setState({
+		// 		showError: 'Please Select Subcategories'
+		// 	})
+		// 	window.scrollTo(0,0);
+		// }
+		 else {
 			ServiciosActionCreator.setCategories(selectedCat);
 		}
 	}
@@ -321,13 +332,13 @@ class Areas extends Component {
 						categoryName={data.name}
 						selectCategory={this.selectCategory}
 					/>
-					<SubCategory
+					{/*<SubCategory
 						showSubCategory={isSelected}
 						selectedCat={selectedCat}
 						selectedCatName={this.state.selectedCatName}
 						subCat={data}
 						selectSubCategory={this.selectSubCategory}
-					/>
+					/>*/}
 				</div>
 			)
 		})
@@ -335,7 +346,13 @@ class Areas extends Component {
 			<div className="areas-block">
 				<div className='container'>
 					<div className='row'>
-						<h1 className='col-sm-12 text-center heading-1 m-t-60'>{'Elige el área de tu servicio'}</h1>
+						<h1 className='col-sm-12 text-center heading-1 m-t-60'>{'Publica un servicio'}</h1>
+						<h2 className='col-sm-12 text-center'>
+							{'después podrás publicar más   : )'}
+						</h2>
+						<h2 className='col-sm-12 text-center m-t-30'>
+							{'Elige 1 área'}
+						</h2>
 						<div className='pull-left col-100 form col-sm-12'>
 							<div className='center'>
 								{this.state.showError &&
