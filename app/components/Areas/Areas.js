@@ -169,12 +169,16 @@ class Areas extends Component {
 			const category = action.data.service.category;
 			const title = action.data.service.title;
 			const price = action.data.service.price;
+			const url = action.data.service.url;
+			const visible = action.data.service.visible;
 			const description = action.data.service.description;
 			const serviceList = action.data.service.service_list;
 			const serviceTime = action.data.service.service_time;
 			const serviceData = {
 				title,
 				price,
+				url,
+				visible,
 				description,
 				serviceList,
 				serviceTime
@@ -209,12 +213,16 @@ class Areas extends Component {
 
 		const title = serviceDescription.title;
 		const price = serviceDescription.price;
+		const url = serviceDescription.url;
+		const visible = serviceDescription.visible;
 		const description = serviceDescription.description;
 		const serviceList = serviceDescription.serviceList;
 		const serviceTime = serviceDescription.serviceTime;
 		const serviceData = {
 			title,
 			price,
+			url,
+			visible,
 			description,
 			serviceList,
 			serviceTime

@@ -24,6 +24,7 @@ class Description extends Component {
 	    this.onAuthChange = this.onAuthChange.bind(this);
 	    this.selectImage = this.selectImage.bind(this);
 	    this.onUserChange = this.onUserChange.bind(this);
+	    this.selectVisible = this.selectVisible.bind(this);
 
 	    this.state = {
 	      showForm: true,
@@ -35,7 +36,9 @@ class Description extends Component {
 	      service: ServiciosStore.getServiceDescription,
 	      showImageSizeError: false,
 	      imageLoading: false,
-	      userImage: AuthStore.user && AuthStore.user.avatar ? AuthStore.user.avatar : ''
+	      userImage: AuthStore.user && AuthStore.user.avatar ? AuthStore.user.avatar : '',
+	      userImageError: '',
+	      visibleValue: this.props.match.params.serviceId ? ServiciosStore.getServiceDescription.visible : 'visible'
 	    };
 	}
 
@@ -86,7 +89,8 @@ class Description extends Component {
 			if (action.type === ActionTypes.UPLOAD_USER_IMAGE_SUCCESS) {
 				this.setState({
 					userImage: action.data.user.avatar,
-					imageLoading: false
+					imageLoading: false,
+					userImageError: ''
 				})
 				AuthStore._updateUserData('avatar', action.data.user.avatar);
 			} else if (action.type === ActionTypes.UPLOAD_USER_IMAGE_ERROR) {
@@ -126,7 +130,7 @@ class Description extends Component {
 				formErrors: data
 			})
 		} else {
-			const formArray = ['title', 'description','serviceList', 'serviceTime', 'price', 'fullName', 'country', 'about'];
+			const formArray = ['title', 'description','serviceList', 'serviceTime', 'price', 'fullName', 'country', 'about', 'url'];
 			_.each(formArray, (k) => {
 				let v;
 				if (k === 'country') {
@@ -155,14 +159,16 @@ class Description extends Component {
 		const serviceList = this.refs.serviceList.value.trim();
 		const serviceTime = this.refs.serviceTime.value.trim();
 		const price = this.refs.price.value.trim();
-		
+		const url = this.refs.url.value.trim();
+		const visible = this.state.visibleValue;
+
 		const userData = {
 			fullName,
 			country,
 			about
 		}
 		this.handleUserInput()
-		
+
 		let isError = false;
 		_.find(this.state.formErrors, (val) => {
 			if (val.length > 0) {
@@ -171,13 +177,27 @@ class Description extends Component {
 			return isError
 		})
 
-		if (!isError) {
+		let imageError = false;
+		if (this.state.userImage === '') {
+			imageError = true;
+			this.setState({
+				userImageError: 'Please select Image'
+			});
+		} else {
+			this.setState({
+				userImageError: ''
+			});
+		}
+
+		if (!isError && !imageError) {
 			const serviceData = {
 				title,
 				description,
 				price,
 				serviceList,
-				serviceTime
+				serviceTime,
+				url,
+				visible
 			}
 
 			if (_.isEmpty(user.fullName) || _.isEmpty(user.country) || _.isEmpty(user.about) || user.fullName !== fullName || user.country !== country || user.about !== about) {
@@ -196,6 +216,12 @@ class Description extends Component {
 			return(error.length === 0 ? '' : 'has-danger');	
 		}
 		return '';		
+	}
+
+	selectVisible(e) {
+		this.setState({
+			visibleValue: e.target.value
+		});
 	}
 
 	selectImage(e) {
@@ -237,6 +263,12 @@ class Description extends Component {
 
 	render() {
 		const {user, selectedCountry, formErrors, service} = this.state;
+		let isVisible = service.visible === 'visible' ? true : false;
+		const isInVisible = service.visible === 'invisible' ? true : false;
+		if (!this.props.match.params.serviceId) {
+			isVisible = this.state.visibleValue;
+		}
+
 		// const fullNameDisable = user && user.fullName ? true : false;
 		// const countryDisable = user && user.country ? true : false;
 		// const aboutDisable = user && user.about ? true : false;
@@ -383,7 +415,7 @@ class Description extends Component {
 								  
 								</div>
 								<div className={`form-group ${this.errorClass(formErrors.about)}`}>
-								    <label>{'ACERCA DE TI: Por ejemplo cuantos años de experiencia, en que área es tu mayor conocimiento, perfil de LinkedIn'}</label>
+								    <label>{'ACERCA DE TI: Por ejemplo años de experiencia, en que área es tu mayor conocimiento, estudios'}</label>
 								    <textarea
 								    	className="form-control"
 								    	ref='about'
@@ -399,7 +431,56 @@ class Description extends Component {
 									   	</div>
 									  }
 								</div>
-								<div className='upload-pic'>								
+
+								<div className={`form-group ${this.errorClass(formErrors.url)}`}>
+								    <label>{'URL de tu perfil de LinkedIn o tu sitio web'}</label>
+								    <input
+								    	type="text"
+								    	className={`form-control`}
+								    	defaultValue={service ? service.url : ''}
+								    	ref='url'
+								    	name='url'
+								    	onKeyUp={this.handleUserInput}
+								   	/>
+								   	{this.errorClass(formErrors.url) &&
+									   	<div className='form-control-feedback'>
+									   		{formErrors.url}
+									   	</div>
+									  }
+								</div>
+
+								<div className={`form-group`}>
+									<div className='form-check form-check-inline'>
+										<label className="form-check-label">
+											<input
+											className="form-check-input"
+											type="radio"
+											name="visible" 
+											ref='visible'
+											value="visible"
+											defaultChecked={isVisible}
+											onClick={this.selectVisible}
+											/>
+											{' Visible a clientes'}
+										</label>
+									</div>
+									<div className='form-check form-check-inline'>
+										<label className="form-check-label">
+											<input
+											className="form-check-input"
+											type="radio"
+											name="visible" 
+											ref='visible'
+											value="invisible"
+											defaultChecked={isInVisible}
+											onClick={this.selectVisible}
+											/>
+											{' Invisible / privado'}
+										</label>
+									</div>
+								</div>
+
+								<div className={`form-group upload-pic ${this.state.userImageError ? 'has-danger' : ''}`}>
 									<i>
 										{!this.state.imageLoading &&
 											<img src={userImage} className={`icon ${this.state.userImage ? 'thumb' : ''}`}/>
@@ -421,7 +502,6 @@ class Description extends Component {
 										{!this.state.userImage &&
 											<div>
 												<h3>{'Foto de perfil o logo'}</h3>
-												<p>{'Tamaño preferido: 200x200 px'}</p>
 											</div>
 										}
 									</div>
@@ -429,8 +509,11 @@ class Description extends Component {
 									<input
 										type='file'
 										onChange={this.selectImage}
-										accept="image/x-png,image/gif,image/jpeg"
+										accept='image/x-png,image/gif,image/jpeg'
 									/>
+									{this.state.userImageError &&
+										<div className='form-control-feedback float-left w-100'>{this.state.userImageError}</div>
+									}
 								</div>
 								{this.state.showImageSizeError &&
 									<div className='form-group has-danger'>

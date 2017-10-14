@@ -47,7 +47,7 @@ class UsuariosListing extends Component {
 		      	<input
 		      		type='number'
 		      		className='form-control number'
-		      		defaultValue={data.sales ? data.sales : ''}
+		      		defaultValue={data.sales ? data.sales : '0'}
 		      		ref='sales'
 		      	/>
 		      	<img

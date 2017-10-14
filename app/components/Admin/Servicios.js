@@ -105,6 +105,8 @@ class Servicios extends Component {
 			title: data.title,
 			description: data.description,
 			price: data.price,
+			url: data.url,
+			visible: data.visible,
 			serviceList: data.service_list,
 			serviceTime: data.service_time
 		}
@@ -176,6 +178,9 @@ class Servicios extends Component {
 		      </td>
 		      <td>
 		      	{data.createdBy.fullName}
+		      </td>
+		      <td>
+		      	{data.createdBy.email}
 		      </td>
 		      <td>
 		      	<img
@@ -254,7 +259,11 @@ class Servicios extends Component {
 													/>
 											</div>
 										</th>
-										<th> ID </th>
+										<th
+											onClick={() => this.handleSort('_id')}
+										>
+											ID
+										</th>
 										<th
 											onClick={() => this.handleSort('category.title')}
 										>
@@ -269,6 +278,11 @@ class Servicios extends Component {
 											onClick={() => this.handleSort('createdBy.fullName')}
 										>
 											Usuario
+										</th>
+										<th
+											onClick={() => this.handleSort('createdBy.email')}
+										>
+											Email
 										</th>
 										<th>
 											{this.state.isDownload &&

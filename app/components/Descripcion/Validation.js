@@ -7,6 +7,7 @@ export default function validateField(state, fieldName, value) {
 	let descriptionValid = false;
 	let serviceListValid = false;
 	let serviceTimeValid = false;
+	let urlValid = false;
 
 	switch(fieldName) {
 		case 'title':
@@ -36,6 +37,10 @@ export default function validateField(state, fieldName, value) {
 			break;
 		case 'country':
 			formErrors.country = _.isEmpty(value) ? 'Please select country': '';
+			break;
+		case 'url':
+			urlValid = !_.isEmpty(value);
+			formErrors.url = urlValid ? '' : 'Please enter url';
 			break;
 
 		default:

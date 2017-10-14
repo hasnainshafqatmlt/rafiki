@@ -14,7 +14,7 @@ class Ventas extends Component {
 	    this.onChange = this.onChange.bind(this);
 
 	    this.state = {
-	    	mySale: ''
+	    	mySale: '0'
 	    };
 	}
 
@@ -35,7 +35,7 @@ class Ventas extends Component {
 		const action = UserStore.getLastAction();
 		if (action && action.type === ActionTypes.GET_MYINFO_SUCCESS) {
 			this.setState({
-				mySale: action.data.user.sales ? action.data.user.sales : ''
+				mySale: action.data.user.sales ? action.data.user.sales : '0'
 			});
 		}
 	}
