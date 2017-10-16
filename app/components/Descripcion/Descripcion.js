@@ -289,7 +289,7 @@ class Description extends Component {
 							<div className='center'>
 								<div className={`form-group ${this.errorClass(formErrors.title)}`}>
 								    <label>
-								    	{`TÍTULO:  por ejemplo “Aumento tus ventas, o Genero más seguidores en FB, o Posiciono tu sitio en Google con SEO Y SEM”`}
+								    	{`TÍTULO:  por ejemplo “Aumento tus ventas, o Genero más seguidores en FB,  o Posiciono tu sitio en Google con SEO Y SEM”`}
 								    </label>
 								    <input
 								    	type="text"
