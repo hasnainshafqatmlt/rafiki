@@ -289,7 +289,7 @@ class Description extends Component {
 							<div className='center'>
 								<div className={`form-group ${this.errorClass(formErrors.title)}`}>
 								    <label>
-								    	{'TÍTULO:  por ejemplo “Social Media Manager”'}
+								    	{`TÍTULO:  por ejemplo “Aumento tus ventas, o Genero más seguidores en FB, o Posiciono tu sitio en Google con SEO Y SEM”`}
 								    </label>
 								    <input
 								    	type="text"
@@ -326,7 +326,7 @@ class Description extends Component {
 								</div>
 								<div className={`form-group ${this.errorClass(formErrors.serviceList)}`}>
 								    <label>
-								    	{`LISTA TODO LO QUE INCLUYE:  por ejemplo “Entrego 5 Facebook posts, 10 Instagram posts, 1 reporte semanal y 100 likes” `}
+								    	{`LISTA TODO LO QUE INCLUYE:  por ejemplo “Entrego 5 Facebook posts, 10 campañas AdWords, 5 Landing Pages, 1 reporte semanal” `}
 								    </label>
 								    <textarea
 								    	className={`form-control`}
