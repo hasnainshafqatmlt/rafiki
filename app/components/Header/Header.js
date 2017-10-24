@@ -124,7 +124,12 @@ class Header extends Component {
 					}
 
 					{!isAuthenticated &&
-						<ul className='nav'>							
+						<ul className='nav'>
+							<li>
+								<a target='_blank' href='http://www.marketing-digital.rafiki.co/'>
+									{'Compra servicios'}
+								</a>
+							</li>								
 							<li>
 								<Link to='/login'>
 									{'Iniciar sesión'}
